@@ -85,7 +85,7 @@ public class Bob {
         System.out.println(line);
         System.out.println(" Aite. I've bobbed it into the list:");
         System.out.println("   " + task);
-        System.out.println("Bobbing heck! You now have " + count + " tasks in the list.");
+        System.out.println(" Bobbing heck! You now have " + count + " tasks in the list.");
         System.out.println(line);
     }
 }
