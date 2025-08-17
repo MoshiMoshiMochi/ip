@@ -19,6 +19,13 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    public Task deleteTask(int index) throws BobException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new BobException(" WHAT THE BOB!!! Task number " + (index + 1) + " does not exist!");
+        }
+        return tasks.remove(index);
+    }
+
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder(" The list do be Bobbing my dude!\n");

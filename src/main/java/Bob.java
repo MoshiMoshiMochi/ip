@@ -19,6 +19,9 @@ public class Bob {
         Scanner echo = new Scanner(System.in);
         TaskList taskList = new TaskList(100);
 
+        String addIntro = " Aite. I've bobbed it into the list:";
+        String removeIntro = "  BOB!!! I've removed the task:";
+
         while (true) {
             String s = echo.nextLine();
             try {
@@ -54,7 +57,7 @@ public class Bob {
                     }
                     Task task = new ToDoTask(description);
                     taskList.addTask(task);
-                    printAdded(line, task, taskList.size());
+                    printAction(line, task, taskList.size(), addIntro);
 
                 } else if (s.toUpperCase().startsWith("DEADLINE ")) {
                     // format: deadline return book /by Sunday
@@ -66,7 +69,7 @@ public class Bob {
                     String by = parts[1].trim();
                     Task task = new DeadlineTask(desc, by);
                     taskList.addTask(task);
-                    printAdded(line, task, taskList.size());
+                    printAction(line, task, taskList.size(), addIntro);
 
                 } else if (s.toUpperCase().startsWith("EVENT ")) {
                     String[] parts = s.substring(6).split("/from|/to");
@@ -78,7 +81,21 @@ public class Bob {
                     String to = parts[2].trim();
                     Task task = new EventTask(desc, from, to);
                     taskList.addTask(task);
-                    printAdded(line, task, taskList.size());
+                    printAction(line, task, taskList.size(), addIntro);
+                } else if (s.toUpperCase().startsWith("DELETE ")) {
+                    try {
+                        int index = Integer.parseInt(s.split(" ")[1]) - 1;
+                        Task removedTask = taskList.deleteTask(index);
+                        printAction(line, removedTask, taskList.size(), removeIntro);
+                    } catch (NumberFormatException e) {
+                        System.out.println(line);
+                        System.out.println(" WHAT THE BOB!!! Invalid task number!");
+                        System.out.println(line);
+                    } catch (BobException e) {
+                        System.out.println(line);
+                        System.out.println(e.getMessage());
+                        System.out.println(line);
+                    }
                 } else {
                     throw new BobException(" WHAT THE BOB!!! You just used an unrecognised command!");
                 }
@@ -97,9 +114,9 @@ public class Bob {
         System.out.println(line);
     }
 
-    private static void printAdded(String line, Task task, int count) {
+    private static void printAction(String line, Task task, int count, String intro) {
         System.out.println(line);
-        System.out.println(" Aite. I've bobbed it into the list:");
+        System.out.println(intro);
         System.out.println("   " + task);
         System.out.println(" Bobbing heck! You now have " + count + " tasks in the list.");
         System.out.println(line);

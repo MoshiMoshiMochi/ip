@@ -8,4 +8,8 @@ list
 deadline return book
 event party /from /to
 blah
+delete 2
+delete 10
+delete lmao
+list
 bye
