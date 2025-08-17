@@ -1,10 +1,10 @@
 public class ToDoTask extends Task{
     public ToDoTask(String description){
-        super(description);
+        super(description, TaskType.TODO);
     }
 
     @Override
     public String toString(){
-        return "[T]" + super.toString();
+        return super.toString();
     }
 }
