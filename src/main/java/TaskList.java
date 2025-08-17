@@ -7,14 +7,16 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
-    public void addTask(String description){
-        Task task = new Task(description);
+    public void addTask(Task task){
         this.tasks.add(task);
-        System.out.println(" added: " + description);
     }
 
     public Task getTask(int index){
         return tasks.get(index);
+    }
+
+    public int size(){
+        return this.tasks.size();
     }
 
     @Override

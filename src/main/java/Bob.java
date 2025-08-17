@@ -27,6 +27,7 @@ public class Bob {
                 System.out.println(line);
                 System.out.println(taskList);
                 System.out.println(line);
+
             } else if (s.toUpperCase().startsWith("MARK ")){
                 int index = Integer.parseInt(s.split(" ")[1]) - 1;
                 Task task = taskList.getTask(index);
@@ -35,6 +36,7 @@ public class Bob {
                 System.out.println(" I'm Marking it. I'm Marking it so good!");
                 System.out.println("    " + task);
                 System.out.println(line);
+
             } else if (s.toUpperCase().startsWith("UNMARK ")) {
                 int index = Integer.parseInt(s.split(" ")[1]) - 1;
                 Task task = taskList.getTask(index);
@@ -43,14 +45,47 @@ public class Bob {
                 System.out.println(" You need to BOB mark! BOB for Viltrum!");
                 System.out.println("    " + task);
                 System.out.println(line);
-            } else {
-                System.out.println(line);
-                taskList.addTask(s);
-                System.out.println(line);
+
+            } else if (s.toUpperCase().startsWith("TODO ")) {
+                String description = s.substring(5).trim();
+                Task task = new ToDoTask(description);
+                taskList.addTask(task);
+                printAdded(line, task, taskList.size());
+
+            } else if (s.toUpperCase().startsWith("DEADLINE ")) {
+                // format: deadline return book /by Sunday
+                String[] parts = s.substring(9).split("/by", 2);
+                String desc = parts[0].trim();
+                String by = parts[1].trim();
+                Task task = new DeadlineTask(desc, by);
+                taskList.addTask(task);
+                printAdded(line, task, taskList.size());
+
+            } else if (s.toUpperCase().startsWith("EVENT ")) {
+                String[] parts = s.substring(6).split("/from|/to");
+                String desc = parts[0].trim();
+                String from = parts[1].trim();
+                String to = parts[2].trim();
+                Task task = new EventTask(desc, from, to);
+                taskList.addTask(task);
+                printAdded(line, task, taskList.size());
+            }
+            else {
+                Task task = new Task(s);
+                taskList.addTask(task);
+                printAdded(line, task, taskList.size());
             }
         }
         System.out.println(line);
         System.out.println(" Bye have a great time!");
+        System.out.println(line);
+    }
+
+    private static void printAdded(String line, Task task, int count) {
+        System.out.println(line);
+        System.out.println(" Aite. I've bobbed it into the list:");
+        System.out.println("   " + task);
+        System.out.println("Bobbing heck! You now have " + count + " tasks in the list.");
         System.out.println(line);
     }
 }
