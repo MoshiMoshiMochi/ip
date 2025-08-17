@@ -1,25 +1,32 @@
+import java.util.ArrayList;
+
 public class TaskList {
-    private String[] tasks;
-    private int taskCount;
+    private ArrayList<Task> tasks;
 
     public TaskList(int size){
-        tasks = new String[size];
-        taskCount = 0;
+        this.tasks = new ArrayList<Task>();
     }
 
-    public void addTask(String task){
-        if (taskCount<100){
-            tasks[taskCount] = task;
-            taskCount++;
-            System.out.println(" added: "+task);
-        } else {
-            System.out.println("Task List full");
-        }
+    public void addTask(String description){
+        Task task = new Task(description);
+        this.tasks.add(task);
+        System.out.println(" added: " + description);
     }
 
-    public void listTask(){
-        for (int i = 0; i < taskCount; i++) {
-            System.out.println(" " + (i + 1) + ". " + tasks[i]);
+    public Task getTask(int index){
+        return tasks.get(index);
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder(" The list do be Bobbing my dude!\n");
+        for(int i=0; i< tasks.size(); i++){
+            //appends each task added the list
+            sb.append(" ").append(i+1).append(".").append(tasks.get(i));
+            if (i!=tasks.size()-1){
+                sb.append("\n");
+            }
         }
+        return sb.toString();
     }
 }

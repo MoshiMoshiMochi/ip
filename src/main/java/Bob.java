@@ -6,7 +6,7 @@ public class Bob {
                 "  ____    _____   ____  \n" +
                 " | __ )  |  _  | | __ ) \n" +
                 " |  _ \\  | | | | |  _ \\ \n" +
-                " | |_) | | |_| | | |_) |s\n" +
+                " | |_) | | |_| | | |_) |\n" +
                 " |____/  |_____| |____/ \n";
         String line =
                 "____________________________________________________________";
@@ -25,7 +25,23 @@ public class Bob {
                 break;
             } else if (s.toUpperCase().equals("LIST")) {
                 System.out.println(line);
-                taskList.listTask();
+                System.out.println(taskList);
+                System.out.println(line);
+            } else if (s.toUpperCase().startsWith("MARK ")){
+                int index = Integer.parseInt(s.split(" ")[1]) - 1;
+                Task task = taskList.getTask(index);
+                task.markDone();
+                System.out.println(line);
+                System.out.println(" I'm Marking it. I'm Marking it so good!");
+                System.out.println("    " + task);
+                System.out.println(line);
+            } else if (s.toUpperCase().startsWith("UNMARK ")) {
+                int index = Integer.parseInt(s.split(" ")[1]) - 1;
+                Task task = taskList.getTask(index);
+                task.markUnDone();
+                System.out.println(line);
+                System.out.println(" You need to BOB mark! BOB for Viltrum!");
+                System.out.println("    " + task);
                 System.out.println(line);
             } else {
                 System.out.println(line);
