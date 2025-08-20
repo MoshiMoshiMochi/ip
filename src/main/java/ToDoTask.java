@@ -4,6 +4,13 @@ public class ToDoTask extends Task{
     }
 
     @Override
+    public String toSaveFormat(){
+        return TaskType.TODO.getSymbol() + " | " +
+                (this.isDone ? "1" : "0") + " | " +
+                this.description + " | " + " | ";
+    }
+
+    @Override
     public String toString(){
         return super.toString();
     }

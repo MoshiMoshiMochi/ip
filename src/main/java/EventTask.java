@@ -9,6 +9,13 @@ public class EventTask extends Task {
     }
 
     @Override
+    public String toSaveFormat(){
+        return TaskType.EVENT.getSymbol() + " | " +
+                (this.isDone ? "1" : "0") + " | " +
+                this.description + " | " + from + " | " + to;
+    }
+
+    @Override
     public String toString(){
         return super.toString() + "(from: " + this.from + " to: " + this.to + ")";
     }

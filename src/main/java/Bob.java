@@ -1,7 +1,16 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Bob {
-    public static void main(String[] args) throws BobException {
+    private Storage storage;
+    private TaskList taskList;
+
+    public Bob(String filePath){
+        storage = new Storage(filePath);
+        taskList = storage.load();
+    }
+
+    public void run(){
         String logo =
                 "  ____    _____   ____  \n" +
                         " | __ )  |  _  | | __ ) \n" +
@@ -17,7 +26,7 @@ public class Bob {
         System.out.println(line);
 
         Scanner echo = new Scanner(System.in);
-        TaskList taskList = new TaskList(100);
+
 
         String addIntro = " Aite. I've bobbed it into the list:";
         String removeIntro = "  BOB!!! I've removed the task:";
@@ -125,6 +134,7 @@ public class Bob {
                         throw new BobException(" WHAT THE BOB!!! You just used an unrecognised command!");
                     }
                 }
+                storage.save(taskList);
             } catch (BobException e) {
                 System.out.println(line);
                 System.out.println(e.getMessage());
@@ -135,6 +145,10 @@ public class Bob {
                 System.out.println(line);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Bob("./savedtasks/task.txt").run();
     }
 
     private static void printAction(String line, Task task, int count, String intro) {

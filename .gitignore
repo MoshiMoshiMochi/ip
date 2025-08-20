@@ -3,6 +3,9 @@
 /out/
 /*.iml
 
+# Ignore local saved tasks files
+savedtasks/
+
 # Gradle build files
 /.gradle/
 /build/
