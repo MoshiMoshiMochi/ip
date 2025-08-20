@@ -10,7 +10,9 @@ public class EventTask extends Task {
 
     @Override
     public String toSaveFormat(){
-        return this.getType().getSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.description + " | " + from + " | " + to;
+        return TaskType.EVENT.getSymbol() + " | " +
+                (this.isDone ? "1" : "0") + " | " +
+                this.description + " | " + from + " | " + to;
     }
 
     @Override

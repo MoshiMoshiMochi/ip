@@ -8,7 +8,9 @@ public class DeadlineTask extends Task{
 
     @Override
     public String toSaveFormat(){
-        return this.getType().getSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.description + " | " + this.by + " | ";
+        return TaskType.DEADLINE.getSymbol() + " | " +
+                (this.isDone ? "1" : "0") + " | " +
+                this.description + " | " + this.by + " | ";
     }
 
     @Override
