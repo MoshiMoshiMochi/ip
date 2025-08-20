@@ -1,7 +1,7 @@
-public class Task {
-    private String description;
-    private boolean isDone;
-    private TaskType type;
+public abstract class Task {
+    protected String description;
+    protected boolean isDone;
+    protected TaskType type;
 
     public Task(String description, TaskType type){
         this.description = description;
@@ -15,6 +15,40 @@ public class Task {
 
     public void markUnDone(){
         this.isDone = false;
+    }
+
+    public abstract String toSaveFormat();
+
+    public static Task fromSaveFormat(String line) {
+        try {
+            String[] parts = line.split(" \\| ");
+            String type = parts[0];
+            boolean isDone = parts[1].equals("1");
+            String desc = parts[2];
+
+            switch (type) {
+                case "T":
+                    ToDoTask toDoTask = new ToDoTask(desc);
+                    if (isDone) toDoTask.markDone();
+                    return toDoTask;
+                case "D":
+                    DeadlineTask deadlineTask = new DeadlineTask(desc, parts[3]);
+                    if (isDone) deadlineTask.markDone();
+                    return deadlineTask;
+                case "E":
+                    EventTask eventTask = new EventTask(desc, parts[3], parts[4]);
+                    if (isDone) eventTask.markDone();
+                    return eventTask;
+                default:
+                    return null; // corrupted line
+            }
+        } catch (Exception e) {
+            return null; // corrupted line
+        }
+    }
+
+    public TaskType getType(){
+        return this.type;
     }
 
     @Override
