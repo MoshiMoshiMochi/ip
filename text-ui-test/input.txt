@@ -1,6 +1,6 @@
 todo hi
-deadline lmao /by yo mama
-event lol /from yo /to mama
+deadline lmao /by 2025-12-12 1200
+event lol /from 2025-10-12 1300 /to 2025-10-12 1400
 list
 mark 1
 unmark 1
@@ -12,4 +12,6 @@ delete 2
 delete 10
 delete lmao
 list
+delete 2
+delete 2
 bye

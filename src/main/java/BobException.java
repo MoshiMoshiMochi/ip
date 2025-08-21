@@ -1,5 +1,5 @@
 public class BobException extends Exception{
     public BobException(String message){
-        super(message);
+        super(" What the BOB!!![BobException]\n"+message);
     }
 }

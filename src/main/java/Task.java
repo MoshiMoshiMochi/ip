@@ -29,20 +29,31 @@ public abstract class Task {
             switch (type) {
                 case "T":
                     ToDoTask toDoTask = new ToDoTask(desc);
-                    if (isDone) toDoTask.markDone();
+                    if (isDone) {
+                        toDoTask.markDone();
+                    }
                     return toDoTask;
                 case "D":
-                    DeadlineTask deadlineTask = new DeadlineTask(desc, parts[3]);
-                    if (isDone) deadlineTask.markDone();
-                    return deadlineTask;
+                    DeadlineTask Deadlinetask = new DeadlineTask(desc, parts[3]);
+                    if(isDone){
+                        Deadlinetask.markDone();
+                    }
+                    return  Deadlinetask;
                 case "E":
-                    EventTask eventTask = new EventTask(desc, parts[3], parts[4]);
-                    if (isDone) eventTask.markDone();
-                    return eventTask;
+                    EventTask EventTask = new EventTask(desc, parts[3], parts[4]);
+                    if(isDone){
+                        EventTask.markDone();
+                    }
+                    return EventTask;
                 default:
                     return null; // corrupted line
             }
-        } catch (Exception e) {
+        } catch (BobInvalidFormatException | BobDateTimeException e) {
+            System.out.println(
+                    " Failed to Load: \n "
+                    + line + "\n "
+                    + e.getMessage() + "\n"
+                    );
             return null; // corrupted line
         }
     }

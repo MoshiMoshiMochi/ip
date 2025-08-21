@@ -22,7 +22,7 @@ public class TaskList {
 
     public Task deleteTask(int index) throws BobException {
         if (index < 0 || index >= tasks.size()) {
-            throw new BobException(" WHAT THE BOB!!! Task number " + (index + 1) + " does not exist!");
+            throw new BobException(" Task number " + (index + 1) + " does not exist!");
         }
         return tasks.remove(index);
     }

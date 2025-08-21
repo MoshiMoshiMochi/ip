@@ -4,7 +4,7 @@
 /*.iml
 
 # Ignore local saved tasks files
-savedtasks/
+/savedtasks/
 
 # Gradle build files
 /.gradle/
