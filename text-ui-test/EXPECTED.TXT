@@ -12,23 +12,24 @@ ____________________________________________________________
 ____________________________________________________________
  Aite. I've bobbed it into the list:
    [T][ ] hi
- Bobbing heck! You now have 1 tasks in the list.
-____________________________________________________________
-____________________________________________________________
- Aite. I've bobbed it into the list:
-   [D][ ] lmao (by:yo mama)
  Bobbing heck! You now have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
  Aite. I've bobbed it into the list:
-   [E][ ] lol(from: yo to: mama)
+   [D][ ] lmao (by:Dec 12 2025 1200)
  Bobbing heck! You now have 3 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+ Aite. I've bobbed it into the list:
+   [E][ ] lol (from: Oct 12 2025 1300 to: Oct 12 2025 1400)
+ Bobbing heck! You now have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
  The list do be Bobbing my dude!
  1.[T][ ] hi
- 2.[D][ ] lmao (by:yo mama)
- 3.[E][ ] lol(from: yo to: mama)
+ 2.[T][ ] hi
+ 3.[D][ ] lmao (by:Dec 12 2025 1200)
+ 4.[E][ ] lol (from: Oct 12 2025 1300 to: Oct 12 2025 1400)
 ____________________________________________________________
 ____________________________________________________________
  I'm Marking it. I'm Marking it so good!
@@ -41,35 +42,50 @@ ____________________________________________________________
 ____________________________________________________________
  The list do be Bobbing my dude!
  1.[T][ ] hi
- 2.[D][ ] lmao (by:yo mama)
- 3.[E][ ] lol(from: yo to: mama)
+ 2.[T][ ] hi
+ 3.[D][ ] lmao (by:Dec 12 2025 1200)
+ 4.[E][ ] lol (from: Oct 12 2025 1300 to: Oct 12 2025 1400)
 ____________________________________________________________
 ____________________________________________________________
- WHAT THE BOB!!! My Bobther in Christ, you need a description and due date for deadline task.
- E.g. deadline <description> /by <due date>
+ What the Bob!!![BobInvalidFormatException]
+ Invalid Command Format! Expected: deadline <desc> /by <date>
 ____________________________________________________________
 ____________________________________________________________
- WHAT THE BOB!!! My Bobther in Christ, you need a description, from and to date for event task.
- E.g. event <description> /from <from date> /to <to date>
+ What the Bob!!![BobInvalidFormatException]
+ Invalid Command Format! Expected: event <desc> /from <date> /to <date>
 ____________________________________________________________
 ____________________________________________________________
- WHAT THE BOB!!! You just used an unrecognised command!
+ What the BOB!!![BobException]
+ You just used an unrecognised command!
 ____________________________________________________________
 ____________________________________________________________
   BOB!!! I've removed the task:
-   [D][ ] lmao (by:yo mama)
- Bobbing heck! You now have 2 tasks in the list.
+   [T][ ] hi
+ Bobbing heck! You now have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
- WHAT THE BOB!!! Task number 10 does not exist!
+ What the BOB!!![BobException]
+ Task number 10 does not exist!
 ____________________________________________________________
 ____________________________________________________________
- WHAT THE BOB!!! Invalid task number!
+ WHAT THE BOB!!!
+ Invalid Task Number!
 ____________________________________________________________
 ____________________________________________________________
  The list do be Bobbing my dude!
  1.[T][ ] hi
- 2.[E][ ] lol(from: yo to: mama)
+ 2.[D][ ] lmao (by:Dec 12 2025 1200)
+ 3.[E][ ] lol (from: Oct 12 2025 1300 to: Oct 12 2025 1400)
+____________________________________________________________
+____________________________________________________________
+  BOB!!! I've removed the task:
+   [D][ ] lmao (by:Dec 12 2025 1200)
+ Bobbing heck! You now have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+  BOB!!! I've removed the task:
+   [E][ ] lol (from: Oct 12 2025 1300 to: Oct 12 2025 1400)
+ Bobbing heck! You now have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
  Bye have a great time!

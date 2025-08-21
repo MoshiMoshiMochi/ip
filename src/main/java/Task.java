@@ -48,7 +48,12 @@ public abstract class Task {
                 default:
                     return null; // corrupted line
             }
-        } catch (Exception e) {
+        } catch (BobInvalidFormatException | BobDateTimeException e) {
+            System.out.println(
+                    " Failed to Load: \n "
+                    + line + "\n "
+                    + e.getMessage() + "\n"
+                    );
             return null; // corrupted line
         }
     }

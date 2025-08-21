@@ -1,19 +1,23 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class EventTask extends Task {
-    private LocalDate to;
-    private LocalDate from;
+    private LocalDateTime to;
+    private LocalDateTime from;
 
-    public EventTask(String description, String from, String to) throws BobException{
+    public EventTask(String description, String from, String to) throws BobDateTimeException, BobInvalidFormatException{
         super(description, TaskType.EVENT);
         try{
-            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            this.from = LocalDate.parse(from, inputFormat);
-            this.to = LocalDate.parse(to, inputFormat);
-        }catch (DateTimeParseException e){
-            throw new BobException("Please use yyyy-MM-dd HHmm (e.g., 2019-12-02 1800).");
+            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            this.from = LocalDateTime.parse(from, inputFormat);
+            this.to = LocalDateTime.parse(to, inputFormat);
+            if(this.to.isBefore(this.from)){
+                throw new BobDateTimeException("To Date needs to be larger than From Date");
+            }
+        } catch (DateTimeParseException e){
+            throw new BobInvalidFormatException(CommandFormat.DATETIMEFORMAT);
         }
     }
 
@@ -24,21 +28,9 @@ public class EventTask extends Task {
                 this.description + " | " + from + " | " + to;
     }
 
-//    public static EventTask fromSaveFormat(boolean isDone, String desc, String from, String to) throws BobException{
-//        try{
-//            EventTask task = new EventTask(desc, from, to);
-//            if (isDone) {
-//                task.markDone();
-//            }
-//            return task;
-//        }catch (BobException e){
-//            throw e;
-//        }
-//    }
-
     @Override
     public String toString(){
-        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return super.toString() + "(from: " + this.from.format(outputFormat) + " to: " + this.to.format(outputFormat) + ")";
+        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+        return super.toString() + " (from: " + this.from.format(outputFormat) + " to: " + this.to.format(outputFormat) + ")";
     }
 }

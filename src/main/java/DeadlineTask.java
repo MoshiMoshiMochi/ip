@@ -1,17 +1,18 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class DeadlineTask extends Task{
-    private LocalDate by;
+    private LocalDateTime by;
+    private final DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
-    public DeadlineTask(String description, String by) throws BobException{
+    public DeadlineTask(String description, String by) throws BobInvalidFormatException{
         super(description, TaskType.DEADLINE);
         try{
-            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            this.by = LocalDate.parse(by, inputFormat);
+            this.by = LocalDateTime.parse(by, inputFormat);
         }catch (DateTimeParseException e){
-            throw new BobException("Please use yyyy-MM-dd HHmm (e.g., 2019-12-02 1800).");
+            throw new BobInvalidFormatException(CommandFormat.DATETIMEFORMAT);
         }
     }
 
@@ -19,25 +20,12 @@ public class DeadlineTask extends Task{
     public String toSaveFormat(){
         return TaskType.DEADLINE.getSymbol() + " | " +
                 (this.isDone ? "1" : "0") + " | " +
-                this.description + " | " + this.by + " | ";
+                this.description + " | " + this.by.format(inputFormat) + " | ";
     }
-
-//    public static DeadlineTask fromSaveFormat(boolean isDone, String desc, String by) throws BobException{
-//        // parse line back to DeadlineTask
-//        try{
-//            DeadlineTask task = new DeadlineTask(desc, by);
-//            if (isDone) {
-//                task.markDone();
-//            }
-//            return task;
-//        }catch (BobException e){
-//            throw e;
-//        }
-//    }
 
     @Override
     public String toString(){
-        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
         return super.toString() + " (by:" + this.by.format(outputFormat) + ")";
     }
 }
