@@ -90,7 +90,7 @@ public class Bob {
                         String[] deadlineParts = parts[1].split("/by", 2);
                         if (deadlineParts.length < 2 || deadlineParts[0].trim().isEmpty() || deadlineParts[1].trim().isEmpty()) {
                             throw new BobException(" WHAT THE BOB!!! My Bobther in Christ, you need a description and due date for deadline task.\n " +
-                                    "E.g. deadline <description> /by <due date>");
+                                    "E.g. deadline <description> /by <due date formatted yyyy-mm-dd>");
                         }
                         Task task = new DeadlineTask(deadlineParts[0].trim(), deadlineParts[1].trim());
                         taskList.addTask(task);

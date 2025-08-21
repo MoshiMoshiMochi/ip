@@ -32,9 +32,7 @@ public abstract class Task {
                     if (isDone) toDoTask.markDone();
                     return toDoTask;
                 case "D":
-                    DeadlineTask deadlineTask = new DeadlineTask(desc, parts[3]);
-                    if (isDone) deadlineTask.markDone();
-                    return deadlineTask;
+                    return  DeadlineTask.fromSaveFormat(isDone, desc, parts[3]);
                 case "E":
                     EventTask eventTask = new EventTask(desc, parts[3], parts[4]);
                     if (isDone) eventTask.markDone();
