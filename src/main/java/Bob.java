@@ -92,9 +92,13 @@ public class Bob {
                             throw new BobException(" WHAT THE BOB!!! My Bobther in Christ, you need a description and due date for deadline task.\n " +
                                     "E.g. deadline <description> /by <due date formatted yyyy-mm-dd>");
                         }
-                        Task task = new DeadlineTask(deadlineParts[0].trim(), deadlineParts[1].trim());
-                        taskList.addTask(task);
-                        printAction(line, task, taskList.size(), addIntro);
+                        try{
+                            Task task = new DeadlineTask(deadlineParts[0].trim(), deadlineParts[1].trim());
+                            taskList.addTask(task);
+                            printAction(line, task, taskList.size(), addIntro);
+                        }catch (BobException e){
+                            throw e;
+                        }
                         break;
                     }
                     case EVENT: {
@@ -105,9 +109,13 @@ public class Bob {
                         if (eventParts.length < 3 || eventParts[0].trim().isEmpty() || eventParts[1].trim().isEmpty() || eventParts[2].trim().isEmpty()) {
                             throw new BobException(" WHAT THE BOB!!! My Bobther in Christ, you need a description, from and to date for event task.\n E.g. event <description> /from <from date> /to <to date>");
                         }
-                        Task task = new EventTask(eventParts[0].trim(), eventParts[1].trim(), eventParts[2].trim());
-                        taskList.addTask(task);
-                        printAction(line, task, taskList.size(), addIntro);
+                        try{
+                            EventTask task = new EventTask(eventParts[0].trim(), eventParts[1].trim(), eventParts[2].trim());
+                            taskList.addTask(task);
+                            printAction(line, task, taskList.size(), addIntro);
+                        }catch (BobException e){
+                            throw e;
+                        }
                         break;
                     }
                     case DELETE: {

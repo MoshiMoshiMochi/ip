@@ -29,14 +29,22 @@ public abstract class Task {
             switch (type) {
                 case "T":
                     ToDoTask toDoTask = new ToDoTask(desc);
-                    if (isDone) toDoTask.markDone();
+                    if (isDone) {
+                        toDoTask.markDone();
+                    }
                     return toDoTask;
                 case "D":
-                    return  DeadlineTask.fromSaveFormat(isDone, desc, parts[3]);
+                    DeadlineTask Deadlinetask = new DeadlineTask(desc, parts[3]);
+                    if(isDone){
+                        Deadlinetask.markDone();
+                    }
+                    return  Deadlinetask;
                 case "E":
-                    EventTask eventTask = new EventTask(desc, parts[3], parts[4]);
-                    if (isDone) eventTask.markDone();
-                    return eventTask;
+                    EventTask EventTask = new EventTask(desc, parts[3], parts[4]);
+                    if(isDone){
+                        EventTask.markDone();
+                    }
+                    return EventTask;
                 default:
                     return null; // corrupted line
             }
