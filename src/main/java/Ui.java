@@ -16,7 +16,7 @@ public class Ui {
                         " |  _ \\  | | | | |  _ \\ \n" +
                         " | |_) | | |_| | | |_) |\n" +
                         " |____/  |_____| |____/ \n";
-        showLine();
+        //showLine();
         System.out.println(" Hello from\n" + logo);
         showLine();
         System.out.println(" Hows it bobbing dude?! I'm Bob");
@@ -33,7 +33,7 @@ public class Ui {
     }
 
     public void showMessage(String... messages) {
-        showLine();
+//        showLine();
         for (String msg : messages) {
             System.out.println(msg);
         }
