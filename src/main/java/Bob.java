@@ -4,32 +4,36 @@ import java.util.Scanner;
 public class Bob {
     private Storage storage;
     private TaskList taskList;
+    private Ui ui;
 
-    public Bob(String filePath){
+    public Bob(String filePath) {
+        ui = new Ui();
         storage = new Storage(filePath);
         taskList = storage.load();
     }
 
-    public void run(){
-        String logo =
-                "  ____    _____   ____  \n" +
-                        " | __ )  |  _  | | __ ) \n" +
-                        " |  _ \\  | | | | |  _ \\ \n" +
-                        " | |_) | | |_| | | |_) |\n" +
-                        " |____/  |_____| |____/ \n";
-        String line =
-                "____________________________________________________________";
-        System.out.println(" Hello from\n" + logo);
-        System.out.println(line);
-        System.out.println(" Hows it bobbing dude?! I'm Bob");
-        System.out.println(" What can I do for you?");
-        System.out.println(line);
+    public void run() {
+//        String logo =
+//                "  ____    _____   ____  \n" +
+//                        " | __ )  |  _  | | __ ) \n" +
+//                        " |  _ \\  | | | | |  _ \\ \n" +
+//                        " | |_) | | |_| | | |_) |\n" +
+//                        " |____/  |_____| |____/ \n";
+//        String line =
+//                "____________________________________________________________";
+//        System.out.println(" Hello from\n" + logo);
+//        System.out.println(line);
+//        System.out.println(" Hows it bobbing dude?! I'm Bob");
+//        System.out.println(" What can I do for you?");
+//        System.out.println(line);
+
+        ui.showWelcome();
 
         Scanner echo = new Scanner(System.in);
 
 
-        String addIntro = " Aite. I've bobbed it into the list:";
-        String removeIntro = "  BOB!!! I've removed the task:";
+//        String addIntro = " Aite. I've bobbed it into the list:";
+//        String removeIntro = "  BOB!!! I've removed the task:";
 
         while (true) {
             String s = echo.nextLine();
@@ -39,29 +43,39 @@ public class Bob {
             try {
                 switch (commandType) {
                     case BYE: {
-                        printAction(line, " Bye have a great time!");
+//                        printAction(line, " Bye have a great time!");
+                        ui.showMessage(" Bye have a great time!");
                         return;
                     }
                     case LIST: {
-                        printAction(line, taskList.toString());
+//                        printAction(line, taskList.toString());
+                        ui.showMessage(taskList.toString());
                         break;
                     }
                     case MARK: {
                         int index = Integer.parseInt(parts[1]) - 1;
                         Task task = taskList.getTask(index);
                         task.markDone();
-                        printAction(line,
+//                        printAction(line,
+//                                " I'm Marking it. I'm Marking it so good!",
+//                                "    " + task);
+                        ui.showMessage(
                                 " I'm Marking it. I'm Marking it so good!",
-                                "    " + task);
+                                "    " + task
+                        );
                         break;
                     }
                     case UNMARK: {
                         int index = Integer.parseInt(parts[1]) - 1;
                         Task task = taskList.getTask(index);
                         task.markUnDone();
-                        printAction(line,
+//                        printAction(line,
+//                                " You need to BOB mark! BOB for Viltrum!",
+//                                "    " + task);
+                        ui.showMessage(
                                 " You need to BOB mark! BOB for Viltrum!",
-                                "    " + task);
+                                "    " + task
+                        );
                         break;
                     }
                     case TODO: {
@@ -71,7 +85,12 @@ public class Bob {
 
                         Task task = new ToDoTask(parts[1].trim());
                         taskList.addTask(task);
-                        printAction(line, task, taskList.size(), addIntro);
+                        //printAction(line, task, taskList.size(), addIntro);
+                        ui.prepareMessage(
+                                CommandType.TODO,
+                                task,
+                                taskList.size()
+                        );
                         break;
                     }
                     case DEADLINE: {
@@ -85,8 +104,12 @@ public class Bob {
 
                         Task task = new DeadlineTask(deadlineParts[0].trim(), deadlineParts[1].trim());
                         taskList.addTask(task);
-                        printAction(line, task, taskList.size(), addIntro);
-
+                        //printAction(line, task, taskList.size(), addIntro);
+                        ui.prepareMessage(
+                                CommandType.DEADLINE,
+                                task,
+                                taskList.size()
+                        );
                         break;
                     }
                     case EVENT: {
@@ -100,8 +123,12 @@ public class Bob {
 
                         EventTask task = new EventTask(eventParts[0].trim(), eventParts[1].trim(), eventParts[2].trim());
                         taskList.addTask(task);
-                        printAction(line, task, taskList.size(), addIntro);
-
+                        //printAction(line, task, taskList.size(), addIntro);
+                        ui.prepareMessage(
+                                CommandType.EVENT,
+                                task,
+                                taskList.size()
+                        );
                         break;
                     }
                     case DELETE: {
@@ -110,7 +137,12 @@ public class Bob {
                         }
                         int index = Integer.parseInt(s.split(" ")[1]) - 1;
                         Task removedTask = taskList.deleteTask(index);
-                        printAction(line, removedTask, taskList.size(), removeIntro);
+                        //printAction(line, removedTask, taskList.size(), removeIntro);
+                        ui.prepareMessage(
+                                CommandType.DELETE,
+                                removedTask,
+                                taskList.size()
+                        );
                         break;
                     }
 
@@ -119,10 +151,10 @@ public class Bob {
                     }
                 }
                 storage.save(taskList);
-            } catch (BobDateTimeException | BobInvalidFormatException | BobException e){
-                printAction(line, e.getMessage());
+            } catch (BobDateTimeException | BobInvalidFormatException | BobException e) {
+                ui.showMessage(e.getMessage());
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                printAction(line, " WHAT THE BOB!!!\n Invalid Task Number!");
+                ui.showMessage(" WHAT THE BOB!!!\n Invalid Task Number!");
             }
         }
     }
@@ -131,19 +163,4 @@ public class Bob {
         new Bob("./savedtasks/task.txt").run();
     }
 
-    private static void printAction(String line, String... messages) {
-        System.out.println(line);
-        for (String msg : messages) {
-            System.out.println(msg);
-        }
-        System.out.println(line);
-    }
-
-
-    private static void printAction(String line, Task task, int count, String intro) {
-        printAction(line,
-                intro,
-                "   " + task,
-                " Bobbing heck! You now have " + count + " tasks in the list.");
-    }
 }
