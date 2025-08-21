@@ -1,4 +1,13 @@
-public class AddCommand implements Command{
+package bob.command;
+
+import bob.exception.BobDateTimeException;
+import bob.exception.BobInvalidFormatException;
+import bob.storage.Storage;
+import bob.task.Task;
+import bob.task.TaskList;
+import bob.ui.Ui;
+
+public class AddCommand implements Command {
     private final Task task;
 
     public AddCommand(Task task) {

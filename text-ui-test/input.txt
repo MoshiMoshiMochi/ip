@@ -13,5 +13,5 @@ delete 10
 delete lmao
 list
 delete 2
-delete 2
+delete 1
 bye

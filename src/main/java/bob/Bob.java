@@ -1,5 +1,12 @@
-import java.io.IOException;
-import java.util.Scanner;
+package bob;
+
+import bob.command.Command;
+import bob.exception.BobDateTimeException;
+import bob.exception.BobException;
+import bob.exception.BobInvalidFormatException;
+import bob.storage.Storage;
+import bob.task.TaskList;
+import bob.ui.Ui;
 
 public class Bob {
     private Storage storage;
@@ -23,14 +30,14 @@ public class Bob {
                 Command c = Parser.parse(command);
                 c.execute(taskList, ui, storage);
                 isExit = c.isExit();
-            }catch (BobInvalidFormatException| BobDateTimeException |BobException e){
+            }catch (BobInvalidFormatException | BobDateTimeException | BobException e){
                 ui.showMessage(e.getMessage());
             }
         }
     }
 
     public static void main(String[] args) {
-        new Bob("./savedtasks/task.txt").run();
+        new Bob("../savedtasks/task.txt").run();
     }
 
 }

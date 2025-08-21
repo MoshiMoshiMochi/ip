@@ -1,3 +1,5 @@
+package bob.command;
+
 public enum CommandFormat {
     LIST("list"),
     MARK("mark <task no.>"),
