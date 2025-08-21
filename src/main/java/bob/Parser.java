@@ -1,3 +1,12 @@
+package bob;
+
+import bob.command.*;
+import bob.exception.BobException;
+import bob.exception.BobInvalidFormatException;
+import bob.task.DeadlineTask;
+import bob.task.EventTask;
+import bob.task.ToDoTask;
+
 public class Parser {
     public static Command parse(String command) throws BobException {
         String[] parts = command.split(" ", 2);

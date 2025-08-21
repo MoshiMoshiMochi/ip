@@ -1,8 +1,12 @@
+package bob.storage;
+
+import bob.task.Task;
+import bob.task.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Storage {

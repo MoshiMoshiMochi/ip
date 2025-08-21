@@ -1,16 +1,23 @@
-public class MarkCommand implements Command{
+package bob.command;
+
+import bob.storage.Storage;
+import bob.task.Task;
+import bob.task.TaskList;
+import bob.ui.Ui;
+
+public class UnMarkCommand implements Command {
     private final int index;
 
-    public MarkCommand(int index){
+    public UnMarkCommand(int index){
         this.index = index;
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task task = taskList.getTask(index);
-        task.markDone();
+        task.markUnDone();
         ui.showMessage(
-                " I'm Marking it. I'm Marking it so good!",
+                " You need to BOB mark! BOB for Viltrum!",
                 "    " + task
         );
     }

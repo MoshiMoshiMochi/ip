@@ -1,4 +1,12 @@
-public class DeleteCommand implements Command{
+package bob.command;
+
+import bob.exception.BobException;
+import bob.storage.Storage;
+import bob.task.Task;
+import bob.task.TaskList;
+import bob.ui.Ui;
+
+public class DeleteCommand implements Command {
     private final int index;
 
     public DeleteCommand(int index){

@@ -1,3 +1,5 @@
+package bob.command;
+
 public enum CommandType {
     TODO,
     DEADLINE,

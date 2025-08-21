@@ -1,3 +1,8 @@
+package bob.ui;
+
+import bob.command.CommandType;
+import bob.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
