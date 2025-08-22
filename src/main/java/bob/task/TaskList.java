@@ -15,7 +15,10 @@ public class TaskList {
         this.tasks.add(task);
     }
 
-    public Task getTask(int index){
+    public Task getTask(int index) throws BobException{
+        if (index < 0 || index >= tasks.size()) {
+            throw new BobException(" Task number " + (index + 1) + " does not exist!");
+        }
         return tasks.get(index);
     }
 

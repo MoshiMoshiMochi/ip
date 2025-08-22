@@ -1,5 +1,6 @@
 package bob.command;
 
+import bob.exception.BobException;
 import bob.storage.Storage;
 import bob.task.Task;
 import bob.task.TaskList;
@@ -14,12 +15,16 @@ public class MarkCommand implements Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        Task task = taskList.getTask(index);
-        task.markDone();
-        ui.showMessage(
-                " I'm Marking it. I'm Marking it so good!",
-                "    " + task
-        );
+        try {
+            Task task = taskList.getTask(index);
+            task.markDone();
+            ui.showMessage(
+                    " I'm Marking it. I'm Marking it so good!",
+                    "    " + task
+            );
+        } catch (BobException e){
+            ui.showMessage(e.getMessage());
+        }
     }
 
     @Override
