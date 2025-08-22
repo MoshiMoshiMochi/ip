@@ -15,7 +15,10 @@ public class TaskList {
         this.tasks.add(task);
     }
 
-    public Task getTask(int index){
+    public Task getTask(int index) throws BobException{
+        if (!indexInRange(index)) {
+            throw new BobException(" Task number " + (index + 1) + " does not exist!");
+        }
         return tasks.get(index);
     }
 
@@ -24,10 +27,14 @@ public class TaskList {
     }
 
     public Task deleteTask(int index) throws BobException {
-        if (index < 0 || index >= tasks.size()) {
+        if (!indexInRange(index)) {
             throw new BobException(" Task number " + (index + 1) + " does not exist!");
         }
         return tasks.remove(index);
+    }
+
+    public boolean indexInRange(int index) {
+        return index >= 0 && index < tasks.size();
     }
 
     @Override

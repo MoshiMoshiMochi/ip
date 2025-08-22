@@ -1,5 +1,6 @@
 package bob.storage;
 
+import bob.exception.BobException;
 import bob.task.Task;
 import bob.task.TaskList;
 
@@ -27,7 +28,11 @@ public class Storage {
 
             FileWriter fw = new FileWriter(file);
             for(int i=0; i < tasks.size(); i++) {
-                fw.write(tasks.getTask(i).toSaveFormat() + System.lineSeparator());
+                try{
+                    fw.write(tasks.getTask(i).toSaveFormat() + System.lineSeparator());
+                } catch (BobException e){
+                    //It should never reach here since i will always be within the range of tasks.size
+                }
             }
             fw.close();
         } catch (IOException e) {
