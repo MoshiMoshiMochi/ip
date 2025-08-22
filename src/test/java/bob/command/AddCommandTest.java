@@ -26,7 +26,9 @@ public class AddCommandTest {
         cmd.execute(tasks, ui, storage);
 
         assertEquals(1, tasks.size());
-        assertEquals("["+ TaskType.TODO.getSymbol() + "]" +"[ ] read book", tasks.getTask(0).toString());
+        assertEquals(
+                "["+ TaskType.TODO.getSymbol() + "]" +"[ ] read book",
+                task.toString());
     }
 
     @Test
@@ -41,7 +43,7 @@ public class AddCommandTest {
         assertEquals(1, tasks.size());
         assertEquals(
                 "["+ TaskType.DEADLINE.getSymbol() + "]" +"[ ] read book (by:Dec 12 2025 1200)",
-                tasks.getTask(0).toString());
+                task.toString());
     }
 
     @Test
@@ -56,7 +58,7 @@ public class AddCommandTest {
         assertEquals(1, tasks.size());
         assertEquals(
                 "["+ TaskType.EVENT.getSymbol() + "]" +"[ ] read book (from: Dec 12 2025 1200 to: Dec 12 2025 1300)",
-                tasks.getTask(0).toString());
+                task.toString());
     }
 
     @Test
