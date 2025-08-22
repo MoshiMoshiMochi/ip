@@ -33,10 +33,10 @@ public class AddCommand implements Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        try{
+        try {
             tasks.addTask(task);
             ui.prepareMessage(CommandType.UNKNOWN, task, tasks.size());
-        }catch (BobDateTimeException | BobInvalidFormatException e){
+        } catch (BobDateTimeException | BobInvalidFormatException e) {
             ui.showMessage(e.getMessage());
         }
     }

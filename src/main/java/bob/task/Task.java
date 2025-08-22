@@ -19,7 +19,7 @@ public abstract class Task {
      * @param description Description of the task.
      * @param type Type of the task.
      */
-    public Task(String description, TaskType type){
+    public Task(String description, TaskType type) {
         this.description = description;
         this.isDone = false;
         this.type = type;
@@ -29,14 +29,14 @@ public abstract class Task {
     /**
      * Marks task as done by updating isDone to true
      */
-    public void markDone(){
+    public void markDone() {
         this.isDone = true;
     }
 
     /**
      * UnMarks task as UnDone by updating isDone to false
      */
-    public void markUnDone(){
+    public void markUnDone() {
         this.isDone = false;
     }
 
@@ -60,44 +60,44 @@ public abstract class Task {
             String desc = parts[2];
 
             switch (type) {
-                case "T":
-                    ToDoTask toDoTask = new ToDoTask(desc);
-                    if (isDone) {
-                        toDoTask.markDone();
-                    }
-                    return toDoTask;
-                case "D":
-                    DeadlineTask Deadlinetask = new DeadlineTask(desc, parts[3]);
-                    if(isDone){
-                        Deadlinetask.markDone();
-                    }
-                    return  Deadlinetask;
-                case "E":
-                    EventTask EventTask = new EventTask(desc, parts[3], parts[4]);
-                    if(isDone){
-                        EventTask.markDone();
-                    }
-                    return EventTask;
-                default:
-                    return null; // corrupted line
+            case "T":
+                ToDoTask toDoTask = new ToDoTask(desc);
+                if (isDone) {
+                    toDoTask.markDone();
+                }
+                return toDoTask;
+            case "D":
+                DeadlineTask Deadlinetask = new DeadlineTask(desc, parts[3]);
+                if (isDone) {
+                    Deadlinetask.markDone();
+                }
+                return Deadlinetask;
+            case "E":
+                EventTask EventTask = new EventTask(desc, parts[3], parts[4]);
+                if (isDone) {
+                    EventTask.markDone();
+                }
+                return EventTask;
+            default:
+                return null; // corrupted line
             }
         } catch (BobInvalidFormatException | BobDateTimeException e) {
             System.out.println(
                     " Failed to Load: \n "
-                    + line + "\n "
-                    + e.getMessage() + "\n"
-                    );
+                            + line + "\n "
+                            + e.getMessage() + "\n"
+            );
             return null; // corrupted line
         }
     }
 
-    public TaskType getType(){
+    public TaskType getType() {
         return this.type;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String check = this.isDone ? "X" : " ";
-        return "[" + type.getSymbol() + "]"+ "[" + check + "] " + this.description;
+        return "[" + type.getSymbol() + "]" + "[" + check + "] " + this.description;
     }
 }

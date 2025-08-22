@@ -18,7 +18,7 @@ public class MarkCommand implements Command {
      *
      * @param index The index of the task to mark as done (0-based).
      */
-    public MarkCommand(int index){
+    public MarkCommand(int index) {
         this.index = index;
     }
 
@@ -38,7 +38,7 @@ public class MarkCommand implements Command {
                     " I'm Marking it. I'm Marking it so good!",
                     "    " + task
             );
-        } catch (BobException e){
+        } catch (BobException e) {
             ui.showMessage(e.getMessage());
         }
     }
@@ -49,7 +49,7 @@ public class MarkCommand implements Command {
      * @return <code>false</code> as MarkCommand does not terminate the program.
      */
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

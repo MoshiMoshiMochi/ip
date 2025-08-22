@@ -12,7 +12,7 @@ public class BobException extends Exception{
      *
      * @param message The detail message explaining the exception.
      */
-    public BobException(String message){
-        super(" What the BOB!!![BobException]\n"+message);
+    public BobException(String message) {
+        super(" What the BOB!!![BobException]\n" + message);
     }
 }

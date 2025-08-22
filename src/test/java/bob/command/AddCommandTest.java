@@ -5,6 +5,7 @@ import bob.exception.BobInvalidFormatException;
 import bob.storage.Storage;
 import bob.task.*;
 import bob.ui.Ui;
+
 import org.junit.jupiter.api.Test;
 
 import java.time.format.DateTimeFormatter;
@@ -27,7 +28,7 @@ public class AddCommandTest {
 
         assertEquals(1, tasks.size());
         assertEquals(
-                "["+ TaskType.TODO.getSymbol() + "]" +"[ ] read book",
+                "[" + TaskType.TODO.getSymbol() + "]" + "[ ] read book",
                 task.toString());
     }
 
@@ -42,7 +43,7 @@ public class AddCommandTest {
 
         assertEquals(1, tasks.size());
         assertEquals(
-                "["+ TaskType.DEADLINE.getSymbol() + "]" +"[ ] read book (by:Dec 12 2025 1200)",
+                "[" + TaskType.DEADLINE.getSymbol() + "]" + "[ ] read book (by:Dec 12 2025 1200)",
                 task.toString());
     }
 
@@ -57,16 +58,16 @@ public class AddCommandTest {
 
         assertEquals(1, tasks.size());
         assertEquals(
-                "["+ TaskType.EVENT.getSymbol() + "]" +"[ ] read book (from: Dec 12 2025 1200 to: Dec 12 2025 1300)",
+                "[" + TaskType.EVENT.getSymbol() + "]" + "[ ] read book (from: Dec 12 2025 1200 to: Dec 12 2025 1300)",
                 task.toString());
     }
 
     @Test
     public void AddDeadlineTask_InvalidDateFormat() {
 
-        try{
+        try {
             DeadlineTask task = new DeadlineTask("read book", "2025-12-12");
-        }catch (BobInvalidFormatException e){
+        } catch (BobInvalidFormatException e) {
             BobInvalidFormatException expected = new BobInvalidFormatException(CommandFormat.DATETIMEFORMAT);
             assertEquals(expected.getMessage(), e.getMessage());
         }
@@ -76,9 +77,9 @@ public class AddCommandTest {
     @Test
     public void AddEventTask_InvalidDateFormat() {
 
-        try{
+        try {
             EventTask task = new EventTask("read book", "2025-12-12", "2025-12-12");
-        }catch (BobInvalidFormatException e){
+        } catch (BobInvalidFormatException e) {
             BobInvalidFormatException expected = new BobInvalidFormatException(CommandFormat.DATETIMEFORMAT);
             assertEquals(expected.getMessage(), e.getMessage());
         }
@@ -89,7 +90,7 @@ public class AddCommandTest {
     public void AddEventTask_throwsDateTimeException() {
         try {
             EventTask task = new EventTask("read book", "2025-12-12 1200", "2025-12-12 1100");
-        }catch (BobDateTimeException e){
+        } catch (BobDateTimeException e) {
             BobDateTimeException expected = new BobDateTimeException("To Date needs to be larger than From Date");
             assertEquals(expected.getMessage(), e.getMessage());
         }

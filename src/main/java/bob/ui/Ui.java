@@ -77,16 +77,16 @@ public class Ui {
      * @param task The task that was added or deleted.
      * @param count The current number of tasks in the list.
      */
-    public void prepareMessage(CommandType type, Task task, int count){
+    public void prepareMessage(CommandType type, Task task, int count) {
         String intro;
-        switch (type){
-            case DELETE:{
-                intro = removeIntro;
-                break;
-            }
-            default: {
-                intro = addIntro;
-            }
+        switch (type) {
+        case DELETE: {
+            intro = removeIntro;
+            break;
+        }
+        default: {
+            intro = addIntro;
+        }
         }
         showMessage(
                 intro,

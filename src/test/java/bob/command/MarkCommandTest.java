@@ -7,6 +7,7 @@ import bob.task.TaskList;
 import bob.task.TaskType;
 import bob.task.ToDoTask;
 import bob.ui.Ui;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,7 +17,7 @@ public class MarkCommandTest {
     private Storage storage;
 
     @Test
-    public void Task_Mark_UnMark_Success(){
+    public void Task_Mark_UnMark_Success() {
         TaskList tasks = new TaskList();
         ToDoTask task = new ToDoTask("read book");
 
@@ -35,7 +36,7 @@ public class MarkCommandTest {
 
             //Check if UnMark
             assertEquals("[" + TaskType.TODO.getSymbol() + "]" + "[ ] read book", tasks.getTask(0).toString());
-        }catch (BobException e){
+        } catch (BobException e) {
             //It should not reach here!!!!!!!!!!!!!!
         }
 

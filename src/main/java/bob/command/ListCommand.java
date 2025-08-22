@@ -22,9 +22,9 @@ public class ListCommand implements Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        try{
+        try {
             ui.showMessage(tasks.toString());
-        }catch (BobDateTimeException | BobInvalidFormatException e){
+        } catch (BobDateTimeException | BobInvalidFormatException e) {
             ui.showMessage(e.getMessage());
         }
     }

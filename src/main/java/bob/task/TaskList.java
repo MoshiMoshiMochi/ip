@@ -14,7 +14,7 @@ public class TaskList {
     /**
      * Constructs an empty <code>TaskList</code>.
      */
-    public  TaskList(){
+    public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
@@ -22,7 +22,7 @@ public class TaskList {
      * Adds a task to list
      * @param task that is to be added into tasks
      */
-    public void addTask(Task task){
+    public void addTask(Task task) {
         this.tasks.add(task);
     }
 
@@ -33,7 +33,7 @@ public class TaskList {
      * @return The <code>Task</code> at the given index.
      * @throws BobException If the index is out of range.
      */
-    public Task getTask(int index) throws BobException{
+    public Task getTask(int index) throws BobException {
         if (!indexInRange(index)) {
             throw new BobException(" Task number " + (index + 1) + " does not exist!");
         }
@@ -45,7 +45,7 @@ public class TaskList {
      *
      * @return Size of the task list.
      */
-    public int size(){
+    public int size() {
         return this.tasks.size();
     }
 
@@ -80,12 +80,12 @@ public class TaskList {
      * @return String representation of the task list.
      */
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder(" The list do be Bobbing my dude!\n");
-        for(int i=0; i< tasks.size(); i++){
+        for (int i = 0; i < tasks.size(); i++) {
             //appends each task added the list
-            sb.append(" ").append(i+1).append(".").append(tasks.get(i));
-            if (i!=tasks.size()-1){
+            sb.append(" ").append(i + 1).append(".").append(tasks.get(i));
+            if (i != tasks.size() - 1) {
                 sb.append("\n");
             }
         }

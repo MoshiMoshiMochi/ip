@@ -44,7 +44,7 @@ public class Bob {
                 Command c = Parser.parse(command);
                 c.execute(taskList, ui, storage);
                 isExit = c.isExit();
-            }catch (BobInvalidFormatException | BobDateTimeException | BobException e){
+            } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {
                 ui.showMessage(e.getMessage());
             }
         }

@@ -21,7 +21,7 @@ public enum CommandFormat {
      *
      * @param format The string representing the command format.
      */
-    CommandFormat(String format){
+    CommandFormat(String format) {
         this.format = format;
     }
 

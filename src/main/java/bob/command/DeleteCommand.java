@@ -18,7 +18,7 @@ public class DeleteCommand implements Command {
      *
      * @param index The index of the task to delete (0-based).
      */
-    public DeleteCommand(int index){
+    public DeleteCommand(int index) {
         this.index = index;
     }
 
@@ -39,7 +39,7 @@ public class DeleteCommand implements Command {
                     task,
                     taskList.size()
             );
-        }catch (BobException e){
+        } catch (BobException e) {
             ui.showMessage(e.getMessage());
         }
     }

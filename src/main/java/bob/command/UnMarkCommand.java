@@ -18,7 +18,7 @@ public class UnMarkCommand implements Command {
      *
      * @param index The index of the task to unmark (0-based).
      */
-    public UnMarkCommand(int index){
+    public UnMarkCommand(int index) {
         this.index = index;
     }
 
@@ -38,7 +38,7 @@ public class UnMarkCommand implements Command {
                     " You need to BOB mark! BOB for Viltrum!",
                     "    " + task
             );
-        } catch (BobException e){
+        } catch (BobException e) {
             ui.showMessage(e.getMessage());
         }
     }
@@ -49,7 +49,7 @@ public class UnMarkCommand implements Command {
      * @return <code>false</code> as UnMarkCommand does not terminate the program.
      */
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }
