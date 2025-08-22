@@ -5,13 +5,14 @@ import bob.command.CommandFormat;
 import bob.exception.BobDateTimeException;
 import bob.exception.BobException;
 import bob.exception.BobInvalidFormatException;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test
-    public void Paser_InValid_Command(){
+    public void Paser_InValid_Command() {
 
         BobInvalidFormatException expected_todo = new BobInvalidFormatException(CommandFormat.TODO);
         BobInvalidFormatException expected_deadline = new BobInvalidFormatException(CommandFormat.DEADLINE);
@@ -24,49 +25,49 @@ public class ParserTest {
 
         try {
             Command todo_cmd = Parser.parse("TODO ");
-        } catch (BobInvalidFormatException | BobException | BobDateTimeException e){
+        } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
             assertEquals(expected_todo.getMessage(), e.getMessage());
         }
 
         try {
             Command deadline_cmd = Parser.parse("deadline ");
-        } catch (BobInvalidFormatException | BobException | BobDateTimeException e){
+        } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
             assertEquals(expected_deadline.getMessage(), e.getMessage());
         }
 
         try {
             Command event_cmd = Parser.parse("Event ");
-        } catch (BobInvalidFormatException | BobException | BobDateTimeException e){
+        } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
             assertEquals(expected_event.getMessage(), e.getMessage());
         }
 
         try {
             Command mark_cmd = Parser.parse("mark");
-        } catch (BobInvalidFormatException | BobException | BobDateTimeException e){
+        } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
             assertEquals(expected_mark.getMessage(), e.getMessage());
         }
 
         try {
             Command unmark_cmd = Parser.parse("unmark");
-        } catch (BobInvalidFormatException | BobException | BobDateTimeException e){
+        } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
             assertEquals(expected_unmark.getMessage(), e.getMessage());
         }
 
         try {
             Command delete_cmd = Parser.parse("delete");
-        } catch (BobInvalidFormatException | BobException | BobDateTimeException e){
+        } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
             assertEquals(expected_delete.getMessage(), e.getMessage());
         }
 
         try {
             Command invalid_cmd = Parser.parse("Mark hello");
-        } catch (BobInvalidFormatException | BobException | BobDateTimeException e){
+        } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
             assertEquals(expected_invalidnum.getMessage(), e.getMessage());
         }
 
         try {
             Command invalid_cmd = Parser.parse("hello ");
-        } catch (BobInvalidFormatException | BobException | BobDateTimeException e){
+        } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
             assertEquals(expected_unrecognisedcommand.getMessage(), e.getMessage());
         }
     }
