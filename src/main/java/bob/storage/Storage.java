@@ -10,13 +10,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Handles saving and loading of tasks to and from a file.
+ * Provides methods to persist a <code>TaskList</code> and retrieve it later.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs a <code>Storage</code> object with the specified file path.
+     *
+     * @param filePath The path of the file to save/load tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves all tasks from the given <code>TaskList</code> into the file.
+     * Creates parent directories if they do not exist.
+     *
+     * @param tasks The <code>TaskList</code> to save.
+     */
     public void save(TaskList tasks){
         try{
             File file = new File(filePath);
@@ -40,6 +55,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from the file into a <code>TaskList</code>.
+     * Returns an empty list if the file does not exist or lines are invalid.
+     *
+     * @return The <code>TaskList</code> containing tasks loaded from the file.
+     */
     public TaskList load() {
         TaskList tasks = new TaskList();
         File file = new File(filePath);
