@@ -3,27 +3,55 @@ package bob.task;
 import bob.exception.BobDateTimeException;
 import bob.exception.BobInvalidFormatException;
 
+/**
+ * Represents a task in the Bob task manager.
+ * A <code>Task</code> has a description, completion status, and type.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected TaskType type;
 
+    /**
+     * Constructs a new task with the specified description and type.
+     * The task is initially marked as not done.
+     *
+     * @param description Description of the task.
+     * @param type Type of the task.
+     */
     public Task(String description, TaskType type){
         this.description = description;
         this.isDone = false;
         this.type = type;
     }
 
+
+    /**
+     * Marks task as done by updating isDone to true
+     */
     public void markDone(){
         this.isDone = true;
     }
 
+    /**
+     * UnMarks task as UnDone by updating isDone to false
+     */
     public void markUnDone(){
         this.isDone = false;
     }
 
+    /**
+     * String format to save each respective task that inherits from task
+     */
     public abstract String toSaveFormat();
 
+    /**
+     * Creates a <code>Task</code> object from a saved line in a file.
+     * Returns null if the line is corrupted or cannot be parsed.
+     *
+     * @param line A line representing a task in saved file format.
+     * @return The corresponding <code>Task</code> object, or null if parsing fails.
+     */
     public static Task fromSaveFormat(String line) {
         try {
             String[] parts = line.split(" \\| ");

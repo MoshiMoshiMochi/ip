@@ -7,7 +7,20 @@ import bob.task.DeadlineTask;
 import bob.task.EventTask;
 import bob.task.ToDoTask;
 
+/**
+ * Parses user input strings into <code>Command</code> objects for execution.
+ * Handles validation of input format and throws exceptions for invalid commands.
+ */
 public class Parser {
+
+    /**
+     * Parses a user input string and returns the corresponding <code>Command</code> object.
+     *
+     * @param command The raw input string entered by the user.
+     * @return The corresponding <code>Command</code> object to execute.
+     * @throws BobException If the command is invalid or contains invalid arguments.
+     * @throws BobInvalidFormatException If the command format does not match expected format.
+     */
     public static Command parse(String command) throws BobException {
         String[] parts = command.split(" ", 2);
         CommandType type = CommandType.fromString(parts[0]);

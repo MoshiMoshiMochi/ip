@@ -5,15 +5,27 @@ import bob.task.Task;
 
 import java.util.Scanner;
 
+/**
+ * Represents the Ui of the application.
+ * Responsible for displaying messages, reading user input and formatting outputs
+ */
+
 public class Ui {
     private final Scanner scanner;
     private static final String addIntro = " Aite. I've bobbed it into the list:";
     private static final String removeIntro = "  BOB!!! I've removed the task:";
 
+    /**
+     * Constructs a new <code>Ui</code> instance with a scanner for user input.
+     */
     public Ui() {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Displays a welcome message including the Bob ASCII logo.
+     * BOB BOB BOB!!!!!!!!!
+     */
     public void showWelcome() {
         String logo =
                 "  ____    _____   ____  \n" +
@@ -29,14 +41,27 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Reads a line of input from the user.
+     *
+     * @return The next line of user input.
+     */
     public String readCommand() {
         return scanner.nextLine();
     }
 
+    /**
+     * Displays a horizontal line to the console for formatting purposes.
+     */
     public void showLine() {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Displays one or more messages to the console, separated by a line.
+     *
+     * @param messages One or more messages to display.
+     */
     public void showMessage(String... messages) {
 //        showLine();
         for (String msg : messages) {
@@ -45,6 +70,13 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prepares and displays a message after adding or deleting a task.
+     *
+     * @param type The type of command (e.g., ADD or DELETE).
+     * @param task The task that was added or deleted.
+     * @param count The current number of tasks in the list.
+     */
     public void prepareMessage(CommandType type, Task task, int count){
         String intro;
         switch (type){
