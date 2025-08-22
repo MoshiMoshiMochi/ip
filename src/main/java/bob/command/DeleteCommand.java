@@ -9,9 +9,10 @@ import bob.ui.Ui;
 public class DeleteCommand implements Command {
     private final int index;
 
-    public DeleteCommand(int index){
+    public DeleteCommand(int index) {
         this.index = index;
     }
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
@@ -21,7 +22,7 @@ public class DeleteCommand implements Command {
                     task,
                     taskList.size()
             );
-        }catch (BobException e){
+        } catch (BobException e) {
             ui.showMessage(e.getMessage());
         }
     }

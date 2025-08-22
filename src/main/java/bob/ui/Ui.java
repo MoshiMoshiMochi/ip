@@ -45,16 +45,16 @@ public class Ui {
         showLine();
     }
 
-    public void prepareMessage(CommandType type, Task task, int count){
+    public void prepareMessage(CommandType type, Task task, int count) {
         String intro;
-        switch (type){
-            case DELETE:{
-                intro = removeIntro;
-                break;
-            }
-            default: {
-                intro = addIntro;
-            }
+        switch (type) {
+        case DELETE: {
+            intro = removeIntro;
+            break;
+        }
+        default: {
+            intro = addIntro;
+        }
         }
         showMessage(
                 intro,

@@ -17,8 +17,8 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void save(TaskList tasks){
-        try{
+    public void save(TaskList tasks) {
+        try {
             File file = new File(filePath);
             File parentDir = file.getParentFile();
 
@@ -27,10 +27,10 @@ public class Storage {
             }
 
             FileWriter fw = new FileWriter(file);
-            for(int i=0; i < tasks.size(); i++) {
-                try{
+            for (int i = 0; i < tasks.size(); i++) {
+                try {
                     fw.write(tasks.getTask(i).toSaveFormat() + System.lineSeparator());
-                } catch (BobException e){
+                } catch (BobException e) {
                     //It should never reach here since i will always be within the range of tasks.size
                 }
             }

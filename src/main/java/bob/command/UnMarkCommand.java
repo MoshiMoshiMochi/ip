@@ -9,7 +9,7 @@ import bob.ui.Ui;
 public class UnMarkCommand implements Command {
     private final int index;
 
-    public UnMarkCommand(int index){
+    public UnMarkCommand(int index) {
         this.index = index;
     }
 
@@ -22,13 +22,13 @@ public class UnMarkCommand implements Command {
                     " You need to BOB mark! BOB for Viltrum!",
                     "    " + task
             );
-        } catch (BobException e){
+        } catch (BobException e) {
             ui.showMessage(e.getMessage());
         }
     }
 
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

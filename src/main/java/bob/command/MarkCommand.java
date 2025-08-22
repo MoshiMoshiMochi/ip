@@ -9,7 +9,7 @@ import bob.ui.Ui;
 public class MarkCommand implements Command {
     private final int index;
 
-    public MarkCommand(int index){
+    public MarkCommand(int index) {
         this.index = index;
     }
 
@@ -22,13 +22,13 @@ public class MarkCommand implements Command {
                     " I'm Marking it. I'm Marking it so good!",
                     "    " + task
             );
-        } catch (BobException e){
+        } catch (BobException e) {
             ui.showMessage(e.getMessage());
         }
     }
 
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }
