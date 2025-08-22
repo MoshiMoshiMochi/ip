@@ -10,7 +10,9 @@ public class ListCommand implements Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try{
-            ui.showMessage(tasks.toString());
+            ui.showMessage(
+                    " The list do be Bobbing my dude!",
+                    tasks.toString());
         }catch (BobDateTimeException | BobInvalidFormatException e){
             ui.showMessage(e.getMessage());
         }

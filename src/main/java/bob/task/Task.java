@@ -63,6 +63,10 @@ public abstract class Task {
         }
     }
 
+    public String getDescription(){
+        return this.description;
+    }
+
     public TaskType getType(){
         return this.type;
     }
