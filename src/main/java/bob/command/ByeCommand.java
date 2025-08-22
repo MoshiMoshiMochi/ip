@@ -14,8 +14,8 @@ public class ByeCommand implements Command {
      * Executes the bye command: saves the task list to storage
      * and displays a goodbye message via the UI.
      *
-     * @param tasks The <code>TaskList</code> to save.
-     * @param ui The <code>Ui</code> instance for displaying messages.
+     * @param tasks   The <code>TaskList</code> to save.
+     * @param ui      The <code>Ui</code> instance for displaying messages.
      * @param storage The <code>Storage</code> instance for persisting tasks.
      */
     @Override

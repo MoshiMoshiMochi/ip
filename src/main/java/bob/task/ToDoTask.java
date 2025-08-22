@@ -10,7 +10,7 @@ public class ToDoTask extends Task {
     }
 
     /**
-     *  Save format of <code>ToDoTask</code> into file
+     * Save format of <code>ToDoTask</code> into file
      */
     @Override
     public String toSaveFormat() {

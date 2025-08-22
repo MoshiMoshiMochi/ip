@@ -7,6 +7,7 @@ import bob.exception.BobException;
 import bob.exception.BobInvalidFormatException;
 import bob.storage.Storage;
 import bob.ui.Ui;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,7 +17,7 @@ public class TaskListTest {
     private Storage storage;
 
     @Test
-    public void TaskList_TaskNumDNE(){
+    public void TaskList_TaskNumDNE() {
         TaskList tasks = new TaskList();
         ToDoTask task = new ToDoTask("read book");
 
@@ -26,7 +27,7 @@ public class TaskListTest {
         int index = 200;
         try {
             Task t = tasks.getTask(index);
-        }catch (BobException e){
+        } catch (BobException e) {
             BobException expected = new BobException(" Task number " + (index + 1) + " does not exist!");
             assertEquals(expected.getMessage(), e.getMessage());
         }

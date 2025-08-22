@@ -27,8 +27,8 @@ public class DeleteCommand implements Command {
      * and displays a message via the UI.
      *
      * @param taskList The <code>TaskList</code> from which to delete the task.
-     * @param ui The <code>Ui</code> instance for displaying messages.
-     * @param storage The <code>Storage</code> instance for persisting changes.
+     * @param ui       The <code>Ui</code> instance for displaying messages.
+     * @param storage  The <code>Storage</code> instance for persisting changes.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {

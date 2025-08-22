@@ -20,6 +20,7 @@ public class TaskList {
 
     /**
      * Adds a task to list
+     *
      * @param task that is to be added into tasks
      */
     public void addTask(Task task) {
@@ -81,7 +82,7 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(" The list do be Bobbing my dude!\n");
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             //appends each task added the list
             sb.append(" ").append(i + 1).append(".").append(tasks.get(i));

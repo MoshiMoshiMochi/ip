@@ -27,8 +27,8 @@ public class AddCommand implements Command {
      * Executes the add command: adds the task to the task list
      * and displays a message via the UI.
      *
-     * @param tasks The <code>TaskList</code> to add the task to.
-     * @param ui The <code>Ui</code> instance for displaying messages.
+     * @param tasks   The <code>TaskList</code> to add the task to.
+     * @param ui      The <code>Ui</code> instance for displaying messages.
      * @param storage The <code>Storage</code> instance for persisting tasks.
      */
     @Override

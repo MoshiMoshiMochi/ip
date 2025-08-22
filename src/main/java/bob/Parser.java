@@ -18,7 +18,7 @@ public class Parser {
      *
      * @param command The raw input string entered by the user.
      * @return The corresponding <code>Command</code> object to execute.
-     * @throws BobException If the command is invalid or contains invalid arguments.
+     * @throws BobException              If the command is invalid or contains invalid arguments.
      * @throws BobInvalidFormatException If the command format does not match expected format.
      */
     public static Command parse(String command) throws BobException {
@@ -89,6 +89,12 @@ public class Parser {
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 throw new BobException(" Invalid Task number!");
             }
+        }
+        case FIND: {
+            if (parts.length < 2) {
+                throw new BobInvalidFormatException(CommandFormat.FIND);
+            }
+            return new FindCommand(parts[1].trim());
         }
         default: {
             throw new BobException(" You just used an unrecognised command!");

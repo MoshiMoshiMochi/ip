@@ -73,8 +73,8 @@ public class Ui {
     /**
      * Prepares and displays a message after adding or deleting a task.
      *
-     * @param type The type of command (e.g., ADD or DELETE).
-     * @param task The task that was added or deleted.
+     * @param type  The type of command (e.g., ADD or DELETE).
+     * @param task  The task that was added or deleted.
      * @param count The current number of tasks in the list.
      */
     public void prepareMessage(CommandType type, Task task, int count) {

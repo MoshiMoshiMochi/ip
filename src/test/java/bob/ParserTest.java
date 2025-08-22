@@ -20,8 +20,10 @@ public class ParserTest {
         BobInvalidFormatException expected_mark = new BobInvalidFormatException(CommandFormat.MARK);
         BobInvalidFormatException expected_unmark = new BobInvalidFormatException(CommandFormat.UNMARK);
         BobInvalidFormatException expected_delete = new BobInvalidFormatException(CommandFormat.DELETE);
+        BobInvalidFormatException expected_find = new BobInvalidFormatException(CommandFormat.FIND);
         BobException expected_invalidnum = new BobException(" Invalid Task number!");
         BobException expected_unrecognisedcommand = new BobException(" You just used an unrecognised command!");
+
 
         try {
             Command todo_cmd = Parser.parse("TODO ");
@@ -69,6 +71,12 @@ public class ParserTest {
             Command invalid_cmd = Parser.parse("hello ");
         } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
             assertEquals(expected_unrecognisedcommand.getMessage(), e.getMessage());
+        }
+
+        try {
+            Command find_cmd = Parser.parse("find ");
+        } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
+            assertEquals(expected_find.getMessage(), e.getMessage());
         }
     }
 }

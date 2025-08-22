@@ -16,14 +16,16 @@ public class ListCommand implements Command {
      * Executes the list command: displays all tasks in the task list
      * using the UI.
      *
-     * @param tasks The <code>TaskList</code> containing tasks to display.
-     * @param ui The <code>Ui</code> instance for displaying messages.
+     * @param tasks   The <code>TaskList</code> containing tasks to display.
+     * @param ui      The <code>Ui</code> instance for displaying messages.
      * @param storage The <code>Storage</code> instance for persistence (unused here).
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            ui.showMessage(tasks.toString());
+            ui.showMessage(
+                    " The list do be Bobbing my dude!",
+                    tasks.toString());
         } catch (BobDateTimeException | BobInvalidFormatException e) {
             ui.showMessage(e.getMessage());
         }

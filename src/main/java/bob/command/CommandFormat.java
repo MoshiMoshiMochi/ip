@@ -12,6 +12,7 @@ public enum CommandFormat {
     DEADLINE("deadline <desc> /by <date>"),
     EVENT("event <desc> /from <date> /to <date>"),
     DELETE("delete <task no.>"),
+    FIND("find <desc>"),
     DATETIMEFORMAT("<yyyy-mm-dd HHmm>");
 
     private final String format;

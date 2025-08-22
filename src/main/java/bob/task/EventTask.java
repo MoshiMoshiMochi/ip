@@ -21,9 +21,9 @@ public class EventTask extends Task {
      * Constructs a new <code>EventTask</code> with a description, start datetime, and end datetime.
      *
      * @param description Description of the event task.
-     * @param from Start datetime in "yyyy-MM-dd HHmm" format.
-     * @param to End datetime in "yyyy-MM-dd HHmm" format; must not be before <code>from</code>.
-     * @throws BobDateTimeException if <code>to</code> is before <code>from</code>.
+     * @param from        Start datetime in "yyyy-MM-dd HHmm" format.
+     * @param to          End datetime in "yyyy-MM-dd HHmm" format; must not be before <code>from</code>.
+     * @throws BobDateTimeException      if <code>to</code> is before <code>from</code>.
      * @throws BobInvalidFormatException if the datetime strings cannot be parsed.
      */
     public EventTask(String description, String from, String to) throws BobDateTimeException, BobInvalidFormatException {

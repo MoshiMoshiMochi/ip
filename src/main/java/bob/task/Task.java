@@ -17,7 +17,7 @@ public abstract class Task {
      * The task is initially marked as not done.
      *
      * @param description Description of the task.
-     * @param type Type of the task.
+     * @param type        Type of the task.
      */
     public Task(String description, TaskType type) {
         this.description = description;
@@ -89,6 +89,10 @@ public abstract class Task {
             );
             return null; // corrupted line
         }
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     public TaskType getType() {

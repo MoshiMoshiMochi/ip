@@ -4,7 +4,7 @@ package bob.exception;
  * The most general exception used in the Bob application.
  * Serves as the base class for other Bob-specific exceptions.
  */
-public class BobException extends Exception{
+public class BobException extends Exception {
 
     /**
      * Constructs a new <code>BobException</code> with the specified detail message.
