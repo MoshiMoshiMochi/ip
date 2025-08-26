@@ -1,23 +1,22 @@
 package bob.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import bob.exception.BobException;
-import bob.exception.BobInvalidFormatException;
 import bob.storage.Storage;
 import bob.task.TaskList;
 import bob.task.TaskType;
 import bob.task.ToDoTask;
 import bob.ui.Ui;
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class MarkCommandTest {
     private Ui ui = new Ui();
     private Storage storage;
 
     @Test
-    public void Task_Mark_UnMark_Success() {
+    public void task_markUnMark_success() {
         TaskList tasks = new TaskList();
         ToDoTask task = new ToDoTask("read book");
 

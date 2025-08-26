@@ -1,12 +1,12 @@
 package bob.task;
 
-import bob.command.CommandFormat;
-import bob.exception.BobDateTimeException;
-import bob.exception.BobInvalidFormatException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import bob.command.CommandFormat;
+import bob.exception.BobDateTimeException;
+import bob.exception.BobInvalidFormatException;
 
 /**
  * Represents an event task in the Bob task manager.
@@ -26,7 +26,8 @@ public class EventTask extends Task {
      * @throws BobDateTimeException      if <code>to</code> is before <code>from</code>.
      * @throws BobInvalidFormatException if the datetime strings cannot be parsed.
      */
-    public EventTask(String description, String from, String to) throws BobDateTimeException, BobInvalidFormatException {
+    public EventTask(String description, String from, String to)
+            throws BobDateTimeException, BobInvalidFormatException {
         super(description, TaskType.EVENT);
         try {
             DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -47,9 +48,15 @@ public class EventTask extends Task {
      */
     @Override
     public String toSaveFormat() {
-        return TaskType.EVENT.getSymbol() + " | " +
-                (this.isDone ? "1" : "0") + " | " +
-                this.description + " | " + from + " | " + to;
+        return TaskType.EVENT.getSymbol()
+                + " | "
+                + (this.isDone ? "1" : "0")
+                + " | "
+                + this.description
+                + " | "
+                + this.from
+                + " | "
+                + this.to;
     }
 
     /**
@@ -61,6 +68,11 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
-        return super.toString() + " (from: " + this.from.format(outputFormat) + " to: " + this.to.format(outputFormat) + ")";
+        return super.toString()
+                + " (from: "
+                + this.from.format(outputFormat)
+                + " to: "
+                + this.to.format(outputFormat)
+                + ")";
     }
 }

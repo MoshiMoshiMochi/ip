@@ -1,14 +1,14 @@
 package bob.storage;
 
-import bob.exception.BobException;
-import bob.task.Task;
-import bob.task.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import bob.exception.BobException;
+import bob.task.Task;
+import bob.task.TaskList;
 
 /**
  * Handles saving and loading of tasks to and from a file.

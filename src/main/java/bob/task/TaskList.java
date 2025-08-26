@@ -1,8 +1,8 @@
 package bob.task;
 
-import bob.exception.BobException;
-
 import java.util.ArrayList;
+
+import bob.exception.BobException;
 
 /**
  * Stores a list of <code>Task</code> objects and handles operations

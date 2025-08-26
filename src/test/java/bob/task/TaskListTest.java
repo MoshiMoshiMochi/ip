@@ -1,23 +1,20 @@
 package bob.task;
 
-import bob.command.AddCommand;
-import bob.command.MarkCommand;
-import bob.command.UnMarkCommand;
-import bob.exception.BobException;
-import bob.exception.BobInvalidFormatException;
-import bob.storage.Storage;
-import bob.ui.Ui;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import bob.command.AddCommand;
+import bob.exception.BobException;
+import bob.storage.Storage;
+import bob.ui.Ui;
 
 public class TaskListTest {
     private Ui ui = new Ui();
     private Storage storage;
 
     @Test
-    public void TaskList_TaskNumDNE() {
+    public void taskList_taskNumOutOfRange() {
         TaskList tasks = new TaskList();
         ToDoTask task = new ToDoTask("read book");
 

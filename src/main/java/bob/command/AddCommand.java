@@ -35,7 +35,11 @@ public class AddCommand implements Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.addTask(task);
-            ui.prepareMessage(CommandType.UNKNOWN, task, tasks.size());
+            ui.prepareMessage(
+                    CommandType.UNKNOWN,
+                    task,
+                    tasks.size()
+            );
         } catch (BobDateTimeException | BobInvalidFormatException e) {
             ui.showMessage(e.getMessage());
         }

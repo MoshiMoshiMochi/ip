@@ -57,16 +57,16 @@ public class FindCommand implements Command {
 
         if (matchingTasks.size() == 0) {
             ui.showMessage(
-                    " NOOO BOB! No Bobbing tasks within the list\n matches the description for: " +
-                            this.description + "\n\n Maybe trying another Bobbing description!");
+                    " NOOO BOB! No Bobbing tasks within the list\n matches the description for: "
+                            + this.description
+                            + "\n\n Maybe trying another Bobbing description!");
         } else {
             String intro =
-                    " BOB YEA! Here is/are the " +
-                            matchingTasks.size() +
-                            " task(s)\n based on the given description: " +
-                            this.description;
-            String outro =
-                    "\n I've been a good BOB";
+                    " BOB YEA! Here is/are the "
+                            + matchingTasks.size()
+                            + " task(s)\n based on the given description: "
+                            + this.description;
+            String outro = "\n I've been a good BOB";
             ui.showMessage(
                     intro,
                     matchingTasks.toString(),

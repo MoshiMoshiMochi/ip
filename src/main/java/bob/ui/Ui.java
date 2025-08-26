@@ -1,9 +1,9 @@
 package bob.ui;
 
+import java.util.Scanner;
+
 import bob.command.CommandType;
 import bob.task.Task;
-
-import java.util.Scanner;
 
 /**
  * Represents the Ui of the application.
@@ -11,9 +11,9 @@ import java.util.Scanner;
  */
 
 public class Ui {
+    private static final String ADDINTRO = " Aite. I've bobbed it into the list:";
+    private static final String REMOVEINTRO = "  BOB!!! I've removed the task:";
     private final Scanner scanner;
-    private static final String addIntro = " Aite. I've bobbed it into the list:";
-    private static final String removeIntro = "  BOB!!! I've removed the task:";
 
     /**
      * Constructs a new <code>Ui</code> instance with a scanner for user input.
@@ -27,12 +27,11 @@ public class Ui {
      * BOB BOB BOB!!!!!!!!!
      */
     public void showWelcome() {
-        String logo =
-                "  ____    _____   ____  \n" +
-                        " | __ )  |  _  | | __ ) \n" +
-                        " |  _ \\  | | | | |  _ \\ \n" +
-                        " | |_) | | |_| | | |_) |\n" +
-                        " |____/  |_____| |____/ \n";
+        String logo = "  ____    _____   ____  \n"
+                + " | __ )  |  _  | | __ ) \n"
+                + " |  _ \\  | | | | |  _ \\ \n"
+                + " | |_) | | |_| | | |_) |\n"
+                + " |____/  |_____| |____/ \n";
         //showLine();
         System.out.println(" Hello from\n" + logo);
         showLine();
@@ -63,7 +62,6 @@ public class Ui {
      * @param messages One or more messages to display.
      */
     public void showMessage(String... messages) {
-//        showLine();
         for (String msg : messages) {
             System.out.println(msg);
         }
@@ -81,11 +79,11 @@ public class Ui {
         String intro;
         switch (type) {
         case DELETE: {
-            intro = removeIntro;
+            intro = REMOVEINTRO;
             break;
         }
         default: {
-            intro = addIntro;
+            intro = ADDINTRO;
         }
         }
         showMessage(

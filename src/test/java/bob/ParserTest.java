@@ -1,82 +1,82 @@
 package bob;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import bob.command.Command;
 import bob.command.CommandFormat;
 import bob.exception.BobDateTimeException;
 import bob.exception.BobException;
 import bob.exception.BobInvalidFormatException;
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class ParserTest {
     @Test
-    public void Paser_InValid_Command() {
+    public void praser_command_inValid() {
 
-        BobInvalidFormatException expected_todo = new BobInvalidFormatException(CommandFormat.TODO);
-        BobInvalidFormatException expected_deadline = new BobInvalidFormatException(CommandFormat.DEADLINE);
-        BobInvalidFormatException expected_event = new BobInvalidFormatException(CommandFormat.EVENT);
-        BobInvalidFormatException expected_mark = new BobInvalidFormatException(CommandFormat.MARK);
-        BobInvalidFormatException expected_unmark = new BobInvalidFormatException(CommandFormat.UNMARK);
-        BobInvalidFormatException expected_delete = new BobInvalidFormatException(CommandFormat.DELETE);
-        BobInvalidFormatException expected_find = new BobInvalidFormatException(CommandFormat.FIND);
-        BobException expected_invalidnum = new BobException(" Invalid Task number!");
-        BobException expected_unrecognisedcommand = new BobException(" You just used an unrecognised command!");
+        BobInvalidFormatException expectedTodo = new BobInvalidFormatException(CommandFormat.TODO);
+        BobInvalidFormatException expectedDeadline = new BobInvalidFormatException(CommandFormat.DEADLINE);
+        BobInvalidFormatException expectedEvent = new BobInvalidFormatException(CommandFormat.EVENT);
+        BobInvalidFormatException expectedMark = new BobInvalidFormatException(CommandFormat.MARK);
+        BobInvalidFormatException expectedUnmark = new BobInvalidFormatException(CommandFormat.UNMARK);
+        BobInvalidFormatException expectedDelete = new BobInvalidFormatException(CommandFormat.DELETE);
+        BobInvalidFormatException expectedFind = new BobInvalidFormatException(CommandFormat.FIND);
+        BobException expectedInvalidnum = new BobException(" Invalid Task number!");
+        BobException expectedUnrecognisedcommand = new BobException(" You just used an unrecognised command!");
 
 
         try {
-            Command todo_cmd = Parser.parse("TODO ");
+            Command todoCmd = Parser.parse("TODO ");
         } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
-            assertEquals(expected_todo.getMessage(), e.getMessage());
+            assertEquals(expectedTodo.getMessage(), e.getMessage());
         }
 
         try {
-            Command deadline_cmd = Parser.parse("deadline ");
+            Command deadlineCmd = Parser.parse("deadline ");
         } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
-            assertEquals(expected_deadline.getMessage(), e.getMessage());
+            assertEquals(expectedDeadline.getMessage(), e.getMessage());
         }
 
         try {
-            Command event_cmd = Parser.parse("Event ");
+            Command eventCmd = Parser.parse("Event ");
         } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
-            assertEquals(expected_event.getMessage(), e.getMessage());
+            assertEquals(expectedEvent.getMessage(), e.getMessage());
         }
 
         try {
-            Command mark_cmd = Parser.parse("mark");
+            Command markCmd = Parser.parse("mark");
         } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
-            assertEquals(expected_mark.getMessage(), e.getMessage());
+            assertEquals(expectedMark.getMessage(), e.getMessage());
         }
 
         try {
-            Command unmark_cmd = Parser.parse("unmark");
+            Command unmarkCmd = Parser.parse("unmark");
         } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
-            assertEquals(expected_unmark.getMessage(), e.getMessage());
+            assertEquals(expectedUnmark.getMessage(), e.getMessage());
         }
 
         try {
-            Command delete_cmd = Parser.parse("delete");
+            Command deleteCmd = Parser.parse("delete");
         } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
-            assertEquals(expected_delete.getMessage(), e.getMessage());
+            assertEquals(expectedDelete.getMessage(), e.getMessage());
         }
 
         try {
-            Command invalid_cmd = Parser.parse("Mark hello");
+            Command invalidCmd = Parser.parse("Mark hello");
         } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
-            assertEquals(expected_invalidnum.getMessage(), e.getMessage());
+            assertEquals(expectedInvalidnum.getMessage(), e.getMessage());
         }
 
         try {
-            Command invalid_cmd = Parser.parse("hello ");
+            Command invalidCmd = Parser.parse("hello ");
         } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
-            assertEquals(expected_unrecognisedcommand.getMessage(), e.getMessage());
+            assertEquals(expectedUnrecognisedcommand.getMessage(), e.getMessage());
         }
 
         try {
-            Command find_cmd = Parser.parse("find ");
+            Command findCmd = Parser.parse("find ");
         } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
-            assertEquals(expected_find.getMessage(), e.getMessage());
+            assertEquals(expectedFind.getMessage(), e.getMessage());
         }
     }
 }
