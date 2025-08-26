@@ -8,7 +8,7 @@ import bob.ui.Ui;
  * Represents a command to exit the Bob application.
  * Executes by saving the task list and displaying a farewell message.
  */
-public class ByeCommand implements Command {
+public class ByeCommand extends Command {
 
     /**
      * Executes the bye command: saves the task list to storage

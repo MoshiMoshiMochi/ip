@@ -8,7 +8,7 @@ import bob.ui.Ui;
  * Represents a command that can be executed in the Bob application.
  * Each command defines how it interacts with the task list, UI, and storage.
  */
-public interface Command {
+public abstract class Command {
 
     /**
      * Executes this command, performing the associated action,
@@ -18,12 +18,24 @@ public interface Command {
      * @param ui       The <code>Ui</code> instance for displaying messages.
      * @param storage  The <code>Storage</code> instance for saving/loading tasks.
      */
-    void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+
 
     /**
      * Indicates whether this command exits the application.
      *
      * @return <code>true</code> if the command terminates the program, <code>false</code> otherwise.
      */
-    boolean isExit();
+    public abstract boolean isExit();
+
+
+    /**
+     * Executes this command in GUI mode (returns a response string).
+     */
+    public String executeAndReturn(TaskList taskList, Storage storage){
+        // Default: use a StringBuilder to collect responses
+        Ui tempUi = new Ui();
+        this.execute(taskList, tempUi, storage);
+        return tempUi.getCollectedMessages();
+    }
 }

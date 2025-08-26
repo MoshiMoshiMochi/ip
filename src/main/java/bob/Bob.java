@@ -51,6 +51,21 @@ public class Bob {
     }
 
     /**
+     * Processes a single user input and returns Bob's response (for GUI).
+     *
+     * @param input User command string
+     * @return Response message from Bob
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.executeAndReturn(taskList, storage);
+        } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
      * Entry point of the application.
      *
      * @param args Command line arguments (not used).

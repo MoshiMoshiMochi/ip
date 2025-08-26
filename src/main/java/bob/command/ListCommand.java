@@ -10,7 +10,7 @@ import bob.ui.Ui;
  * Represents a command to list all tasks in the task list.
  * Executes by displaying all tasks via the UI.
  */
-public class ListCommand implements Command {
+public class ListCommand extends Command {
 
     /**
      * Executes the list command: displays all tasks in the task list
