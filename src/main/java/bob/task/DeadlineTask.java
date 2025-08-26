@@ -1,11 +1,11 @@
 package bob.task;
 
-import bob.command.CommandFormat;
-import bob.exception.BobInvalidFormatException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import bob.command.CommandFormat;
+import bob.exception.BobInvalidFormatException;
 
 /**
  * Represents a deadline task in the Bob task manager.
@@ -39,9 +39,14 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toSaveFormat() {
-        return TaskType.DEADLINE.getSymbol() + " | " +
-                (this.isDone ? "1" : "0") + " | " +
-                this.description + " | " + this.by.format(inputFormat) + " | ";
+        return TaskType.DEADLINE.getSymbol()
+                + " | "
+                + (this.isDone ? "1" : "0")
+                + " | "
+                + this.description
+                + " | "
+                + this.by.format(inputFormat)
+                + " | ";
     }
 
     /**

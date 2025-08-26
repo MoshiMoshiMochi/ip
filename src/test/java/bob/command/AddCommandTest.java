@@ -1,16 +1,20 @@
 package bob.command;
 
-import bob.exception.BobDateTimeException;
-import bob.exception.BobInvalidFormatException;
-import bob.storage.Storage;
-import bob.task.*;
-import bob.ui.Ui;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import bob.exception.BobDateTimeException;
+import bob.exception.BobInvalidFormatException;
+import bob.storage.Storage;
+import bob.task.DeadlineTask;
+import bob.task.EventTask;
+import bob.task.TaskList;
+import bob.task.TaskType;
+import bob.task.ToDoTask;
+import bob.ui.Ui;
 
 public class AddCommandTest {
     private Ui ui = new Ui();
@@ -18,7 +22,7 @@ public class AddCommandTest {
     private final DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
     @Test
-    public void AddTodoTask_Success() {
+    public void addTodoTask_success() {
 
         TaskList tasks = new TaskList();
         ToDoTask task = new ToDoTask("read book");
@@ -33,7 +37,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void AddDeadlineTask_Success() {
+    public void addDeadlineTask_success() {
 
         TaskList tasks = new TaskList();
         DeadlineTask task = new DeadlineTask("read book", "2025-12-12 1200");
@@ -43,12 +47,13 @@ public class AddCommandTest {
 
         assertEquals(1, tasks.size());
         assertEquals(
-                "[" + TaskType.DEADLINE.getSymbol() + "]" + "[ ] read book (by:Dec 12 2025 1200)",
+                "[" + TaskType.DEADLINE.getSymbol()
+                        + "]" + "[ ] read book (by:Dec 12 2025 1200)",
                 task.toString());
     }
 
     @Test
-    public void AddEventTask_Success() {
+    public void addEventTask_success() {
 
         TaskList tasks = new TaskList();
         EventTask task = new EventTask("read book", "2025-12-12 1200", "2025-12-12 1300");
@@ -63,7 +68,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void AddDeadlineTask_InvalidDateFormat() {
+    public void addDeadlineTask_invalidDateFormat() {
 
         try {
             DeadlineTask task = new DeadlineTask("read book", "2025-12-12");
@@ -75,7 +80,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void AddEventTask_InvalidDateFormat() {
+    public void addEventTask_invalidDateFormat() {
 
         try {
             EventTask task = new EventTask("read book", "2025-12-12", "2025-12-12");
@@ -87,7 +92,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void AddEventTask_throwsDateTimeException() {
+    public void addEventTask_throwsDateTimeException() {
         try {
             EventTask task = new EventTask("read book", "2025-12-12 1200", "2025-12-12 1100");
         } catch (BobDateTimeException e) {

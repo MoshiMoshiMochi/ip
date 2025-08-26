@@ -67,17 +67,17 @@ public abstract class Task {
                 }
                 return toDoTask;
             case "D":
-                DeadlineTask Deadlinetask = new DeadlineTask(desc, parts[3]);
+                DeadlineTask deadlineTask = new DeadlineTask(desc, parts[3]);
                 if (isDone) {
-                    Deadlinetask.markDone();
+                    deadlineTask.markDone();
                 }
-                return Deadlinetask;
+                return deadlineTask;
             case "E":
-                EventTask EventTask = new EventTask(desc, parts[3], parts[4]);
+                EventTask eventTask = new EventTask(desc, parts[3], parts[4]);
                 if (isDone) {
-                    EventTask.markDone();
+                    eventTask.markDone();
                 }
-                return EventTask;
+                return eventTask;
             default:
                 return null; // corrupted line
             }

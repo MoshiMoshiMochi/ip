@@ -1,6 +1,16 @@
 package bob;
 
-import bob.command.*;
+
+import bob.command.AddCommand;
+import bob.command.ByeCommand;
+import bob.command.Command;
+import bob.command.CommandFormat;
+import bob.command.CommandType;
+import bob.command.DeleteCommand;
+import bob.command.FindCommand;
+import bob.command.ListCommand;
+import bob.command.MarkCommand;
+import bob.command.UnMarkCommand;
 import bob.exception.BobException;
 import bob.exception.BobInvalidFormatException;
 import bob.task.DeadlineTask;
@@ -57,7 +67,11 @@ public class Parser {
             if (parts.length < 2 || parts[1].trim().isEmpty()) {
                 throw new BobInvalidFormatException(CommandFormat.TODO);
             }
-            return new AddCommand(new ToDoTask(parts[1].trim()));
+            return new AddCommand(
+                    new ToDoTask(
+                            parts[1].trim()
+                    )
+            );
         }
         case DEADLINE: {
             if (parts.length < 2) {
@@ -67,17 +81,32 @@ public class Parser {
             if (deadlineParts.length < 2 || deadlineParts[0].trim().isEmpty() || deadlineParts[1].trim().isEmpty()) {
                 throw new BobInvalidFormatException(CommandFormat.DEADLINE);
             }
-            return new AddCommand(new DeadlineTask(deadlineParts[0].trim(), deadlineParts[1].trim()));
+            return new AddCommand(
+                    new DeadlineTask(
+                            deadlineParts[0].trim(),
+                            deadlineParts[1].trim()
+                    )
+            );
         }
         case EVENT: {
             if (parts.length < 2) {
                 throw new BobInvalidFormatException(CommandFormat.EVENT);
             }
             String[] eventParts = parts[1].split("/from|/to");
-            if (eventParts.length < 3 || eventParts[0].trim().isEmpty() || eventParts[1].trim().isEmpty() || eventParts[2].trim().isEmpty()) {
+            if (eventParts.length < 3
+                    || eventParts[0].trim().isEmpty()
+                    || eventParts[1].trim().isEmpty()
+                    || eventParts[2].trim().isEmpty()
+            ) {
                 throw new BobInvalidFormatException(CommandFormat.EVENT);
             }
-            return new AddCommand(new EventTask(eventParts[0].trim(), eventParts[1].trim(), eventParts[2].trim()));
+            return new AddCommand(
+                    new EventTask(
+                            eventParts[0].trim(),
+                            eventParts[1].trim(),
+                            eventParts[2].trim()
+                    )
+            );
         }
         case DELETE: {
             if (parts.length < 2) {
