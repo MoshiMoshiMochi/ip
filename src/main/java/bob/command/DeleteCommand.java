@@ -10,7 +10,7 @@ import bob.ui.Ui;
  * Represents a command to delete a task from the task list.
  * Executes by removing the task at the specified index and updating the UI.
  */
-public class DeleteCommand implements Command {
+public class DeleteCommand extends Command {
     private final int index;
 
     /**

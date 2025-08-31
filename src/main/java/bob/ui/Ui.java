@@ -13,13 +13,16 @@ import bob.task.Task;
 public class Ui {
     private static final String ADDINTRO = " Aite. I've bobbed it into the list:";
     private static final String REMOVEINTRO = "  BOB!!! I've removed the task:";
+    private static final String LINE = "____________________________________________________________";
     private final Scanner scanner;
+    private final StringBuilder buffer; // collect messages for GUI
 
     /**
      * Constructs a new <code>Ui</code> instance with a scanner for user input.
      */
     public Ui() {
         scanner = new Scanner(System.in);
+        buffer = new StringBuilder();
     }
 
     /**
@@ -32,12 +35,10 @@ public class Ui {
                 + " |  _ \\  | | | | |  _ \\ \n"
                 + " | |_) | | |_| | | |_) |\n"
                 + " |____/  |_____| |____/ \n";
-        //showLine();
-        System.out.println(" Hello from\n" + logo);
-        showLine();
-        System.out.println(" Hows it bobbing dude?! I'm Bob");
-        System.out.println(" What can I do for you?");
-        showLine();
+        showMessage(
+                " Hows it bobbing dude?! I'm Bob",
+                " What can I do for you?"
+        );
     }
 
     /**
@@ -53,7 +54,7 @@ public class Ui {
      * Displays a horizontal line to the console for formatting purposes.
      */
     public void showLine() {
-        System.out.println("____________________________________________________________");
+        System.out.println(LINE);
     }
 
     /**
@@ -64,8 +65,10 @@ public class Ui {
     public void showMessage(String... messages) {
         for (String msg : messages) {
             System.out.println(msg);
+            buffer.append(msg).append("\n");
         }
         showLine();
+        //buffer.append(LINE);
     }
 
     /**
@@ -91,6 +94,15 @@ public class Ui {
                 "   " + task,
                 " Bobbing heck! You now have " + count + " tasks in the list."
         );
+    }
+
+    /**
+     * Returns collected messages for GUI (and clears buffer).
+     */
+    public String getCollectedMessages() {
+        String result = buffer.toString().trim();
+        buffer.setLength(0); // clear
+        return result;
     }
 
 

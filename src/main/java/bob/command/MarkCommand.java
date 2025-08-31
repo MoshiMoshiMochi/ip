@@ -10,7 +10,7 @@ import bob.ui.Ui;
  * Represents a command to mark a task as done in the task list.
  * Executes by updating the task's status and displaying a message via the UI.
  */
-public class MarkCommand implements Command {
+public class MarkCommand extends Command {
     private final int index;
 
     /**

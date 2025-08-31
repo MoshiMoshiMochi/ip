@@ -22,7 +22,7 @@ import bob.task.ToDoTask;
  * Handles validation of input format and throws exceptions for invalid commands.
  */
 public class Parser {
-
+    private static CommandType commandType;
     /**
      * Parses a user input string and returns the corresponding <code>Command</code> object.
      *

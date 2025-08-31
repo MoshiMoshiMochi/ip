@@ -11,7 +11,7 @@ import bob.ui.Ui;
  * Represents a command to add a task to the task list.
  * Executes by adding the specified task and updating the UI.
  */
-public class AddCommand implements Command {
+public class AddCommand extends Command {
     private final Task task;
 
     /**

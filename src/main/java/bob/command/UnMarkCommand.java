@@ -10,7 +10,7 @@ import bob.ui.Ui;
  * Represents a command to unmark a task as not done in the task list.
  * Executes by updating the task's status and displaying a message via the UI.
  */
-public class UnMarkCommand implements Command {
+public class UnMarkCommand extends Command {
     private final int index;
 
     /**

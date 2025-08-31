@@ -16,7 +16,7 @@ import bob.ui.Ui;
  * provided to the user via the {@link Ui}.
  * </p>
  */
-public class FindCommand implements Command {
+public class FindCommand extends Command {
     private String description;
 
     /**
