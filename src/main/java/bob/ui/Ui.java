@@ -35,12 +35,10 @@ public class Ui {
                 + " |  _ \\  | | | | |  _ \\ \n"
                 + " | |_) | | |_| | | |_) |\n"
                 + " |____/  |_____| |____/ \n";
-        //showLine();
-        System.out.println(" Hello from\n" + logo);
-        showLine();
-        System.out.println(" Hows it bobbing dude?! I'm Bob");
-        System.out.println(" What can I do for you?");
-        showLine();
+        showMessage(
+                " Hows it bobbing dude?! I'm Bob",
+                " What can I do for you?"
+        );
     }
 
     /**
@@ -70,7 +68,7 @@ public class Ui {
             buffer.append(msg).append("\n");
         }
         showLine();
-        buffer.append(LINE);
+        //buffer.append(LINE);
     }
 
     /**
@@ -98,7 +96,9 @@ public class Ui {
         );
     }
 
-    /** Returns collected messages for GUI (and clears buffer). */
+    /**
+     * Returns collected messages for GUI (and clears buffer).
+     */
     public String getCollectedMessages() {
         String result = buffer.toString().trim();
         buffer.setLength(0); // clear

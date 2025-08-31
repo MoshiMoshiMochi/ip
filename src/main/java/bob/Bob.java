@@ -17,6 +17,7 @@ public class Bob {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+    private String commandType;
 
     /**
      * Constructs a <code>Bob</code> instance with the specified file path for storage.
@@ -34,7 +35,6 @@ public class Bob {
      * executing them, and handling exceptions until exit.
      */
     public void run() {
-        ui.showWelcome();
         boolean isExit = false;
 
         while (!isExit) {
@@ -59,10 +59,25 @@ public class Bob {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            commandType = c.getClass().getSimpleName();
             return c.executeAndReturn(taskList, storage);
         } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {
             return e.getMessage();
         }
+    }
+
+    public String getCommandType() {
+        return commandType;
+    }
+
+    /**
+     * Used to display intro message (for GUI)
+     *
+     * @return
+     */
+    public String getIntro() {
+        ui.showWelcome();
+        return ui.getCollectedMessages();
     }
 
     /**

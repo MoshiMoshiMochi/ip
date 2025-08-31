@@ -32,7 +32,7 @@ public abstract class Command {
     /**
      * Executes this command in GUI mode (returns a response string).
      */
-    public String executeAndReturn(TaskList taskList, Storage storage){
+    public String executeAndReturn(TaskList taskList, Storage storage) {
         // Default: use a StringBuilder to collect responses
         Ui tempUi = new Ui();
         this.execute(taskList, tempUi, storage);
