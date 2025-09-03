@@ -1,6 +1,8 @@
 package bob;
 
 
+import bob.ui.Main;
+
 /**
  * A launcher class to workaround classpath issues.
  */
