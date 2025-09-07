@@ -59,6 +59,8 @@ public abstract class Task {
             boolean isDone = parts[1].equals("1");
             String desc = parts[2];
 
+            assert type != "" : "Loaded type should not be empty. Row will not be loaded";
+
             switch (type) {
             case "T":
                 ToDoTask toDoTask = new ToDoTask(desc);
