@@ -23,6 +23,19 @@ import bob.task.ToDoTask;
  */
 public class Parser {
     private static CommandType commandType;
+
+    // Exception messages
+    private static String INVALID_INDEX_MESSAGE = " Invalid Task number!";
+    private static String INVALID_COMMAND_MESSAGE = " Invalid Command!";
+
+    // Add Command delimiters and expected parts
+    private static String TODO_DELIMITER = null;
+    private static int TODO_EXPECTED = 1;
+    private static String DEADLINE_DELIMITER = "/by";
+    private static int DEADLINE_EXPECTED = 2;
+    private static String EVENT_DELIMITER = "/from|/to";
+    private static int EVENT_EXPECTED = 3;
+
     /**
      * Parses a user input string and returns the corresponding <code>Command</code> object.
      *
@@ -42,45 +55,37 @@ public class Parser {
             return new ListCommand();
         }
         case MARK: {
-            if (parts.length < 2) {
-                throw new BobInvalidFormatException(CommandFormat.MARK);
-            }
-            try {
-                int index = Integer.parseInt(parts[1]) - 1;
-                return new MarkCommand(index);
-            } catch (NumberFormatException e) {
-                throw new BobException(" Invalid Task number!");
-            }
+            String part = parts.length > 1 ? parts[1] : null;
+            int markIndex = validateIndex(part, CommandFormat.MARK);
+            return new MarkCommand(markIndex);
         }
         case UNMARK: {
-            if (parts.length < 2) {
-                throw new BobInvalidFormatException(CommandFormat.UNMARK);
-            }
-            try {
-                int index = Integer.parseInt(parts[1]) - 1;
-                return new UnMarkCommand(index);
-            } catch (NumberFormatException e) {
-                throw new BobException(" Invalid Task number!");
-            }
+            String part = parts.length > 1 ? parts[1] : null;
+            int unMarkIndex = validateIndex(part, CommandFormat.UNMARK);
+            return new UnMarkCommand(unMarkIndex);
         }
         case TODO: {
-            if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                throw new BobInvalidFormatException(CommandFormat.TODO);
-            }
+            String arg = parts.length > 1 ? parts[1] : null;
+            String[] todoParts = validateAdd(
+                    arg,
+                    TODO_DELIMITER,
+                    TODO_EXPECTED,
+                    CommandFormat.TODO
+            );
             return new AddCommand(
                     new ToDoTask(
-                            parts[1].trim()
+                            todoParts[0].trim()
                     )
             );
         }
         case DEADLINE: {
-            if (parts.length < 2) {
-                throw new BobInvalidFormatException(CommandFormat.DEADLINE);
-            }
-            String[] deadlineParts = parts[1].split("/by", 2);
-            if (deadlineParts.length < 2 || deadlineParts[0].trim().isEmpty() || deadlineParts[1].trim().isEmpty()) {
-                throw new BobInvalidFormatException(CommandFormat.DEADLINE);
-            }
+            String arg = parts.length > 1 ? parts[1] : null;
+            String[] deadlineParts = validateAdd(
+                    arg,
+                    DEADLINE_DELIMITER,
+                    DEADLINE_EXPECTED,
+                    CommandFormat.DEADLINE
+            );
             return new AddCommand(
                     new DeadlineTask(
                             deadlineParts[0].trim(),
@@ -89,17 +94,13 @@ public class Parser {
             );
         }
         case EVENT: {
-            if (parts.length < 2) {
-                throw new BobInvalidFormatException(CommandFormat.EVENT);
-            }
-            String[] eventParts = parts[1].split("/from|/to");
-            if (eventParts.length < 3
-                    || eventParts[0].trim().isEmpty()
-                    || eventParts[1].trim().isEmpty()
-                    || eventParts[2].trim().isEmpty()
-            ) {
-                throw new BobInvalidFormatException(CommandFormat.EVENT);
-            }
+            String arg = parts.length > 1 ? parts[1] : null;
+            String[] eventParts = validateAdd(
+                    arg,
+                    EVENT_DELIMITER,
+                    EVENT_EXPECTED,
+                    CommandFormat.EVENT
+            );
             return new AddCommand(
                     new EventTask(
                             eventParts[0].trim(),
@@ -109,25 +110,70 @@ public class Parser {
             );
         }
         case DELETE: {
-            if (parts.length < 2) {
-                throw new BobInvalidFormatException(CommandFormat.DELETE);
-            }
-            try {
-                int index = Integer.parseInt(parts[1].trim()) - 1;
-                return new DeleteCommand(index);
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new BobException(" Invalid Task number!");
-            }
+            String part = parts.length > 1 ? parts[1] : null;
+            int deleteIndex = validateIndex(part, CommandFormat.DELETE);
+            return new DeleteCommand(deleteIndex);
         }
         case FIND: {
-            if (parts.length < 2) {
-                throw new BobInvalidFormatException(CommandFormat.FIND);
-            }
+            String part = parts.length > 1 ? parts[1] : null;
+            validateFind(part, CommandFormat.FIND);
             return new FindCommand(parts[1].trim());
         }
         default: {
-            throw new BobException(" You just used an unrecognised command!");
+            throw new BobException(INVALID_COMMAND_MESSAGE);
         }
         }
     }
+
+    private static int validateIndex(String part, CommandFormat format) throws BobException {
+        if (isValidPart(part)) {
+            throw new BobInvalidFormatException(format);
+        }
+        try {
+            return Integer.parseInt(part.trim()) - 1;
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new BobException(INVALID_INDEX_MESSAGE);
+        }
+    }
+
+    private static String[] validateAdd(String arg, String delimiter, int expectedParts, CommandFormat format)
+            throws BobInvalidFormatException {
+
+        if (isValidPart(arg)) {
+            throw new BobInvalidFormatException(format);
+        }
+
+        String[] parts = new String[expectedParts];
+        if (delimiter != null) {
+            parts = arg.split(delimiter);
+        } else {
+            parts[0] = arg;
+        }
+
+        // Checks if required parts exist
+        if (parts.length < expectedParts) {
+            throw new BobInvalidFormatException(format);
+        }
+
+        // Check if empty argument
+        for (String part : parts) {
+            System.out.println(part);
+            if (part.trim().isEmpty()) {
+                throw new BobInvalidFormatException(format);
+            }
+        }
+        return parts;
+    }
+
+    private static void validateFind(String part, CommandFormat format) {
+        if (isValidPart(part)) {
+            throw new BobInvalidFormatException(format);
+        }
+    }
+
+    private static boolean isValidPart(String part) {
+        return part == null || part.isBlank();
+    }
+
+
 }
