@@ -22,7 +22,7 @@ public class ParserTest {
         BobInvalidFormatException expectedDelete = new BobInvalidFormatException(CommandFormat.DELETE);
         BobInvalidFormatException expectedFind = new BobInvalidFormatException(CommandFormat.FIND);
         BobException expectedInvalidnum = new BobException(" Invalid Task number!");
-        BobException expectedUnrecognisedcommand = new BobException(" You just used an unrecognised command!");
+        BobException expectedUnrecognisedcommand = new BobException(" Invalid Command!");
 
 
         try {
