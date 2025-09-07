@@ -40,7 +40,7 @@ public class Storage {
             if (parentDir != null && !parentDir.exists()) {
                 parentDir.mkdirs(); // create ./data/ if it doesn’t exist
             }
-
+            assert parentDir.exists() : "parent directory does not exist!";
             FileWriter fw = new FileWriter(file);
             for (int i = 0; i < tasks.size(); i++) {
                 try {
@@ -50,6 +50,7 @@ public class Storage {
                 }
             }
             fw.close();
+            assert file.exists() : "File should exist after saving";
         } catch (IOException e) {
             System.out.println("Error saving tasks: " + e.getMessage());
         }
