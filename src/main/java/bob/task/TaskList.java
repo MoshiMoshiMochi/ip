@@ -38,6 +38,7 @@ public class TaskList {
         if (!indexInRange(index)) {
             throw new BobException(" Task number " + (index + 1) + " does not exist!");
         }
+        assert index >= 0 : "Index should be >= 0 at this point";
         return tasks.get(index);
     }
 
@@ -61,6 +62,7 @@ public class TaskList {
         if (!indexInRange(index)) {
             throw new BobException(" Task number " + (index + 1) + " does not exist!");
         }
+        assert index >= 0 : "Index should be >= 0 at this point";
         return tasks.remove(index);
     }
 
