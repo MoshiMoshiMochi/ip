@@ -12,7 +12,7 @@ import bob.ui.Ui;
  */
 public class UnMarkCommand extends Command {
     private final int index;
-
+    private static final String INTRO = " You need to BOB mark! BOB for Viltrum!";
     /**
      * Constructs a new <code>UnMarkCommand</code> for the specified task index.
      *
@@ -35,7 +35,7 @@ public class UnMarkCommand extends Command {
             Task task = taskList.getTask(index);
             task.markUnDone();
             ui.showMessage(
-                    " You need to BOB mark! BOB for Viltrum!",
+                    INTRO,
                     "    " + task
             );
         } catch (BobException e) {

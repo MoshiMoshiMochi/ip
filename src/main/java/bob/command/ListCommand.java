@@ -11,6 +11,7 @@ import bob.ui.Ui;
  * Executes by displaying all tasks via the UI.
  */
 public class ListCommand extends Command {
+    private static final String INTRO = " The list do be Bobbing my dude!";
 
     /**
      * Executes the list command: displays all tasks in the task list
@@ -24,7 +25,7 @@ public class ListCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             ui.showMessage(
-                    " The list do be Bobbing my dude!",
+                    INTRO,
                     tasks.toString());
         } catch (BobDateTimeException | BobInvalidFormatException e) {
             ui.showMessage(e.getMessage());

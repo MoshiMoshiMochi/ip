@@ -12,6 +12,7 @@ import bob.ui.Ui;
  */
 public class MarkCommand extends Command {
     private final int index;
+    private static final String INTRO = " I'm Marking it. I'm Marking it so good!";
 
     /**
      * Constructs a new <code>MarkCommand</code> for the specified task index.
@@ -35,7 +36,7 @@ public class MarkCommand extends Command {
             Task task = taskList.getTask(index);
             task.markDone();
             ui.showMessage(
-                    " I'm Marking it. I'm Marking it so good!",
+                    INTRO,
                     "    " + task
             );
         } catch (BobException e) {
