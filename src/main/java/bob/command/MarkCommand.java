@@ -11,6 +11,7 @@ import bob.ui.Ui;
  * Executes by updating the task's status and displaying a message via the UI.
  */
 public class MarkCommand extends Command {
+    private static final String INTRO = " I'm Marking it. I'm Marking it so good!";
     private final int index;
 
     /**
@@ -35,7 +36,7 @@ public class MarkCommand extends Command {
             Task task = taskList.getTask(index);
             task.markDone();
             ui.showMessage(
-                    " I'm Marking it. I'm Marking it so good!",
+                    INTRO,
                     "    " + task
             );
         } catch (BobException e) {

@@ -11,6 +11,7 @@ import bob.ui.Ui;
  * Executes by updating the task's status and displaying a message via the UI.
  */
 public class UnMarkCommand extends Command {
+    private static final String INTRO = " You need to BOB mark! BOB for Viltrum!";
     private final int index;
 
     /**
@@ -35,7 +36,7 @@ public class UnMarkCommand extends Command {
             Task task = taskList.getTask(index);
             task.markUnDone();
             ui.showMessage(
-                    " You need to BOB mark! BOB for Viltrum!",
+                    INTRO,
                     "    " + task
             );
         } catch (BobException e) {
