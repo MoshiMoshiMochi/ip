@@ -17,7 +17,7 @@ import bob.ui.Ui;
  * </p>
  */
 public class FindCommand extends Command {
-    private String description;
+
     private static final String INTRO_SUCCESS_1 = " BOB YEA! Here is/are the ";
     private static final String INTRO_SUCCESS_2 = " task(s)\n based on the given description: ";
     private static final String OUTRO_SUCCESS = "\n I've been a good BOB";
@@ -26,6 +26,7 @@ public class FindCommand extends Command {
             + "matches the description for: ";
     private static final String OUTRO_FAILURE = "\n Maybe trying another Bobbing description!";
 
+    private String description;
     /**
      * Constructs a {@code FindCommand} with the specified search keyword.
      *

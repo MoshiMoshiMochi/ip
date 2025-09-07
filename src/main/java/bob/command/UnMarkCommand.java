@@ -11,8 +11,9 @@ import bob.ui.Ui;
  * Executes by updating the task's status and displaying a message via the UI.
  */
 public class UnMarkCommand extends Command {
-    private final int index;
     private static final String INTRO = " You need to BOB mark! BOB for Viltrum!";
+    private final int index;
+
     /**
      * Constructs a new <code>UnMarkCommand</code> for the specified task index.
      *

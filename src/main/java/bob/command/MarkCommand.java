@@ -11,8 +11,8 @@ import bob.ui.Ui;
  * Executes by updating the task's status and displaying a message via the UI.
  */
 public class MarkCommand extends Command {
-    private final int index;
     private static final String INTRO = " I'm Marking it. I'm Marking it so good!";
+    private final int index;
 
     /**
      * Constructs a new <code>MarkCommand</code> for the specified task index.

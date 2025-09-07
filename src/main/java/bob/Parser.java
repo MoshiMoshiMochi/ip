@@ -25,16 +25,16 @@ public class Parser {
     private static CommandType commandType;
 
     // Exception messages
-    private static String INVALID_INDEX_MESSAGE = " Invalid Task number!";
-    private static String INVALID_COMMAND_MESSAGE = " Invalid Command!";
+    private static final String INVALID_INDEX_MESSAGE = " Invalid Task number!";
+    private static final String INVALID_COMMAND_MESSAGE = " Invalid Command!";
 
     // Add Command delimiters and expected parts
-    private static String TODO_DELIMITER = null;
-    private static int TODO_EXPECTED = 1;
-    private static String DEADLINE_DELIMITER = "/by";
-    private static int DEADLINE_EXPECTED = 2;
-    private static String EVENT_DELIMITER = "/from|/to";
-    private static int EVENT_EXPECTED = 3;
+    private static final String TODO_DELIMITER = null;
+    private static final int TODO_EXPECTED = 1;
+    private static final String DEADLINE_DELIMITER = "/by";
+    private static final int DEADLINE_EXPECTED = 2;
+    private static final String EVENT_DELIMITER = "/from|/to";
+    private static final int EVENT_EXPECTED = 3;
 
     /**
      * Parses a user input string and returns the corresponding <code>Command</code> object.
