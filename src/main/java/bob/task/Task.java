@@ -93,10 +93,20 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Returns a string representation of <code>description</code>
+     *
+     * @return String in the input format for <code>description</code>.
+     */
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * Returns a <code>TaskType</code> representation of the given <code>Task</code>
+     *
+     * @return <code>TaskType</code> representation of the given <code>Task</code>.
+     */
     public TaskType getType() {
         return this.type;
     }

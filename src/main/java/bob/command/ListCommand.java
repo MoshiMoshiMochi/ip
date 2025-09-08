@@ -33,7 +33,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Indicates whether this command exits the application.
+     * @inheritDoc
      *
      * @return <code>false</code> as ListCommand does not terminate the program.
      */

@@ -46,7 +46,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Indicates whether this command exits the application.
+     * @inheritDoc
      *
      * @return <code>false</code> as AddCommand does not terminate the program.
      */

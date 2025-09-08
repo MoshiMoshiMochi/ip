@@ -1,8 +1,5 @@
 package bob;
 
-
-import org.w3c.dom.css.CSSFontFaceRule;
-
 import bob.command.AddCommand;
 import bob.command.ByeCommand;
 import bob.command.Command;
@@ -122,7 +119,7 @@ public class Parser {
             validateFind(part);
             return new FindCommand(parts[1].trim());
         }
-        case UPDATE:{
+        case UPDATE: {
             String part = parts.length > 1 ? parts[1] : null;
             return validateUpdate(part);
         }
@@ -179,7 +176,7 @@ public class Parser {
     }
 
     private static UpdateCommand validateUpdate(String part) {
-        if(isNotValidPart(part)){
+        if (isNotValidPart(part)) {
             throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT); //replace with corrected version later
         }
         String[] parts = part.trim().split(" ", 2);
@@ -245,7 +242,7 @@ public class Parser {
         }
 
         System.out.println("Pass parseUpdate");
-        return new String[] {taskType, desc, by, from, to};
+        return new String[]{taskType, desc, by, from, to};
     }
 
     private static String helpExtractField(String args, String delimiter) {
@@ -254,9 +251,9 @@ public class Parser {
             return null;
         }
         System.out.println("delimiter: " + delimiter);
-        System.out.println("parts[1]: "+parts[1]);
+        System.out.println("parts[1]: " + parts[1]);
         String field = parts[1].split("/", 2)[0].trim();
-        System.out.println("field: "+field);
+        System.out.println("field: " + field);
         return field.isEmpty() ? null : field;
     }
 
@@ -270,7 +267,7 @@ public class Parser {
             break;
         }
         case DEADLINE: {
-            if (by == null){
+            if (by == null) {
                 System.out.println("Aint no ways it here");
                 throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
             }

@@ -78,7 +78,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Indicates whether this command causes the program to exit.
+     * @inheritDoc
      *
      * @return {@code false}, since the find command does not exit the program.
      */

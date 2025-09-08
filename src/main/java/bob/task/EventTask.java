@@ -61,7 +61,7 @@ public class EventTask extends Task {
     /**
      * Returns a string representation of <code>from</code>
      *
-     * @return String in the save format for <code>from</code>.
+     * @return String in the input format for <code>from</code>.
      */
     public String getFrom() {
         return this.from.format(inputFormat);
@@ -70,7 +70,7 @@ public class EventTask extends Task {
     /**
      * Returns a string representation of <code>to</code>
      *
-     * @return String in the save format for <code>to</code>.
+     * @return String in the input format for <code>to</code>.
      */
     public String getTo() {
         return this.to.format(inputFormat);

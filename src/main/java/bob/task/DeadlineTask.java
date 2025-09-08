@@ -52,7 +52,7 @@ public class DeadlineTask extends Task {
     /**
      * Returns a string representation of <code>by</code>
      *
-     * @return String in the save format for <code>by</code>.
+     * @return String in the input format for <code>by</code>.
      */
     public String getBy() {
         return this.by.format(inputFormat);

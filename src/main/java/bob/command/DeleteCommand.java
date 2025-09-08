@@ -45,7 +45,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Indicates whether this command exits the application.
+     * @inheritDoc
      *
      * @return <code>false</code> as DeleteCommand does not terminate the program.
      */

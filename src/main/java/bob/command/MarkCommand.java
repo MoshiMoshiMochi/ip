@@ -45,7 +45,7 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Indicates whether this command exits the application.
+     * @inheritDoc
      *
      * @return <code>false</code> as MarkCommand does not terminate the program.
      */
