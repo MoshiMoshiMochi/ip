@@ -180,15 +180,15 @@ public class Parser {
 
     private static UpdateCommand validateUpdate(String part) {
         if(isNotValidPart(part)){
-            throw new BobInvalidFormatException(CommandFormat.FIND); //replace with corrected version later
+            throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT); //replace with corrected version later
         }
         String[] parts = part.trim().split(" ", 2);
         int index = -1; // Temp index value
         try {
-            index = validateIndex(parts[0], CommandFormat.FIND);
+            index = validateIndex(parts[0], CommandFormat.UPDATEFORMAT);
         } catch (BobException e) {
             // if invalid index
-            throw new BobInvalidFormatException(CommandFormat.FIND);
+            throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
         }
         System.out.println("pass validate index");
 
@@ -272,7 +272,7 @@ public class Parser {
         case DEADLINE: {
             if (by == null){
                 System.out.println("Aint no ways it here");
-                throw new BobInvalidFormatException(CommandFormat.UPDATEDEADLINE);
+                throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
             }
             break;
         }
@@ -281,7 +281,7 @@ public class Parser {
                 // replace with custom CommandFormat for all listed Task types
                 System.out.println("WHAT ITS AN EVENT");
                 System.out.println(type);
-                throw new BobInvalidFormatException(CommandFormat.FIND);
+                throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
             }
             break;
         }

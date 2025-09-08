@@ -1,5 +1,6 @@
 package bob.command;
 
+import bob.exception.BobDateTimeException;
 import bob.exception.BobException;
 import bob.exception.BobInvalidFormatException;
 import bob.storage.Storage;
@@ -53,7 +54,7 @@ public class UpdateCommand extends Command {
 
             ui.showMessage("Pass update");
 
-        } catch (BobException e) {
+        } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {
             // Basically only for not found
             ui.showMessage(e.getMessage());
         }
@@ -96,14 +97,14 @@ public class UpdateCommand extends Command {
         case TODO: {
             if (isDescriptionNull) {
                 // Use correct exception
-                throw new BobInvalidFormatException(CommandFormat.FIND);
+                throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
             }
             return new ToDoTask(newDesc);
         }
         case DEADLINE: {
             if (isDescriptionNull && isByNull) {
                 // Use correct exception
-                throw new BobInvalidFormatException(CommandFormat.FIND);
+                throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
             }
 
             // Safe cast since we already know its an event type
@@ -114,7 +115,7 @@ public class UpdateCommand extends Command {
         case EVENT: {
             if (isDescriptionNull && isFromNull  && isToNull) {
                 // Use correct exception
-                throw new BobInvalidFormatException(CommandFormat.FIND);
+                throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
             }
             // Safe cast since we already know it's an event type
             EventTask eventTask = (EventTask) task;
