@@ -53,8 +53,12 @@ public class DialogBox extends HBox {
             case "DeleteCommand":
                 dialog.getStyleClass().add("delete-label");
                 break;
+            case "UpdateCommand":
+                dialog.getStyleClass().add("update-label");
+                break;
             default:
-                // Do nothing
+                // default style
+                dialog.getStyleClass().add("label");
             }
         } else {
             dialog.getStyleClass().add("error-label");

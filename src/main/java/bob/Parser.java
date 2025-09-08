@@ -187,13 +187,24 @@ public class Parser {
             // if invalid index
             throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
         }
-        System.out.println("pass validate index");
 
         assert index >= 0 : "Index should be >= 0 at this point";
         String args = parts.length > 1 ? parts[1] : "";
         String[] fieldArgs = parseUpdate(args);
 
-        System.out.println("Pass validateUpdate");
+        // Checks if at least one field argument is used
+        boolean isAllNull = true;
+        for (String field : fieldArgs) {
+            if (field != null) {
+                isAllNull = false;
+                break;
+            }
+        }
+        if (isAllNull) {
+            // throw error if null
+            throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
+        }
+
         return new UpdateCommand(index, fieldArgs[0], fieldArgs[1], fieldArgs[2], fieldArgs[3], fieldArgs[4]);
     }
 
@@ -204,19 +215,14 @@ public class Parser {
         String from = null;
         String to = null;
 
-        System.out.println("args: " + args);
-
         // Find if change of task type
         if (args.contains("/t")) {
             String[] split = args.split("/t", 2);
-            System.out.println("split[1]: " + split[1]);
 
             String afterT = split[1].trim();
-            System.out.println("afterT:" + afterT);
 
             String[] parts = afterT.split("\\s+", 2);
             taskType = parts[0].trim();
-            System.out.println("taskType updated: " + taskType);
 
             //sets the remainder args to contain
             args = split[1].replaceFirst(taskType, "").trim();
@@ -228,7 +234,6 @@ public class Parser {
         }
         if (args.contains("/by")) {
             by = helpExtractField(args, "/by");
-            System.out.println("updated by: " + by);
         }
         if (args.contains("/from")) {
             from = helpExtractField(args, "/from");
@@ -241,7 +246,6 @@ public class Parser {
             validateUpdateRequiredFields(taskType, by, from, to);
         }
 
-        System.out.println("Pass parseUpdate");
         return new String[]{taskType, desc, by, from, to};
     }
 
@@ -250,17 +254,15 @@ public class Parser {
         if (parts.length < 2) {
             return null;
         }
-        System.out.println("delimiter: " + delimiter);
-        System.out.println("parts[1]: " + parts[1]);
+
         String field = parts[1].split("/", 2)[0].trim();
-        System.out.println("field: " + field);
         return field.isEmpty() ? null : field;
     }
 
     private static void validateUpdateRequiredFields(String taskType, String by, String from, String to)
             throws BobInvalidFormatException {
+
         CommandType type = CommandType.fromString(taskType);
-        System.out.println("COMMANDTYPE: " + type.toString());
         switch (type) {
         case TODO: {
             // Nothing required
@@ -268,7 +270,6 @@ public class Parser {
         }
         case DEADLINE: {
             if (by == null) {
-                System.out.println("Aint no ways it here");
                 throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
             }
             break;
@@ -276,14 +277,12 @@ public class Parser {
         case EVENT: {
             if (from == null && to == null) {
                 // replace with custom CommandFormat for all listed Task types
-                System.out.println("WHAT ITS AN EVENT");
-                System.out.println(type);
                 throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
             }
             break;
         }
         default: {
-            System.out.println("Hoow did it reach here lmao");
+            throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
         }
         }
 

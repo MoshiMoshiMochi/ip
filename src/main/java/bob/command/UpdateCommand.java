@@ -23,6 +23,8 @@ public class UpdateCommand extends Command {
     private final String by;
     private final String from;
     private final String to;
+    private static final String INTRO1 = "BOBBIDY BOB BOB! I've up(bob)ed the provided task. \n Old Task: ";
+    private static final String INTRO2 = " Updated Task: ";
 
     /**
      * Constructs a new {@code UpdateCommand}.
@@ -54,12 +56,6 @@ public class UpdateCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("--------------------------------------");
-        System.out.println("tasktype: " + taskType);
-        System.out.println("description: " + description);
-        System.out.println("by: " + by);
-        System.out.println("fr: " + from);
-        System.out.println("to: " + to);
 
         try {
             Task selectedTask = tasks.getTask(this.index);
@@ -72,10 +68,17 @@ public class UpdateCommand extends Command {
             } else {
                 updatedTask = updateExistingTask(selectedTask);
             }
+
+            // Replaces currently selected task with newly created updatedTask
             assert this.index >= 0 : "Index should be within range in this point";
             tasks.setIndex(updatedTask, this.index);
 
-            ui.showMessage("Pass update");
+            //Display message
+            assert updatedTask != null : "updatedTask should not be null at this point";
+            ui.showMessage(
+                    INTRO1 + selectedTask,
+                    INTRO2 + updatedTask
+            );
 
         } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {
             // Basically only for not found
@@ -126,11 +129,6 @@ public class UpdateCommand extends Command {
 
         String newDesc = isDescriptionNull ? task.getDescription() : this.description;
 
-        System.out.println("new description: " + this.description);
-        System.out.println("by: " + this.by);
-        System.out.println("from: " + this.from);
-        System.out.println("to: " + this.to);
-
         switch (task.getType()) {
         case TODO: {
             if (isDescriptionNull) {
@@ -155,6 +153,7 @@ public class UpdateCommand extends Command {
                 // Use correct exception
                 throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
             }
+
             // Safe cast since we already know it's an event type
             EventTask eventTask = (EventTask) task;
             String newFrom = isFromNull ? eventTask.getFrom() : this.from;
