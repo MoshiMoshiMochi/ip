@@ -50,6 +50,15 @@ public class DeadlineTask extends Task {
     }
 
     /**
+     * Returns a string representation of <code>by</code>
+     *
+     * @return String in the save format for <code>by</code>.
+     */
+    public String getBy() {
+        return this.by.format(inputFormat);
+    }
+
+    /**
      * Returns a human-readable string representation of this deadline task,
      * including the due datetime formatted as "MMM dd yyyy HHmm".
      *

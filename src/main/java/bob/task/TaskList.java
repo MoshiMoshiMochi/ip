@@ -35,7 +35,7 @@ public class TaskList {
      * @throws BobException If the index is out of range.
      */
     public Task getTask(int index) throws BobException {
-        if (!indexInRange(index)) {
+        if (!isIndexInRange(index)) {
             throw new BobException(" Task number " + (index + 1) + " does not exist!");
         }
         assert index >= 0 : "Index should be >= 0 at this point";
@@ -59,7 +59,7 @@ public class TaskList {
      * @throws BobException If the index is out of range.
      */
     public Task deleteTask(int index) throws BobException {
-        if (!indexInRange(index)) {
+        if (!isIndexInRange(index)) {
             throw new BobException(" Task number " + (index + 1) + " does not exist!");
         }
         assert index >= 0 : "Index should be >= 0 at this point";
@@ -72,8 +72,12 @@ public class TaskList {
      * @param index Index to check.
      * @return <code>true</code> if the index is valid, <code>false</code> otherwise.
      */
-    public boolean indexInRange(int index) {
+    public boolean isIndexInRange(int index) {
         return index >= 0 && index < tasks.size();
+    }
+
+    public void setIndex(Task task, int index) {
+        tasks.set(index, task);
     }
 
     /**

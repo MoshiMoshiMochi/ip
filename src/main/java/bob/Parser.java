@@ -1,6 +1,8 @@
 package bob;
 
 
+import org.w3c.dom.css.CSSFontFaceRule;
+
 import bob.command.AddCommand;
 import bob.command.ByeCommand;
 import bob.command.Command;
@@ -11,6 +13,7 @@ import bob.command.FindCommand;
 import bob.command.ListCommand;
 import bob.command.MarkCommand;
 import bob.command.UnMarkCommand;
+import bob.command.UpdateCommand;
 import bob.exception.BobException;
 import bob.exception.BobInvalidFormatException;
 import bob.task.DeadlineTask;
@@ -116,8 +119,12 @@ public class Parser {
         }
         case FIND: {
             String part = parts.length > 1 ? parts[1] : null;
-            validateFind(part, CommandFormat.FIND);
+            validateFind(part);
             return new FindCommand(parts[1].trim());
+        }
+        case UPDATE:{
+            String part = parts.length > 1 ? parts[1] : null;
+            return validateUpdate(part);
         }
         default: {
             throw new BobException(INVALID_COMMAND_MESSAGE);
@@ -126,7 +133,7 @@ public class Parser {
     }
 
     private static int validateIndex(String part, CommandFormat format) throws BobException {
-        if (isValidPart(part)) {
+        if (isNotValidPart(part)) {
             throw new BobInvalidFormatException(format);
         }
         try {
@@ -139,7 +146,7 @@ public class Parser {
     private static String[] validateAdd(String arg, String delimiter, int expectedParts, CommandFormat format)
             throws BobInvalidFormatException {
 
-        if (isValidPart(arg)) {
+        if (isNotValidPart(arg)) {
             throw new BobInvalidFormatException(format);
         }
 
@@ -165,13 +172,127 @@ public class Parser {
         return parts;
     }
 
-    private static void validateFind(String part, CommandFormat format) {
-        if (isValidPart(part)) {
-            throw new BobInvalidFormatException(format);
+    private static void validateFind(String part) {
+        if (isNotValidPart(part)) {
+            throw new BobInvalidFormatException(CommandFormat.FIND);
         }
     }
 
-    private static boolean isValidPart(String part) {
+    private static UpdateCommand validateUpdate(String part) {
+        if(isNotValidPart(part)){
+            throw new BobInvalidFormatException(CommandFormat.FIND); //replace with corrected version later
+        }
+        String[] parts = part.trim().split(" ", 2);
+        int index = -1; // Temp index value
+        try {
+            index = validateIndex(parts[0], CommandFormat.FIND);
+        } catch (BobException e) {
+            // if invalid index
+            throw new BobInvalidFormatException(CommandFormat.FIND);
+        }
+        System.out.println("pass validate index");
+
+        assert index >= 0 : "Index should be >= 0 at this point";
+        String args = parts.length > 1 ? parts[1] : "";
+        String[] fieldArgs = parseUpdate(args);
+
+        System.out.println("Pass validateUpdate");
+        return new UpdateCommand(index, fieldArgs[0], fieldArgs[1], fieldArgs[2], fieldArgs[3], fieldArgs[4]);
+    }
+
+    private static String[] parseUpdate(String args) {
+        String taskType = null;
+        String desc = null;
+        String by = null;
+        String from = null;
+        String to = null;
+
+        System.out.println("args: " + args);
+
+        // Find if change of task type
+        if (args.contains("/t")) {
+            String[] split = args.split("/t", 2);
+            System.out.println("split[1]: " + split[1]);
+
+            String afterT = split[1].trim();
+            System.out.println("afterT:" + afterT);
+
+            String[] parts = afterT.split("\\s+", 2);
+            taskType = parts[0].trim();
+            System.out.println("taskType updated: " + taskType);
+
+            //sets the remainder args to contain
+            args = split[1].replaceFirst(taskType, "").trim();
+        }
+
+        // Parse fields based on delimiters
+        if (args.contains("/d")) {
+            desc = helpExtractField(args, "/d");
+        }
+        if (args.contains("/by")) {
+            by = helpExtractField(args, "/by");
+            System.out.println("updated by: " + by);
+        }
+        if (args.contains("/from")) {
+            from = helpExtractField(args, "/from");
+        }
+        if (args.contains("/to")) {
+            to = helpExtractField(args, "/to");
+        }
+
+        if (taskType != null) {
+            validateUpdateRequiredFields(taskType, by, from, to);
+        }
+
+        System.out.println("Pass parseUpdate");
+        return new String[] {taskType, desc, by, from, to};
+    }
+
+    private static String helpExtractField(String args, String delimiter) {
+        String[] parts = args.split(delimiter, 2);
+        if (parts.length < 2) {
+            return null;
+        }
+        System.out.println("delimiter: " + delimiter);
+        System.out.println("parts[1]: "+parts[1]);
+        String field = parts[1].split("/", 2)[0].trim();
+        System.out.println("field: "+field);
+        return field.isEmpty() ? null : field;
+    }
+
+    private static void validateUpdateRequiredFields(String taskType, String by, String from, String to)
+            throws BobInvalidFormatException {
+        CommandType type = CommandType.fromString(taskType);
+        System.out.println("COMMANDTYPE: " + type.toString());
+        switch (type) {
+        case TODO: {
+            // Nothing required
+            break;
+        }
+        case DEADLINE: {
+            if (by == null){
+                System.out.println("Aint no ways it here");
+                throw new BobInvalidFormatException(CommandFormat.UPDATEDEADLINE);
+            }
+            break;
+        }
+        case EVENT: {
+            if (from == null && to == null) {
+                // replace with custom CommandFormat for all listed Task types
+                System.out.println("WHAT ITS AN EVENT");
+                System.out.println(type);
+                throw new BobInvalidFormatException(CommandFormat.FIND);
+            }
+            break;
+        }
+        default: {
+            System.out.println("Hoow did it reach here lmao");
+        }
+        }
+
+    }
+
+    private static boolean isNotValidPart(String part) {
         return part == null || part.isBlank();
     }
 

@@ -16,7 +16,7 @@ import bob.exception.BobInvalidFormatException;
 public class EventTask extends Task {
     private LocalDateTime to;
     private LocalDateTime from;
-
+    private final DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     /**
      * Constructs a new <code>EventTask</code> with a description, start datetime, and end datetime.
      *
@@ -30,7 +30,6 @@ public class EventTask extends Task {
             throws BobDateTimeException, BobInvalidFormatException {
         super(description, TaskType.EVENT);
         try {
-            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             this.from = LocalDateTime.parse(from, inputFormat);
             this.to = LocalDateTime.parse(to, inputFormat);
             if (this.to.isBefore(this.from)) {
@@ -57,6 +56,24 @@ public class EventTask extends Task {
                 + this.from
                 + " | "
                 + this.to;
+    }
+
+    /**
+     * Returns a string representation of <code>from</code>
+     *
+     * @return String in the save format for <code>from</code>.
+     */
+    public String getFrom() {
+        return this.from.format(inputFormat);
+    }
+
+    /**
+     * Returns a string representation of <code>to</code>
+     *
+     * @return String in the save format for <code>to</code>.
+     */
+    public String getTo() {
+        return this.to.format(inputFormat);
     }
 
     /**
