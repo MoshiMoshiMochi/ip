@@ -17,14 +17,15 @@ import bob.ui.Ui;
  * (e.g., deadline or event timings).
  */
 public class UpdateCommand extends Command {
+    private static final String INTRO1 = "BOBBIDY BOB BOB! I've up(bob)ed the provided task. \n Old Task: ";
+    private static final String INTRO2 = " Updated Task: ";
+
     private final int index;
     private final String taskType;
     private final String description;
     private final String by;
     private final String from;
     private final String to;
-    private static final String INTRO1 = "BOBBIDY BOB BOB! I've up(bob)ed the provided task. \n Old Task: ";
-    private static final String INTRO2 = " Updated Task: ";
 
     /**
      * Constructs a new {@code UpdateCommand}.

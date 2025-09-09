@@ -16,6 +16,7 @@ public enum CommandFormat {
     DATETIMEFORMAT("<yyyy-mm-dd HHmm>"),
     UPDATEFORMAT("\n update <task no.> with at least one optional field listed below \n"
             + "\n /t <task type> for changing task types \n"
+            + "Types to choose from: todo / deadline / event \n"
             + "\n /d <description> for changing description of task \n"
             + "\n /by <date> for changing due datetime for deadline task "
             + "\n (Required if changing to deadline task i.e. /t deadline) \n"
