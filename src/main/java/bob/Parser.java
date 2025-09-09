@@ -1,6 +1,5 @@
 package bob;
 
-
 import bob.command.AddCommand;
 import bob.command.ByeCommand;
 import bob.command.Command;
@@ -11,6 +10,7 @@ import bob.command.FindCommand;
 import bob.command.ListCommand;
 import bob.command.MarkCommand;
 import bob.command.UnMarkCommand;
+import bob.command.UpdateCommand;
 import bob.exception.BobException;
 import bob.exception.BobInvalidFormatException;
 import bob.task.DeadlineTask;
@@ -116,8 +116,12 @@ public class Parser {
         }
         case FIND: {
             String part = parts.length > 1 ? parts[1] : null;
-            validateFind(part, CommandFormat.FIND);
+            validateFind(part);
             return new FindCommand(parts[1].trim());
+        }
+        case UPDATE: {
+            String part = parts.length > 1 ? parts[1] : null;
+            return validateUpdate(part);
         }
         default: {
             throw new BobException(INVALID_COMMAND_MESSAGE);
@@ -126,7 +130,7 @@ public class Parser {
     }
 
     private static int validateIndex(String part, CommandFormat format) throws BobException {
-        if (isValidPart(part)) {
+        if (isNotValidPart(part)) {
             throw new BobInvalidFormatException(format);
         }
         try {
@@ -139,7 +143,7 @@ public class Parser {
     private static String[] validateAdd(String arg, String delimiter, int expectedParts, CommandFormat format)
             throws BobInvalidFormatException {
 
-        if (isValidPart(arg)) {
+        if (isNotValidPart(arg)) {
             throw new BobInvalidFormatException(format);
         }
 
@@ -165,13 +169,126 @@ public class Parser {
         return parts;
     }
 
-    private static void validateFind(String part, CommandFormat format) {
-        if (isValidPart(part)) {
-            throw new BobInvalidFormatException(format);
+    private static void validateFind(String part) {
+        if (isNotValidPart(part)) {
+            throw new BobInvalidFormatException(CommandFormat.FIND);
         }
     }
 
-    private static boolean isValidPart(String part) {
+    private static UpdateCommand validateUpdate(String part) {
+        if (isNotValidPart(part)) {
+            throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT); //replace with corrected version later
+        }
+        String[] parts = part.trim().split(" ", 2);
+        int index = -1; // Temp index value
+        try {
+            index = validateIndex(parts[0], CommandFormat.UPDATEFORMAT);
+        } catch (BobException e) {
+            // if invalid index
+            throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
+        }
+
+        assert index >= 0 : "Index should be >= 0 at this point";
+        String args = parts.length > 1 ? parts[1] : "";
+        String[] fieldArgs = parseUpdate(args);
+
+        // Checks if at least one field argument is used
+        boolean isAllNull = true;
+        for (String field : fieldArgs) {
+            if (field != null) {
+                isAllNull = false;
+                break;
+            }
+        }
+        if (isAllNull) {
+            // throw error if null
+            throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
+        }
+
+        return new UpdateCommand(index, fieldArgs[0], fieldArgs[1], fieldArgs[2], fieldArgs[3], fieldArgs[4]);
+    }
+
+    private static String[] parseUpdate(String args) {
+        String taskType = null;
+        String desc = null;
+        String by = null;
+        String from = null;
+        String to = null;
+
+        // Find if change of task type
+        if (args.contains("/t")) {
+            String[] split = args.split("/t", 2);
+
+            String afterT = split[1].trim();
+
+            String[] parts = afterT.split("\\s+", 2);
+            taskType = parts[0].trim();
+
+            //sets the remainder args to contain
+            args = split[1].replaceFirst(taskType, "").trim();
+        }
+
+        // Parse fields based on delimiters
+        if (args.contains("/d")) {
+            desc = helpExtractField(args, "/d");
+        }
+        if (args.contains("/by")) {
+            by = helpExtractField(args, "/by");
+        }
+        if (args.contains("/from")) {
+            from = helpExtractField(args, "/from");
+        }
+        if (args.contains("/to")) {
+            to = helpExtractField(args, "/to");
+        }
+
+        if (taskType != null) {
+            validateUpdateRequiredFields(taskType, by, from, to);
+        }
+
+        return new String[]{taskType, desc, by, from, to};
+    }
+
+    private static String helpExtractField(String args, String delimiter) {
+        String[] parts = args.split(delimiter, 2);
+        if (parts.length < 2) {
+            return null;
+        }
+
+        String field = parts[1].split("/", 2)[0].trim();
+        return field.isEmpty() ? null : field;
+    }
+
+    private static void validateUpdateRequiredFields(String taskType, String by, String from, String to)
+            throws BobInvalidFormatException {
+
+        CommandType type = CommandType.fromString(taskType);
+        switch (type) {
+        case TODO: {
+            // Nothing required
+            break;
+        }
+        case DEADLINE: {
+            if (by == null) {
+                throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
+            }
+            break;
+        }
+        case EVENT: {
+            if (from == null && to == null) {
+                // replace with custom CommandFormat for all listed Task types
+                throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
+            }
+            break;
+        }
+        default: {
+            throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
+        }
+        }
+
+    }
+
+    private static boolean isNotValidPart(String part) {
         return part == null || part.isBlank();
     }
 

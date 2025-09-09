@@ -25,7 +25,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Indicates whether this command exits the application.
+     * @inheritDoc
      *
      * @return <code>true</code> as ByeCommand terminates the program.
      */

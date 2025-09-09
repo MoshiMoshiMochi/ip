@@ -14,6 +14,7 @@ public enum CommandType {
     DELETE,
     BYE,
     FIND,
+    UPDATE,
     UNKNOWN;
 
     /**

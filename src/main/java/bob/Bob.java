@@ -62,6 +62,7 @@ public class Bob {
             commandType = c.getClass().getSimpleName();
             return c.executeAndReturn(taskList, storage);
         } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {
+            commandType = null; // resets so error label is applied in future uses.
             return e.getMessage();
         }
     }

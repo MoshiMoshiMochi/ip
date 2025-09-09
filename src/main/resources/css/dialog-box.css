@@ -29,6 +29,10 @@
     -fx-background-color: lightpink;
 }
 
+.update-label {
+    -fx-background-color: #ADD8E6;
+}
+
 .error-label {
     -fx-background-color: derive(red, 0.5);
     -fx-text-fill: yellow
