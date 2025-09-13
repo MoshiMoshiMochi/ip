@@ -1,6 +1,7 @@
 package bob.task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import bob.exception.BobException;
 
@@ -9,7 +10,7 @@ import bob.exception.BobException;
  * such as adding, deleting, and retrieving tasks.
  */
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructs an empty <code>TaskList</code>.
@@ -39,7 +40,7 @@ public class TaskList {
             throw new BobException(" Task number " + (index + 1) + " does not exist!");
         }
         assert index >= 0 : "Index should be >= 0 at this point";
-        return tasks.get(index);
+        return this.tasks.get(index);
     }
 
     /**
@@ -63,7 +64,7 @@ public class TaskList {
             throw new BobException(" Task number " + (index + 1) + " does not exist!");
         }
         assert index >= 0 : "Index should be >= 0 at this point";
-        return tasks.remove(index);
+        return this.tasks.remove(index);
     }
 
     /**
@@ -72,12 +73,29 @@ public class TaskList {
      * @param index Index to check.
      * @return <code>true</code> if the index is valid, <code>false</code> otherwise.
      */
-    public boolean isIndexInRange(int index) {
-        return index >= 0 && index < tasks.size();
+    private boolean isIndexInRange(int index) {
+        return index >= 0 && index < this.tasks.size();
     }
 
-    public void setIndex(Task task, int index) {
-        tasks.set(index, task);
+    /**
+     * Replaces the task at the specified index with the given task.
+     *
+     * @param task  The new <code>Task</code> to set.
+     * @param index The index at which to set the new task.
+     */
+    public void setIndexAt(Task task, int index) {
+        // Changed method name to improve descriptiveness [Copilot suggestion]
+        // Index will be valid because of previous checks
+        this.tasks.set(index, task);
+    }
+
+    /**
+     * Returns a list of all tasks in the task list.
+     *
+     * @return A new <code>List</code> containing all tasks.
+     */
+    public List<Task> asList() {
+        return new ArrayList<>(this.tasks);
     }
 
     /**
@@ -89,10 +107,10 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < this.tasks.size(); i++) {
             //appends each task added the list
-            sb.append(" ").append(i + 1).append(".").append(tasks.get(i));
-            if (i != tasks.size() - 1) {
+            sb.append(" ").append(i + 1).append(".").append(this.tasks.get(i));
+            if (i != this.tasks.size() - 1) {
                 sb.append("\n");
             }
         }

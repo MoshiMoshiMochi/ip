@@ -18,6 +18,7 @@ public class Bob {
     private TaskList taskList;
     private Ui ui;
     private String commandType;
+    private static final String FILEPATH = "../savedtasks/task.txt";
 
     /**
      * Constructs a <code>Bob</code> instance with the specified file path for storage.
@@ -38,15 +39,22 @@ public class Bob {
         boolean isExit = false;
 
         while (!isExit) {
-            try {
-                String command = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(command);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {
-                ui.showMessage(e.getMessage());
-            }
+            // Read and process the next command
+            isExit = processNextCommand();
+        }
+    }
+
+    private boolean processNextCommand() {
+        // Copilot suggestion to extract this method
+        try {
+            String command = ui.readCommand();
+            ui.showLine();
+            Command c = Parser.parse(command);
+            c.execute(taskList, ui, storage);
+            return c.isExit();
+        } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {
+            ui.showMessage(e.getMessage());
+            return false;
         }
     }
 
@@ -87,7 +95,7 @@ public class Bob {
      * @param args Command line arguments (not used).
      */
     public static void main(String[] args) {
-        new Bob("../savedtasks/task.txt").run();
+        new Bob(FILEPATH).run();
     }
 
 }

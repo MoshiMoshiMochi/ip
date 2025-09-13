@@ -14,8 +14,8 @@ import bob.exception.BobInvalidFormatException;
  * and an end datetime (<code>to</code>), and can be marked done or undone.
  */
 public class EventTask extends Task {
-    private LocalDateTime to;
-    private LocalDateTime from;
+    private final LocalDateTime to;
+    private final LocalDateTime from;
     private final DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     /**
      * Constructs a new <code>EventTask</code> with a description, start datetime, and end datetime.

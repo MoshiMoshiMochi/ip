@@ -72,7 +72,7 @@ public class UpdateCommand extends Command {
 
             // Replaces currently selected task with newly created updatedTask
             assert this.index >= 0 : "Index should be within range in this point";
-            tasks.setIndex(updatedTask, this.index);
+            tasks.setIndexAt(updatedTask, this.index);
 
             //Display message
             assert updatedTask != null : "updatedTask should not be null at this point";
@@ -169,8 +169,9 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * @return <code>false</code> as UpdateCommand does not terminate the program.
      * @inheritDoc
+     *
+     * @return <code>false</code> as UpdateCommand does not terminate the program.
      */
     @Override
     public boolean isExit() {

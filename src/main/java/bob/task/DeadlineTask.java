@@ -13,7 +13,7 @@ import bob.exception.BobInvalidFormatException;
  * and can be marked done or undone.
  */
 public class DeadlineTask extends Task {
-    private LocalDateTime by;
+    private final LocalDateTime by;
     private final DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     /**

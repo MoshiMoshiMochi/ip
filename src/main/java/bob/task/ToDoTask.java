@@ -23,8 +23,5 @@ public class ToDoTask extends Task {
                 + " | ";
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
+    // Removed redundant toString() method [Copilot suggestion]
 }
