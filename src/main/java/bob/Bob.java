@@ -14,11 +14,11 @@ import bob.ui.Ui;
  * and provides the main loop to process user commands.
  */
 public class Bob {
-    private Storage storage;
-    private TaskList taskList;
-    private Ui ui;
-    private String commandType;
     private static final String FILEPATH = "../savedtasks/task.txt";
+    private final Storage storage;
+    private final TaskList taskList;
+    private final Ui ui;
+    private String commandType;
 
     /**
      * Constructs a <code>Bob</code> instance with the specified file path for storage.
@@ -80,9 +80,9 @@ public class Bob {
     }
 
     /**
-     * Used to display intro message (for GUI)
+     * Displays the welcome message and returns it (for GUI).
      *
-     * @return
+     * @return Welcome message from Bob
      */
     public String getIntro() {
         ui.showWelcome();

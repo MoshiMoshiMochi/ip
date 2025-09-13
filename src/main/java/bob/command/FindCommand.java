@@ -1,6 +1,5 @@
 package bob.command;
 
-import bob.exception.BobException;
 import bob.storage.Storage;
 import bob.task.Task;
 import bob.task.TaskList;
@@ -52,19 +51,7 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = getMatchingTasks(tasks);
-
-        if (matchingTasks.size() == 0) {
-            ui.showMessage(
-                    INTRO_FAILURE + this.description,
-                    OUTRO_FAILURE);
-        } else {
-            ui.showMessage(
-                    INTRO_SUCCESS_1 + matchingTasks.size() + INTRO_SUCCESS_2 + this.description,
-                    matchingTasks.toString(),
-                    OUTRO_SUCCESS
-            );
-        }
-
+        displayMatchingTasks(ui, matchingTasks);
     }
 
     private TaskList getMatchingTasks(TaskList tasks) {
@@ -77,6 +64,20 @@ public class FindCommand extends Command {
         }
 
         return matchingTasks;
+    }
+
+    private void displayMatchingTasks(Ui ui, TaskList matchingTasks) {
+        if (matchingTasks.size() == 0) {
+            ui.showMessage(
+                    INTRO_FAILURE + this.description,
+                    OUTRO_FAILURE);
+        } else {
+            ui.showMessage(
+                    INTRO_SUCCESS_1 + matchingTasks.size() + INTRO_SUCCESS_2 + this.description,
+                    matchingTasks.toString(),
+                    OUTRO_SUCCESS
+            );
+        }
     }
 
     /**

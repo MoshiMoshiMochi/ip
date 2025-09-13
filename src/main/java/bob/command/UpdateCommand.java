@@ -60,32 +60,37 @@ public class UpdateCommand extends Command {
 
         try {
             Task selectedTask = tasks.getTask(this.index);
-
-            Task updatedTask;
-            // If change of task type
-            if (this.taskType != null) {
-                CommandType type = CommandType.fromString(this.taskType);
-                updatedTask = createNewTask(selectedTask, type);
-            } else {
-                updatedTask = updateExistingTask(selectedTask);
-            }
-
-            // Replaces currently selected task with newly created updatedTask
-            assert this.index >= 0 : "Index should be within range in this point";
-            tasks.setIndexAt(updatedTask, this.index);
-
-            //Display message
-            assert updatedTask != null : "updatedTask should not be null at this point";
-            ui.showMessage(
-                    INTRO1 + selectedTask,
-                    INTRO2 + updatedTask
-            );
+            Task updatedTask = getUpdatedTask(selectedTask);
+            replaceTaskInList(tasks, updatedTask);
+            showUpdateMessage(ui, selectedTask, updatedTask);
 
         } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {
-            // Basically only for not found
+            // Basically only for not found or if invalid format/datetime format
             ui.showMessage(e.getMessage());
         }
 
+    }
+
+    private Task getUpdatedTask(Task selectedTask) {
+        if (this.taskType != null) {
+            CommandType type = CommandType.fromString(this.taskType);
+            return createNewTask(selectedTask, type);
+        } else {
+            return updateExistingTask(selectedTask);
+        }
+    }
+
+    private void replaceTaskInList(TaskList tasks, Task updatedTask) {
+        assert this.index >= 0 : "Index should be within range in this point";
+        tasks.setIndexAt(updatedTask, this.index);
+    }
+
+    private void showUpdateMessage(Ui ui, Task oldTask, Task updatedTask) {
+        assert updatedTask != null : "updatedTask should not be null at this point";
+        ui.showMessage(
+                INTRO1 + oldTask,
+                INTRO2 + updatedTask
+        );
     }
 
     /**
@@ -109,7 +114,7 @@ public class UpdateCommand extends Command {
         }
         default: {
             // will never reach this point as code will task type is already validated
-            return null;
+            throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
         }
         }
     }
@@ -123,49 +128,60 @@ public class UpdateCommand extends Command {
      * @throws BobInvalidFormatException If no updatable fields are provided.
      */
     private Task updateExistingTask(Task task) {
+        // Retain original description if not updated
         boolean isDescriptionNull = this.description == null;
-        boolean isByNull = this.by == null;
-        boolean isFromNull = this.from == null;
-        boolean isToNull = this.to == null;
-
         String newDesc = isDescriptionNull ? task.getDescription() : this.description;
 
         switch (task.getType()) {
         case TODO: {
-            if (isDescriptionNull) {
-                // Use correct exception
-                throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
-            }
-            return new ToDoTask(newDesc);
+            return updateToDoTask(newDesc);
         }
         case DEADLINE: {
-            if (isDescriptionNull && isByNull) {
-                // Use correct exception
-                throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
-            }
-
-            // Safe cast since we already know its an event type
-            DeadlineTask deadlineTask = (DeadlineTask) task;
-            String newBy = isByNull ? deadlineTask.getBy() : this.by;
-            return new DeadlineTask(newDesc, newBy);
+            assert task instanceof DeadlineTask : "Task should be a DeadlineTask at this point";
+            return updateDeadlineTask(task, newDesc);
         }
         case EVENT: {
-            if (isDescriptionNull && isFromNull && isToNull) {
-                // Use correct exception
-                throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
-            }
-
-            // Safe cast since we already know it's an event type
-            EventTask eventTask = (EventTask) task;
-            String newFrom = isFromNull ? eventTask.getFrom() : this.from;
-            String newTo = isToNull ? eventTask.getTo() : this.to;
-            return new EventTask(newDesc, newFrom, newTo);
+            assert task instanceof EventTask : "Task should be an EventTask at this point";
+            return updateEventTask(task, newDesc);
         }
         default: {
-            // won't reach this point as task is always one of the above types
-            return null;
+            // won't reach this point as task is always validated to be one of the above types
+            throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
         }
         }
+    }
+
+    private ToDoTask updateToDoTask(String newDesc) {
+        if (this.description == null) {
+            throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
+        }
+        return new ToDoTask(newDesc);
+    }
+
+    private DeadlineTask updateDeadlineTask(Task task, String newDesc) {
+        // Safe cast since we already know it's an event type
+        DeadlineTask deadlineTask = (DeadlineTask) task;
+
+        // Retain original by if not updated
+        String newBy = this.by == null ? deadlineTask.getBy() : this.by;
+        if (this.description == null && this.by == null) {
+            throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
+        }
+        return new DeadlineTask(newDesc, newBy);
+    }
+
+    private EventTask updateEventTask(Task task, String newDesc) {
+        // Safe cast since we already know it's an event type
+        EventTask eventTask = (EventTask) task;
+
+        // Retain original from/to if not updated
+        String newFrom = this.from == null ? eventTask.getFrom() : this.from;
+        String newTo = this.to == null ? eventTask.getTo() : this.to;
+
+        if (this.description == null && this.from == null && this.to == null) {
+            throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
+        }
+        return new EventTask(newDesc, newFrom, newTo);
     }
 
     /**
