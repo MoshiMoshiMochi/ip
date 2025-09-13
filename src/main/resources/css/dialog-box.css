@@ -1,11 +1,20 @@
 .label {
-    background:white;
-    -fx-background-color: #fff;
-    -fx-border-color: #d55e00 #009e73 #cc79a7 #0072b2;
+    background:#1D61B4;
+    -fx-background-color: #1D61B4;
+    -fx-border-color: #72A8E8;
     -fx-border-width: 2px;
     -fx-background-radius: 1em 1em 0 1em;
     -fx-border-radius: 1em 1em 0 1em;
     -fx-text-fill: ladder(background, white 49%, black 50%);
+}
+
+.user-label {
+    -fx-background-color: #e1ebed;
+    -fx-border-color: #00bcf0 #ffe556 #00bcf0 #ffe556;
+    -fx-border-width: 2px;
+    -fx-background-radius: 1em 1em 0 1em;
+    -fx-border-radius: 1em 1em 0 1em;
+    -fx-text-fill: black;
 }
 
 .reply-label {
@@ -15,22 +24,27 @@
 
 .add-label {
     -fx-background-color: yellow;
+    -fx-text-fill: black;
 }
 
 .marked-label {
     -fx-background-color: palegreen;
+    -fx-text-fill: black;
 }
 
 .unmarked-label {
     -fx-background-color: #FFDAB9;
+    -fx-text-fill: black;
 }
 
 .delete-label {
     -fx-background-color: lightpink;
+    -fx-text-fill: black;
 }
 
 .update-label {
     -fx-background-color: #ADD8E6;
+    -fx-text-fill: black;
 }
 
 .error-label {

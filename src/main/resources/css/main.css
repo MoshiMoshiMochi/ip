@@ -6,17 +6,19 @@
 }
 
 .text-field {
-    -fx-background-color: #d9ffe2;
+    -fx-background-image: url("../images/textfield2.jpg");
+    -fx-background-size: cover;
     -fx-font: 20px "Arial";
+    -fx-text-fill: black;
 }
 
 .button {
-    -fx-background-color: mediumspringgreen;
+    -fx-background-color: yellow;
     -fx-font: italic bold 16px "Arial";
 }
 
 .button:hover {
-    -fx-background-color:cyan;
+    -fx-background-color:lightblue;
     -fx-font-size: 18px;
 }
 
@@ -47,19 +49,4 @@
 .scroll-bar .decrement-button {
     -fx-pref-height: 0;
     -fx-opacity: 0;
-}
-
-.button {
-    -fx-background-color:springgreen;
-    -fx-font: italic bold 16px "Arial";
-}
-
-.button:hover {
-    -fx-background-color:cyan;
-    -fx-font-size: 18px;
-}
-
-.button:pressed {
-    -fx-background-color:orange;
-    -fx-font-size: 20px;
 }
