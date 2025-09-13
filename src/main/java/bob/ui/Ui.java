@@ -68,7 +68,6 @@ public class Ui {
             buffer.append(msg).append("\n");
         }
         showLine();
-        //buffer.append(LINE);
     }
 
     /**

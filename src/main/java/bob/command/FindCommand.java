@@ -1,6 +1,5 @@
 package bob.command;
 
-import bob.exception.BobException;
 import bob.storage.Storage;
 import bob.task.Task;
 import bob.task.TaskList;
@@ -22,11 +21,11 @@ public class FindCommand extends Command {
     private static final String INTRO_SUCCESS_2 = " task(s)\n based on the given description: ";
     private static final String OUTRO_SUCCESS = "\n I've been a good BOB";
 
-    private static final String INTRO_FAILURE = " NOOO BOB! No Bobbing tasks within the list "
-            + "matches the description for: ";
+    private static final String INTRO_FAILURE = " NOOO BOB! No Bobbing tasks within the list"
+            + "\n matches the description for: ";
     private static final String OUTRO_FAILURE = "\n Maybe trying another Bobbing description!";
 
-    private String description;
+    private final String description;
     /**
      * Constructs a {@code FindCommand} with the specified search keyword.
      *
@@ -51,18 +50,23 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        TaskList matchingTasks = getMatchingTasks(tasks);
+        displayMatchingTasks(ui, matchingTasks);
+    }
+
+    private TaskList getMatchingTasks(TaskList tasks) {
+        // Filters tasks whose descriptions contain the specified keyword
         TaskList matchingTasks = new TaskList();
-        for (int i = 0; i < tasks.size(); i++) {
-            try {
-                Task task = tasks.getTask(i);
-                if (task.getDescription().contains(this.description)) {
-                    matchingTasks.addTask(task);
-                }
-            } catch (BobException e) {
-                //Will never reach this point because i will always be in the bounds of tasks
+        for (Task task : tasks.asList()) {
+            if (task.getDescription().contains(this.description)) {
+                matchingTasks.addTask(task);
             }
         }
 
+        return matchingTasks;
+    }
+
+    private void displayMatchingTasks(Ui ui, TaskList matchingTasks) {
         if (matchingTasks.size() == 0) {
             ui.showMessage(
                     INTRO_FAILURE + this.description,
@@ -74,7 +78,6 @@ public class FindCommand extends Command {
                     OUTRO_SUCCESS
             );
         }
-
     }
 
     /**

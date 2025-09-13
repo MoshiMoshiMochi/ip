@@ -20,220 +20,136 @@ public class UpdateCommandTest {
     private Storage storage;
     private final DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
+    // For updating with changing type
     @Test
-    public void updateTaskType_success() {
-        //Prepare List
+    public void updateTaskType_fromTodoToEvent_success() throws BobException {
         TaskList tasks = new TaskList();
-        ToDoTask task = new ToDoTask("read book");
-        tasks.addTask(task);
+        tasks.addTask(new ToDoTask("read book"));
 
-        EventTask eventTask = new EventTask(
-                "event",
-                "2025-12-12 1200",
-                "2025-12-12 1300"
-        );
-        UpdateCommand updateEventCmd = new UpdateCommand(
-                0,
-                "Event",
-                "event",
-                null,
-                "2025-12-12 1200",
-                "2025-12-12 1300"
-        );
-        updateEventCmd.execute(tasks, ui, storage);
-        try {
-            assertEquals(eventTask.toString(), tasks.getTask(0).toString());
-        } catch (BobException e) {
-            // shouldn't reach here
-        }
+        EventTask expected = new EventTask("event", "2025-12-12 1200", "2025-12-12 1300");
+        UpdateCommand cmd = new UpdateCommand(0, "Event", "event", null, "2025-12-12 1200", "2025-12-12 1300");
+        cmd.execute(tasks, ui, storage);
 
-        DeadlineTask deadlineTask = new DeadlineTask(
-                "deadline",
-                "2025-12-12 1200"
-        );
-        UpdateCommand updateDeadlineCmd = new UpdateCommand(
-                0,
-                "deAdline",
-                "deadline",
-                "2025-12-12 1200",
-                null,
-                null
-        );
-        updateDeadlineCmd.execute(tasks, ui, storage);
         try {
-            assertEquals(deadlineTask.toString(), tasks.getTask(0).toString());
-        } catch (BobException e) {
-            // shouldn't reach here
-        }
-
-        ToDoTask toDoTask = new ToDoTask(
-                "todo"
-        );
-        UpdateCommand updateTodoCmd = new UpdateCommand(
-                0,
-                "toDO",
-                "todo",
-                "2025-12-12 1200",
-                null,
-                null
-        );
-        updateTodoCmd.execute(tasks, ui, storage);
-        try {
-            assertEquals(toDoTask.toString(), tasks.getTask(0).toString());
+            assertEquals(expected.toString(), tasks.getTask(0).toString());
         } catch (BobException e) {
             // shouldn't reach here
         }
     }
 
     @Test
-    public void updateNoType_success() {
-        //Prep
+    public void updateTaskType_fromEventToDeadline_success() throws BobException {
         TaskList tasks = new TaskList();
-        ToDoTask toDoTask = new ToDoTask(
-                "lmao"
-        );
-        DeadlineTask deadlineTask = new DeadlineTask(
-                "lmao",
-                "2025-12-12 1200"
-        );
-        EventTask eventTask = new EventTask(
-                "lmao",
-                "2025-12-12 1100",
-                "2025-12-12 1300"
-        );
-        tasks.addTask(toDoTask);
-        tasks.addTask(deadlineTask);
-        tasks.addTask(eventTask);
+        tasks.addTask(new EventTask("event", "2025-12-12 1200", "2025-12-12 1300"));
 
-        // For todo task
-        ToDoTask toDoTaskExpected = new ToDoTask(
-                "todo"
-        );
-        UpdateCommand updateTodoCmd = new UpdateCommand(
-                0,
-                null,
-                "todo",
-                "2025-12-12 1200",
-                null,
-                null
-        );
-        updateTodoCmd.execute(tasks, ui, storage);
+        DeadlineTask expected = new DeadlineTask("deadline", "2025-12-12 1200");
+        UpdateCommand cmd = new UpdateCommand(0, "deAdline", "deadline", "2025-12-12 1200", null, null);
+        cmd.execute(tasks, ui, storage);
         try {
-            assertEquals(toDoTaskExpected.toString(), tasks.getTask(0).toString());
-        } catch (BobException e) {
-            // shouldn't reach here
-        }
-
-        // For deadline task
-        DeadlineTask deadlineTaskExpected = new DeadlineTask(
-                "deadline",
-                "2025-12-12 1200"
-        );
-        UpdateCommand updateDeadlineCmd = new UpdateCommand(
-                1,
-                null,
-                "deadline",
-                "2025-12-12 1200",
-                null,
-                null
-        );
-        updateDeadlineCmd.execute(tasks, ui, storage);
-        try {
-            assertEquals(deadlineTaskExpected.toString(), tasks.getTask(1).toString());
-        } catch (BobException e) {
-            // shouldn't reach here
-        }
-
-
-        EventTask eventTaskExpected = new EventTask(
-                "event",
-                "2025-12-12 1100",
-                "2025-12-12 1400"
-        );
-        UpdateCommand updateEventCmd = new UpdateCommand(
-                2,
-                null,
-                "event",
-                null,
-                "2025-12-12 1100",
-                "2025-12-12 1400"
-        );
-        updateEventCmd.execute(tasks, ui, storage);
-        try {
-            assertEquals(eventTaskExpected.toString(), tasks.getTask(2).toString());
+            assertEquals(expected.toString(), tasks.getTask(0).toString());
         } catch (BobException e) {
             // shouldn't reach here
         }
     }
 
     @Test
-    public void updateNoType_invalid() {
-        //one for each
-        //Prep
+    public void updateTaskType_fromDeadlineToTodo_success() throws BobException {
         TaskList tasks = new TaskList();
-        ToDoTask toDoTask = new ToDoTask(
-                "lmao"
-        );
-        DeadlineTask deadlineTask = new DeadlineTask(
-                "lmao",
-                "2025-12-12 1200"
-        );
-        EventTask eventTask = new EventTask(
-                "lmao",
-                "2025-12-12 1100",
-                "2025-12-12 1300"
-        );
-        tasks.addTask(toDoTask);
-        tasks.addTask(deadlineTask);
-        tasks.addTask(eventTask);
-        BobInvalidFormatException expected = new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
+        tasks.addTask(new DeadlineTask("deadline", "2025-12-12 1200"));
 
-
-        // For todo task
-        UpdateCommand updateTodoCmd = new UpdateCommand(
-                0,
-                null,
-                null,
-                "2025-12-12 1200",
-                null,
-                null
-        );
+        ToDoTask expected = new ToDoTask("todo");
+        UpdateCommand cmd = new UpdateCommand(0, "toDO", "todo", "2025-12-12 1200", null, null);
+        cmd.execute(tasks, ui, storage);
         try {
-            // Should fail
-            updateTodoCmd.execute(tasks, ui, storage);
-        } catch (BobInvalidFormatException e) {
-            assertEquals(expected.getMessage(), e.getMessage());
-        }
-
-        // For deadline task
-        UpdateCommand updateDeadlineCmd = new UpdateCommand(
-                1,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
-        try {
-            // Should fail
-            updateDeadlineCmd.execute(tasks, ui, storage);
-        } catch (BobInvalidFormatException e) {
-            assertEquals(expected.getMessage(), e.getMessage());
-        }
-
-        UpdateCommand updateEventCmd = new UpdateCommand(
-                2,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
-        try {
-            updateEventCmd.execute(tasks, ui, storage);
-        } catch (BobInvalidFormatException e) {
+            assertEquals(expected.toString(), tasks.getTask(0).toString());
+        } catch (BobException e) {
             // shouldn't reach here
-            assertEquals(expected.getMessage(), e.getMessage());
+        }
+    }
+
+    // For updating without changing type
+    @Test
+    public void updateNoType_todoTask_success() throws BobException {
+        TaskList tasks = new TaskList();
+        tasks.addTask(new ToDoTask("lmao"));
+
+        ToDoTask expected = new ToDoTask("todo");
+        UpdateCommand cmd = new UpdateCommand(0, null, "todo", "2025-12-12 1200", null, null);
+        cmd.execute(tasks, ui, storage);
+
+        assertEquals(expected.toString(), tasks.getTask(0).toString());
+    }
+
+    @Test
+    public void updateNoType_deadlineTask_success() throws BobException {
+        TaskList tasks = new TaskList();
+        tasks.addTask(new DeadlineTask("lmao", "2025-12-12 1200"));
+
+        DeadlineTask expected = new DeadlineTask("deadline", "2025-12-12 1200");
+        UpdateCommand cmd = new UpdateCommand(0, null, "deadline", "2025-12-12 1200", null, null);
+        cmd.execute(tasks, ui, storage);
+
+        assertEquals(expected.toString(), tasks.getTask(0).toString());
+    }
+
+    @Test
+    public void updateNoType_eventTask_success() throws BobException {
+        TaskList tasks = new TaskList();
+        tasks.addTask(new EventTask("lmao", "2025-12-12 1100", "2025-12-12 1300"));
+
+        EventTask expected = new EventTask("event", "2025-12-12 1100", "2025-12-12 1400");
+        UpdateCommand cmd = new UpdateCommand(0, null, "event", null, "2025-12-12 1100", "2025-12-12 1400");
+        cmd.execute(tasks, ui, storage);
+
+        assertEquals(expected.toString(), tasks.getTask(0).toString());
+    }
+
+    // For updating without changing type - invalid format
+    @Test
+    public void updateNoType_todoTaskInvalidFormat_throwsException() {
+        TaskList tasks = new TaskList();
+        tasks.addTask(new ToDoTask("lmao"));
+
+        UpdateCommand cmd = new UpdateCommand(0, null, null, "2025-12-12 1200", null, null);
+
+        try {
+            cmd.execute(tasks, ui, storage);
+        } catch (BobInvalidFormatException e) {
+            assertEquals(new BobInvalidFormatException(CommandFormat.UPDATEFORMAT).getMessage(), e.getMessage());
+        } catch (Exception e) {
+            throw new AssertionError("Unexpected exception type", e);
+        }
+    }
+
+    @Test
+    public void updateNoType_deadlineTaskInvalidFormat_throwsException() {
+        TaskList tasks = new TaskList();
+        tasks.addTask(new DeadlineTask("lmao", "2025-12-12 1200"));
+
+        UpdateCommand cmd = new UpdateCommand(0, null, null, null, null, null);
+
+        try {
+            cmd.execute(tasks, ui, storage);
+        } catch (BobInvalidFormatException e) {
+            assertEquals(new BobInvalidFormatException(CommandFormat.UPDATEFORMAT).getMessage(), e.getMessage());
+        } catch (Exception e) {
+            throw new AssertionError("Unexpected exception type", e);
+        }
+    }
+
+    @Test
+    public void updateNoType_eventTaskInvalidFormat_throwsException() {
+        TaskList tasks = new TaskList();
+        tasks.addTask(new EventTask("lmao", "2025-12-12 1100", "2025-12-12 1300"));
+
+        UpdateCommand cmd = new UpdateCommand(0, null, null, null, null, null);
+
+        try {
+            cmd.execute(tasks, ui, storage);
+        } catch (BobInvalidFormatException e) {
+            assertEquals(new BobInvalidFormatException(CommandFormat.UPDATEFORMAT).getMessage(), e.getMessage());
+        } catch (Exception e) {
+            throw new AssertionError("Unexpected exception type", e);
         }
     }
 }

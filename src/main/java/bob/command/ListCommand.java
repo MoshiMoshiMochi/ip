@@ -26,7 +26,8 @@ public class ListCommand extends Command {
         try {
             ui.showMessage(
                     INTRO,
-                    tasks.toString());
+                    tasks.toString()
+            );
         } catch (BobDateTimeException | BobInvalidFormatException e) {
             ui.showMessage(e.getMessage());
         }

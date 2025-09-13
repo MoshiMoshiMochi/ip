@@ -14,9 +14,10 @@ import bob.ui.Ui;
  * and provides the main loop to process user commands.
  */
 public class Bob {
-    private Storage storage;
-    private TaskList taskList;
-    private Ui ui;
+    private static final String FILEPATH = "../savedtasks/task.txt";
+    private final Storage storage;
+    private final TaskList taskList;
+    private final Ui ui;
     private String commandType;
 
     /**
@@ -38,15 +39,22 @@ public class Bob {
         boolean isExit = false;
 
         while (!isExit) {
-            try {
-                String command = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(command);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {
-                ui.showMessage(e.getMessage());
-            }
+            // Read and process the next command
+            isExit = processNextCommand();
+        }
+    }
+
+    private boolean processNextCommand() {
+        // Copilot suggestion to extract this method
+        try {
+            String command = ui.readCommand();
+            ui.showLine();
+            Command c = Parser.parse(command);
+            c.execute(taskList, ui, storage);
+            return c.isExit();
+        } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {
+            ui.showMessage(e.getMessage());
+            return false;
         }
     }
 
@@ -72,9 +80,9 @@ public class Bob {
     }
 
     /**
-     * Used to display intro message (for GUI)
+     * Displays the welcome message and returns it (for GUI).
      *
-     * @return
+     * @return Welcome message from Bob
      */
     public String getIntro() {
         ui.showWelcome();
@@ -87,7 +95,7 @@ public class Bob {
      * @param args Command line arguments (not used).
      */
     public static void main(String[] args) {
-        new Bob("../savedtasks/task.txt").run();
+        new Bob(FILEPATH).run();
     }
 
 }
