@@ -6,9 +6,9 @@ Bob is a builderful tool designed to help users manage their tasks efficiently.
 Made With an intuitive interface & robust features, Bob makes building and managing task a breeze.
 ## Feature Overview
 - [Adding Tasks](#adding-tasks)
-- [To-Do Task](#to-do-task)
-- [Deadline Task](#deadline-task)
-- [Event Task](#event-task)
+  - [To-Do Task](#to-do-task)
+  - [Deadline Task](#deadline-task)
+  - [Event Task](#event-task)
 - [List Task(s)](#list-tasks)
 - [Find Task(s)](#find-tasks)
 - [Mark Task](#mark-task)
