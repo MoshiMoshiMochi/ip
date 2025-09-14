@@ -14,11 +14,11 @@ import bob.ui.Ui;
  * and provides the main loop to process user commands.
  */
 public class Bob {
-    private static final String FILEPATH = "../savedtasks/task.txt";
     private final Storage storage;
     private final TaskList taskList;
     private final Ui ui;
     private String commandType;
+    private boolean isExit = false;
 
     /**
      * Constructs a <code>Bob</code> instance with the specified file path for storage.
@@ -32,36 +32,6 @@ public class Bob {
     }
 
     /**
-     * Runs the main application loop, reading user commands,
-     * executing them, and handling exceptions until exit.
-     */
-    public void run() {
-        boolean isExit = false;
-
-        while (!isExit) {
-            // Read and process the next command
-            isExit = processNextCommand();
-            System.out.println(isExit);
-        }
-        System.out.println(isExit);
-    }
-
-    private boolean processNextCommand() {
-        // Copilot suggestion to extract this method
-        try {
-            String command = ui.readCommand();
-            ui.showLine();
-            Command c = Parser.parse(command);
-            c.execute(taskList, ui, storage);
-            System.out.println(c.isExit());
-            return c.isExit();
-        } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {
-            ui.showMessage(e.getMessage());
-            return false;
-        }
-    }
-
-    /**
      * Processes a single user input and returns Bob's response (for GUI).
      *
      * @param input User command string
@@ -70,14 +40,24 @@ public class Bob {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            commandType = c.getClass().getSimpleName();
-            return c.executeAndReturn(taskList, storage);
+            updateBob(c);
+            return c.executeAndReturn(this.taskList, this.storage);
         } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {
-            commandType = null; // resets so error label is applied in future uses.
+            this.commandType = null; // resets so error label is applied in future uses.
             return e.getMessage();
         }
     }
 
+    private void updateBob(Command command) {
+        this.commandType = command.getClass().getSimpleName();
+        this.isExit = command.isExit();
+    }
+
+    /**
+     * Returns the type of the last executed command.
+     *
+     * @return The command type as a string
+     */
     public String getCommandType() {
         return commandType;
     }
@@ -88,17 +68,26 @@ public class Bob {
      * @return Welcome message from Bob
      */
     public String getIntro() {
-        ui.showWelcome();
-        return ui.getCollectedMessages();
+        this.ui.showWelcome();
+        return this.ui.getCollectedMessages();
     }
 
     /**
-     * Entry point of the application.
-     *
-     * @param args Command line arguments (not used).
+     * Checks if Bob is set to exit and initiates a delayed shutdown if so.
+     * This allows users to see the exit message before the application closes.
      */
-    public static void main(String[] args) {
-        new Bob(FILEPATH).run();
+    public void handleExitIfNeeded() {
+        if (this.isExit) {
+            // to allow user to see the exit message before closing
+            new Thread(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+                System.exit(0);
+            }).start();
+        }
     }
 
 }

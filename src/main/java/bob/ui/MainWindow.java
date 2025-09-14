@@ -59,17 +59,6 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getBobDialog(response, bobImage, commandType)
         );
         userInput.clear();
-
-        if (commandType != null && commandType.equals("ByeCommand")) {
-            // to allow user to see the exit message before closing
-            new Thread(() -> {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.exit(0);
-            }).start();
-        }
+        bob.handleExitIfNeeded();
     }
 }
