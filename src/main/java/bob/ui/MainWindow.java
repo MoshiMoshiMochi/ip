@@ -59,5 +59,6 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getBobDialog(response, bobImage, commandType)
         );
         userInput.clear();
+        bob.handleExitIfNeeded();
     }
 }
