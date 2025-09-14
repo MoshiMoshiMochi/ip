@@ -53,9 +53,9 @@ public class EventTask extends Task {
                 + " | "
                 + this.description
                 + " | "
-                + this.from
+                + this.from.format(inputFormat)
                 + " | "
-                + this.to;
+                + this.to.format(inputFormat);
     }
 
     /**

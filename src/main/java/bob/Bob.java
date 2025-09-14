@@ -41,7 +41,9 @@ public class Bob {
         while (!isExit) {
             // Read and process the next command
             isExit = processNextCommand();
+            System.out.println(isExit);
         }
+        System.out.println(isExit);
     }
 
     private boolean processNextCommand() {
@@ -51,6 +53,7 @@ public class Bob {
             ui.showLine();
             Command c = Parser.parse(command);
             c.execute(taskList, ui, storage);
+            System.out.println(c.isExit());
             return c.isExit();
         } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {
             ui.showMessage(e.getMessage());
