@@ -57,7 +57,6 @@ Command: `event <desc> /from <date> /to <date>`
 - Creates an event task with the specified description, from date, and to date.
 - Dates should be in the format `YYYY-MM-DD HHMM`.
 
-// A description of the expected outcome goes here
 Example: `event project meeting /from 2024-11-01 1400 /to 2024-11-01 1600`
 ```
 Aite. I've bobbed it into the list:
