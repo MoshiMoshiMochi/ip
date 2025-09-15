@@ -160,17 +160,14 @@ optional fields to update.
 Command: `update <task no.> <updated fields>`
 
 Fields that can be updated include:
-- Task Type (`todo` / `deadline` / `event`): ` /t <task type>`
+- Task Type ([`todo`](#to-do-task) / [`deadline`](#deadline-task) / [`event`](#event-task)): ` /t <task type>`
 - Description: ` /d <description>`
-- by: ` /by <date>` 
-  - Required if changing to `deadline` task i.e. `/t deadline`
-    - [See Deadline Task Section](#deadline-task)
-- From: ` /from <date>` 
-  - Required if changing to `event` task i.e. `/t event`
-    - [See Event Task Section](#event-task)
-- To: ` /to <date>` 
-  - Required if changing to `event` task i.e. `/t event`
-    - [See Event Task Section](#Event-task)
+- by: `/by <date>` 
+  - Required if changing to [`deadline` task](#deadline-task) i.e. `/t deadline`
+- From: `/from <date>` 
+  - Required if changing to [`event` task](#event-task) i.e. `/t event`
+- To: `/to <date>` 
+  - Required if changing to [`event` task](#event-task) i.e. `/t event`
 
 Example: `update 1 /t deadline /d return book /by 2024-12-01 1200`
 - This command updates the second task to be a deadline task with the description "return book"
