@@ -89,6 +89,7 @@ Command: `find <keyword>`
 
 Example (Success): `find book`
 - This command lists all tasks that have the word "book" in their description.
+
 ```
  BOB YEA! Here is/are 2 the task(s)
  based on the given description: book
@@ -100,6 +101,7 @@ Example (Success): `find book`
 
 Example (Failure): `find assignment`
 - This command attempts to find tasks with the word "meeting" in their description but finds none.
+
 ```
  NOOO BOB! No Bobbing tasks within the list
  matches the description for: assignment
@@ -174,6 +176,7 @@ Fields that can be updated include:
 Example: `update 1 /t deadline /d return book /by 2024-12-01 1200`
 - This command updates the second task to be a deadline task with the description "return book"
 with a due date of December 1, 2024 1200H.
+
 ```
 BOBBIDY BOB BOB! I've up(bob)ed the provided task. 
  Old Task: [T][ ] read book
@@ -211,35 +214,43 @@ Depending on the type of error, Bob will reply with different error messages to 
 There are 3 types of error messages:
 1. **BobException**: For errors related to invalid commands or Invalid Task Number.
    - Example: `reorder`
-   ```
-    What the BOB!!![BobException]
-      Invalid Command!
-   ```
-  - Example: `mark 10` (when there are only 5 tasks in the list)
-    ```
-    What the BOB!!![BobException]
-      Task number 10 does not exist!
-    ```
-  - Example: `delete ten`
-    ```
-    What the BOB!!![BobException]
-      Invalid Task Number!
-    ```
+   
+       ```
+        What the BOB!!![BobException]
+          Invalid Command!
+       ```
+   - Example: `mark 10` (when there are only 5 tasks in the list)
+
+     ```
+     What the BOB!!![BobException]
+       Task number 10 does not exist!
+     ```
+     
+   - Example: `delete ten`
+   
+     ```
+     What the BOB!!![BobException]
+       Invalid Task Number!
+     ```
 2. **BobInvalidFormatException**: For errors related to invalid/missing format or fields in commands.
    - Example: `deadline return book`
-   ```
-    What the BOB!!![BobInvalidFormatException]
-    Invalid Command Format! Expected format: deadline <desc> /by <date>
-   ```
+   
+     ```
+      What the BOB!!![BobInvalidFormatException]
+      Invalid Command Format! Expected format: deadline <desc> /by <date>
+     ```
+     
    - Example: `deadline return book /by tomorrow`
-   ```
-    What the BOB!!![BobInvalidFormatException]
-    Invalid Command Format! Expected: YYYY-MM-DD HHMM
-   ```
+   
+     ```
+      What the BOB!!![BobInvalidFormatException]
+      Invalid Command Format! Expected: YYYY-MM-DD HHMM
+     ```
    
 3. **BobDateTimeException**: For errors related to invalid date/time logical errors with dates.
    - Example: `event exam /from 2025-12-12 1400 /to 2025-12-12 1200`
-   ```
-    What the BOB!!![BobDateTimeException]
-    To Date needs to be after From Date!
-   ```
+   
+     ```
+      What the BOB!!![BobDateTimeException]
+      To Date needs to be after From Date!
+     ```
