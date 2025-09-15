@@ -28,7 +28,7 @@ Command: `todo <desc>`
 
 Example: `todo read book`
 
-``` expected output
+```
 Aite. I've bobbed it into the list:
   [T][ ] read book
 Now you have 2 task in the list.
@@ -172,7 +172,7 @@ Fields that can be updated include:
 Example: `update 1 /t deadline /d return book /by 2024-12-01 1200`
 - This command updates the second task to be a deadline task with the description "return book"
 with a due date of December 1, 2024 1200H.
-```Expected output
+```
 BOBBIDY BOB BOB! I've up(bob)ed the provided task. 
  Old Task: [T][ ] read book
  New Task: [D][ ] return book (by: Dec 1 2024 12:00 PM)
