@@ -4,6 +4,7 @@
 Bob is a builderful tool designed to help users manage their tasks efficiently. 
 
 Made With an intuitive interface & robust features, Bob makes building and managing task a breeze.
+
 ## Feature Overview
 - [Adding Tasks](#adding-tasks)
   - [To-Do Task](#to-do-task)
@@ -19,6 +20,7 @@ Made With an intuitive interface & robust features, Bob makes building and manag
 - [Miscellaneous](#miscellaneous)
   - [Reply Colour](#reply-colour)
   - [Error Messages](#error-messages)
+
 ## Adding Tasks
 ### To-Do Task
 Users can add deadline task using the `deadline` command followed by the task description and the due date.
