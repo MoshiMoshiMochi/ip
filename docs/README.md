@@ -5,6 +5,20 @@ Bob is a builderful tool designed to help users manage their tasks efficiently.
 
 Made With an intuitive interface & robust features, Bob makes building and managing task a breeze.
 
+
+## Quick Start Guide
+1. Ensure you have Java 17 or above installed on your computer.
+2. Download the latest `bob.jar` file from the [releases page](google.com)
+3. Either double click the `bob.jar` file or run the following command in your terminal to start the application:
+   
+    ```
+   java -jar bob.jar
+   ```
+   
+4. The application will create a `savedtasks` folder in the same directory as the `bob.jar` file to store your tasks.
+5. You can now start using Bob by entering commands (See [Feature Overview](#feature-overview) for details on available commands).
+
+
 ## Feature Overview
 - [Adding Tasks](#adding-tasks)
   - [To-Do Task](#to-do-task)

@@ -1,6 +1,5 @@
 package bob.command;
 
-import bob.exception.BobInvalidIndexException;
 import bob.personality.Personality;
 import bob.storage.Storage;
 import bob.task.Task;

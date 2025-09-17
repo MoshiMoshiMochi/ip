@@ -1,6 +1,5 @@
 package bob.command;
 
-import bob.exception.BobInvalidIndexException;
 import bob.storage.Storage;
 import bob.task.Task;
 import bob.task.TaskList;
@@ -26,9 +25,9 @@ public class DeleteCommand extends Command {
      * Executes the delete command: removes the task from the task list
      * and displays a message via the UI.
      *
-     * @param tasks    The <code>TaskList</code> from which to delete the task.
-     * @param ui       The <code>Ui</code> instance for displaying messages.
-     * @param storage  The <code>Storage</code> instance for persisting changes.
+     * @param tasks   The <code>TaskList</code> from which to delete the task.
+     * @param ui      The <code>Ui</code> instance for displaying messages.
+     * @param storage The <code>Storage</code> instance for persisting changes.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
@@ -42,9 +41,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * @inheritDoc
-     *
      * @return <code>false</code> as DeleteCommand does not terminate the program.
+     * @inheritDoc
      */
     @Override
     public boolean isExit() {
