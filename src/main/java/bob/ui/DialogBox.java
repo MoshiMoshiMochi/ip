@@ -42,26 +42,26 @@ public class DialogBox extends HBox {
         if (commandType != null) {
             switch (commandType) {
             case "AddCommand":
-                dialog.getStyleClass().add("add-label");
+                dialog.getStyleClass().add(DialogStyle.ADD.getLabel());
                 break;
             case "MarkCommand":
-                dialog.getStyleClass().add("marked-label");
+                dialog.getStyleClass().add(DialogStyle.MARK.getLabel());
                 break;
             case "UnMarkCommand":
-                dialog.getStyleClass().add("unmarked-label");
+                dialog.getStyleClass().add(DialogStyle.UNMARK.getLabel());
                 break;
             case "DeleteCommand":
-                dialog.getStyleClass().add("delete-label");
+                dialog.getStyleClass().add(DialogStyle.DELETE.getLabel());
                 break;
             case "UpdateCommand":
-                dialog.getStyleClass().add("update-label");
+                dialog.getStyleClass().add(DialogStyle.UPDATE.getLabel());
                 break;
             default:
                 // default style
-                dialog.getStyleClass().add("label");
+                dialog.getStyleClass().add(DialogStyle.DEFAULT.getLabel());
             }
         } else {
-            dialog.getStyleClass().add("error-label");
+            dialog.getStyleClass().add(DialogStyle.ERROR.getLabel());
         }
     }
 
@@ -73,12 +73,12 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        dialog.getStyleClass().add("reply-label");
+        dialog.getStyleClass().add(DialogStyle.REPLY.getLabel());
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.dialog.getStyleClass().add("user-label");
+        db.dialog.getStyleClass().add(DialogStyle.USER.getLabel());
         return db;
     }
 

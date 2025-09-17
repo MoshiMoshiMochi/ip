@@ -27,12 +27,12 @@
     -fx-text-fill: black;
 }
 
-.marked-label {
+.mark-label {
     -fx-background-color: palegreen;
     -fx-text-fill: black;
 }
 
-.unmarked-label {
+.unmark-label {
     -fx-background-color: #FFDAB9;
     -fx-text-fill: black;
 }

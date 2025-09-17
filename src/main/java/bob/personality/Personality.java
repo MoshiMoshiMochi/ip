@@ -44,8 +44,8 @@ public enum Personality {
 
     // UpdateCommand
     UPDATEINTRO1(" BOBBIDY BOB BOB! I've up(bob)ed the provided task."),
-    UPDATEINTRO2(" Old Task     : "),
-    UPDATEINTRO3(" Updated Task : "),
+    UPDATEINTRO2(" Old Task: "),
+    UPDATEINTRO3(" Updated Task: "),
 
     // General Use
     TAB("    "),
