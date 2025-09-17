@@ -1,6 +1,6 @@
 package bob.command;
 
-import bob.exception.BobException;
+import bob.exception.BobInvalidIndexException;
 import bob.personality.Personality;
 import bob.storage.Storage;
 import bob.task.Task;
@@ -40,7 +40,7 @@ public class MarkCommand extends Command {
                     Personality.MARKINTRO.getMessage(),
                     Personality.TAB.getMessage() + task
             );
-        } catch (BobException e) {
+        } catch (BobInvalidIndexException e) {
             ui.showMessage(e.getMessage());
         }
     }

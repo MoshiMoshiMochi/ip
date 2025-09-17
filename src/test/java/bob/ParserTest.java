@@ -8,6 +8,7 @@ import bob.command.CommandFormat;
 import bob.exception.BobDateTimeException;
 import bob.exception.BobException;
 import bob.exception.BobInvalidFormatException;
+import bob.exception.BobInvalidIndexException;
 import bob.personality.Personality;
 
 public class ParserTest {
@@ -72,11 +73,12 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_invalidTaskNumber_throwsBobException() {
-        BobException expected = new BobException(Personality.INVALID_INDEX_MESSAGE.getMessage());
+    public void parse_invalidTaskNumber_throwsBobInvalidIndexException() {
+        BobInvalidIndexException expected =
+                new BobInvalidIndexException(Personality.INVALID_INDEX_MESSAGE.getMessage());
         try {
             Parser.parse("Mark hello");
-        } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
+        } catch (BobInvalidFormatException | BobException | BobInvalidIndexException | BobDateTimeException e) {
             assertEquals(expected.getMessage(), e.getMessage());
         }
     }
