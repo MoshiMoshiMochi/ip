@@ -8,7 +8,7 @@ Made With an intuitive interface & robust features, Bob makes building and manag
 
 ## Quick Start Guide
 1. Ensure you have Java 17 or above installed on your computer.
-2. Download the latest `bob.jar` file from the [releases page](google.com)
+2. Download the latest `bob.jar` file from the [releases page](https://github.com/MoshiMoshiMochi/ip/releases/tag/Final-Submission)
 3. Either double click the `bob.jar` file or run the following command in your terminal to start the application:
    
     ```
