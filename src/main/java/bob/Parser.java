@@ -284,7 +284,7 @@ public class Parser {
             break;
         }
         case EVENT: {
-            if (from == null && to == null) {
+            if (from == null || to == null) {
                 // replace with custom CommandFormat for all listed Task types
                 throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
             }

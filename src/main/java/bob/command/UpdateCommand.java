@@ -1,8 +1,6 @@
 package bob.command;
 
-import bob.exception.BobDateTimeException;
 import bob.exception.BobInvalidFormatException;
-import bob.exception.BobInvalidIndexException;
 import bob.personality.Personality;
 import bob.storage.Storage;
 import bob.task.DeadlineTask;
@@ -55,14 +53,11 @@ public class UpdateCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-
-
         Task selectedTask = tasks.getTask(this.index);
         Task updatedTask = getUpdatedTask(selectedTask);
         replaceTaskInList(tasks, updatedTask);
         super.saveStorage(tasks, storage);
         showUpdateMessage(ui, selectedTask, updatedTask);
-
     }
 
     private Task getUpdatedTask(Task selectedTask) {

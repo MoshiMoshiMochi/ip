@@ -19,6 +19,7 @@ public class MarkCommandTest {
 
     @Test
     public void task_markUnMark_success() {
+        Storage storage = new Storage("savedtasks/testMarkUnMark.txt");
         TaskList tasks = storage.load();
         ToDoTask task = new ToDoTask("read book");
 
@@ -45,7 +46,7 @@ public class MarkCommandTest {
             //It should not reach here!!!!!!!!!!!!!!
         }
 
-        File file = new File("savedtasks/test.txt");
+        File file = new File("savedtasks/testMarkUnMark.txt");
         file.delete();
 
     }

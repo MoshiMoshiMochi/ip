@@ -18,11 +18,12 @@ import bob.ui.Ui;
 
 public class UpdateCommandTest {
     private Ui ui = new Ui();
-    private Storage storage = new Storage("savedtasks/test.txt");
+    private Storage storage;
 
     // For updating with changing type
     @Test
     public void updateTaskType_fromTodoToEvent_success() throws BobException {
+        Storage storage = new Storage("savedtasks/testUpdateEvent.txt");
         TaskList tasks = new TaskList();
         tasks.addTask(new ToDoTask("read book"));
 
@@ -43,12 +44,13 @@ public class UpdateCommandTest {
             // shouldn't reach here
         }
 
-        File file = new File("savedtasks/test.txt");
+        File file = new File("savedtasks/testUpdateEvent.txt");
         file.delete();
     }
 
     @Test
     public void updateTaskType_fromEventToDeadline_success() throws BobException {
+        Storage storage = new Storage("savedtasks/testUpdateDeadline.txt");
         TaskList tasks = new TaskList();
         tasks.addTask(new EventTask("event", "2025-12-12 1200", "2025-12-12 1300"));
 
@@ -68,12 +70,13 @@ public class UpdateCommandTest {
             // shouldn't reach here
         }
 
-        File file = new File("savedtasks/test.txt");
+        File file = new File("savedtasks/testUpdateDeadline.txt");
         file.delete();
     }
 
     @Test
     public void updateTaskType_fromDeadlineToTodo_success() throws BobException {
+        Storage storage = new Storage("savedtasks/testUpdateTodo.txt");
         TaskList tasks = new TaskList();
         tasks.addTask(new DeadlineTask("deadline", "2025-12-12 1200"));
 
@@ -93,13 +96,14 @@ public class UpdateCommandTest {
             // shouldn't reach here
         }
 
-        File file = new File("savedtasks/test.txt");
+        File file = new File("savedtasks/testUpdateTodo.txt");
         file.delete();
     }
 
     // For updating without changing type
     @Test
     public void updateNoType_todoTask_success() throws BobException {
+        Storage storage = new Storage("savedtasks/testUpdateNoTypeTodo.txt");
         TaskList tasks = new TaskList();
         tasks.addTask(new ToDoTask("lmao"));
 
@@ -115,12 +119,13 @@ public class UpdateCommandTest {
 
         assertEquals(expected.toString(), tasks.getTask(0).toString());
 
-        File file = new File("savedtasks/test.txt");
+        File file = new File("savedtasks/testUpdateNoTypeTodo.txt");
         file.delete();
     }
 
     @Test
     public void updateNoType_deadlineTask_success() throws BobException {
+        Storage storage = new Storage("savedtasks/testUpdateNoTypeDeadline.txt");
         TaskList tasks = new TaskList();
         tasks.addTask(new DeadlineTask("lmao", "2025-12-12 1200"));
 
@@ -136,12 +141,13 @@ public class UpdateCommandTest {
 
         assertEquals(expected.toString(), tasks.getTask(0).toString());
 
-        File file = new File("savedtasks/test.txt");
+        File file = new File("savedtasks/testUpdateNoTypeDeadline.txt");
         file.delete();
     }
 
     @Test
     public void updateNoType_eventTask_success() throws BobException {
+        Storage storage = new Storage("savedtasks/testUpdateNoTypeEvent.txt");
         TaskList tasks = new TaskList();
         tasks.addTask(new EventTask("lmao", "2025-12-12 1100", "2025-12-12 1300"));
 
@@ -158,13 +164,14 @@ public class UpdateCommandTest {
 
         assertEquals(expected.toString(), tasks.getTask(0).toString());
 
-        File file = new File("savedtasks/test.txt");
+        File file = new File("savedtasks/testUpdateNoTypeEvent.txt");
         file.delete();
     }
 
     // For updating without changing type - invalid format
     @Test
     public void updateNoType_todoTaskInvalidFormat_throwsException() {
+        Storage storage = new Storage("savedtasks/testUpdateInvalidTodo.txt");
         TaskList tasks = new TaskList();
         tasks.addTask(new ToDoTask("lmao"));
 
@@ -184,10 +191,14 @@ public class UpdateCommandTest {
         } catch (Exception e) {
             throw new AssertionError("Unexpected exception type", e);
         }
+
+        File file = new File("savedtasks/testUpdateInvalidTodo.txt");
+        file.delete();
     }
 
     @Test
     public void updateNoType_deadlineTaskInvalidFormat_throwsException() {
+        Storage storage = new Storage("savedtasks/testUpdateInvalidDeadline.txt");
         TaskList tasks = new TaskList();
         tasks.addTask(new DeadlineTask("lmao", "2025-12-12 1200"));
 
@@ -207,10 +218,14 @@ public class UpdateCommandTest {
         } catch (Exception e) {
             throw new AssertionError("Unexpected exception type", e);
         }
+
+        File file = new File("savedtasks/testUpdateInvalidDeadline.txt");
+        file.delete();
     }
 
     @Test
     public void updateNoType_eventTaskInvalidFormat_throwsException() {
+        Storage storage = new Storage("savedtasks/testUpdateInvalidEvent.txt");
         TaskList tasks = new TaskList();
         tasks.addTask(new EventTask("lmao", "2025-12-12 1100", "2025-12-12 1300"));
 
@@ -230,5 +245,8 @@ public class UpdateCommandTest {
         } catch (Exception e) {
             throw new AssertionError("Unexpected exception type", e);
         }
+
+        File file = new File("savedtasks/testUpdateInvalidEvent.txt");
+        file.delete();
     }
 }
