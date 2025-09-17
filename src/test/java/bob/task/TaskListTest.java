@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import bob.command.AddCommand;
 import bob.exception.BobException;
+import bob.personality.Personality;
 import bob.storage.Storage;
 import bob.ui.Ui;
 
@@ -25,7 +26,10 @@ public class TaskListTest {
         try {
             Task t = tasks.getTask(index);
         } catch (BobException e) {
-            BobException expected = new BobException(" Task number " + (index + 1) + " does not exist!");
+            BobException expected = new BobException(
+                    Personality.INDEX_OUT_OF_RANGE_MESSAGE1.getMessage()
+                            + (index + 1)
+                            + Personality.INDEX_OUT_OF_RANGE_MESSAGE2.getMessage());
             assertEquals(expected.getMessage(), e.getMessage());
         }
 

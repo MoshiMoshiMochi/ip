@@ -8,6 +8,7 @@ import bob.command.CommandFormat;
 import bob.exception.BobDateTimeException;
 import bob.exception.BobException;
 import bob.exception.BobInvalidFormatException;
+import bob.personality.Personality;
 
 public class ParserTest {
     @Test
@@ -72,7 +73,7 @@ public class ParserTest {
 
     @Test
     public void parse_invalidTaskNumber_throwsBobException() {
-        BobException expected = new BobException(" Invalid Task number!");
+        BobException expected = new BobException(Personality.INVALID_INDEX_MESSAGE.getMessage());
         try {
             Parser.parse("Mark hello");
         } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {
@@ -82,7 +83,7 @@ public class ParserTest {
 
     @Test
     public void parse_unrecognisedCommand_throwsBobException() {
-        BobException expected = new BobException(" Invalid Command!");
+        BobException expected = new BobException(Personality.INVALID_COMMAND_MESSAGE.getMessage());
         try {
             Parser.parse("hello ");
         } catch (BobInvalidFormatException | BobException | BobDateTimeException e) {

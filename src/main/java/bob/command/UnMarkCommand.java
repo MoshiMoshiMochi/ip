@@ -1,6 +1,7 @@
 package bob.command;
 
 import bob.exception.BobException;
+import bob.personality.Personality;
 import bob.storage.Storage;
 import bob.task.Task;
 import bob.task.TaskList;
@@ -36,8 +37,8 @@ public class UnMarkCommand extends Command {
             Task task = taskList.getTask(index);
             task.markUnDone();
             ui.showMessage(
-                    INTRO,
-                    "    " + task
+                    Personality.UNMARKINTRO.getMessage(),
+                    Personality.TAB.getMessage() + task
             );
         } catch (BobException e) {
             ui.showMessage(e.getMessage());

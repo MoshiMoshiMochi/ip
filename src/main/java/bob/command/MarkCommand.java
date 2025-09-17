@@ -1,6 +1,7 @@
 package bob.command;
 
 import bob.exception.BobException;
+import bob.personality.Personality;
 import bob.storage.Storage;
 import bob.task.Task;
 import bob.task.TaskList;
@@ -11,7 +12,6 @@ import bob.ui.Ui;
  * Executes by updating the task's status and displaying a message via the UI.
  */
 public class MarkCommand extends Command {
-    private static final String INTRO = " I'm Marking it. I'm Marking it so good!";
     private final int index;
 
     /**
@@ -36,8 +36,8 @@ public class MarkCommand extends Command {
             Task task = taskList.getTask(index);
             task.markDone();
             ui.showMessage(
-                    INTRO,
-                    "    " + task
+                    Personality.MARKINTRO.getMessage(),
+                    Personality.TAB.getMessage() + task
             );
         } catch (BobException e) {
             ui.showMessage(e.getMessage());

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bob.exception.BobException;
+import bob.personality.Personality;
 
 /**
  * Stores a list of <code>Task</code> objects and handles operations
@@ -37,7 +38,11 @@ public class TaskList {
      */
     public Task getTask(int index) throws BobException {
         if (!isIndexInRange(index)) {
-            throw new BobException(" Task number " + (index + 1) + " does not exist!");
+            throw new BobException(
+                    Personality.INDEX_OUT_OF_RANGE_MESSAGE1.getMessage()
+                            + (index + 1)
+                            + Personality.INDEX_OUT_OF_RANGE_MESSAGE2.getMessage()
+            );
         }
         assert index >= 0 : "Index should be >= 0 at this point";
         return this.tasks.get(index);
@@ -61,7 +66,11 @@ public class TaskList {
      */
     public Task deleteTask(int index) throws BobException {
         if (!isIndexInRange(index)) {
-            throw new BobException(" Task number " + (index + 1) + " does not exist!");
+            throw new BobException(
+                    Personality.INDEX_OUT_OF_RANGE_MESSAGE1.getMessage()
+                            + (index + 1)
+                            + Personality.INDEX_OUT_OF_RANGE_MESSAGE2.getMessage()
+            );
         }
         assert index >= 0 : "Index should be >= 0 at this point";
         return this.tasks.remove(index);

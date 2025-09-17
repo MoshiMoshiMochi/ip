@@ -1,5 +1,6 @@
 package bob.command;
 
+import bob.personality.Personality;
 import bob.storage.Storage;
 import bob.task.Task;
 import bob.task.TaskList;
@@ -16,16 +17,8 @@ import bob.ui.Ui;
  * </p>
  */
 public class FindCommand extends Command {
-
-    private static final String INTRO_SUCCESS_1 = " BOB YEA! Here is/are the ";
-    private static final String INTRO_SUCCESS_2 = " task(s)\n based on the given description: ";
-    private static final String OUTRO_SUCCESS = "\n I've been a good BOB";
-
-    private static final String INTRO_FAILURE = " NOOO BOB! No Bobbing tasks within the list"
-            + "\n matches the description for: ";
-    private static final String OUTRO_FAILURE = "\n Maybe trying another Bobbing description!";
-
     private final String description;
+
     /**
      * Constructs a {@code FindCommand} with the specified search keyword.
      *
@@ -69,13 +62,14 @@ public class FindCommand extends Command {
     private void displayMatchingTasks(Ui ui, TaskList matchingTasks) {
         if (matchingTasks.size() == 0) {
             ui.showMessage(
-                    INTRO_FAILURE + this.description,
-                    OUTRO_FAILURE);
+                    Personality.FINDINTRO_FAILURE.getMessage() + this.description,
+                    Personality.FINDOUTRO_FAILURE.getMessage());
         } else {
             ui.showMessage(
-                    INTRO_SUCCESS_1 + matchingTasks.size() + INTRO_SUCCESS_2 + this.description,
+                    Personality.FINDINTRO_SUCCESS_1.getMessage() + matchingTasks.size()
+                            + Personality.FINDINTRO_SUCCESS_2.getMessage() + this.description,
                     matchingTasks.toString(),
-                    OUTRO_SUCCESS
+                    Personality.FINDOUTRO_SUCCESS.getMessage()
             );
         }
     }

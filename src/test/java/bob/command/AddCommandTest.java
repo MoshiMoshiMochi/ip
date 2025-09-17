@@ -19,7 +19,6 @@ import bob.ui.Ui;
 public class AddCommandTest {
     private Ui ui = new Ui();
     private Storage storage;
-    private final DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
     @Test
     public void addTodoTask_success() {
@@ -47,8 +46,8 @@ public class AddCommandTest {
 
         assertEquals(1, tasks.size());
         assertEquals(
-                "[" + TaskType.DEADLINE.getSymbol()
-                        + "]" + "[ ] read book (by:Dec 12 2025 1200)",
+                "[" + TaskType.DEADLINE.getSymbol() + "]"
+                        + "[ ] read book (by:Dec 12 2025 1200)",
                 task.toString());
     }
 
@@ -63,7 +62,8 @@ public class AddCommandTest {
 
         assertEquals(1, tasks.size());
         assertEquals(
-                "[" + TaskType.EVENT.getSymbol() + "]" + "[ ] read book (from: Dec 12 2025 1200 to: Dec 12 2025 1300)",
+                "[" + TaskType.EVENT.getSymbol() + "]"
+                        + "[ ] read book (from: Dec 12 2025 1200 to: Dec 12 2025 1300)",
                 task.toString());
     }
 

@@ -161,12 +161,16 @@ Command: `update <task no.> <updated fields>`
 
 Fields that can be updated include:
 - Task Type ([`todo`](#to-do-task) / [`deadline`](#deadline-task) / [`event`](#event-task)): ` /t <task type>`
+
 - Description: `/d <description>`
+
 - by: `/by <date>` 
   - Required if changing to [`deadline` task](#deadline-task) i.e. `/t deadline`
+
 - From: `/from <date>` 
   - Required if changing to [`event` task](#event-task) i.e. `/t event`
-- To: `/to <date>` 
+/
+- To: `/to <date>`
   - Required if changing to [`event` task](#event-task) i.e. `/t event`
 
 Example: `update 1 /t deadline /d return book /by 2024-12-01 1200`

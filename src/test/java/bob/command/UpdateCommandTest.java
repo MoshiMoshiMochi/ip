@@ -18,7 +18,6 @@ import bob.ui.Ui;
 public class UpdateCommandTest {
     private Ui ui = new Ui();
     private Storage storage;
-    private final DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
     // For updating with changing type
     @Test

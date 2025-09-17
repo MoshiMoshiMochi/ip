@@ -1,7 +1,6 @@
 package bob.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import bob.command.CommandFormat;
@@ -16,7 +15,7 @@ import bob.exception.BobInvalidFormatException;
 public class EventTask extends Task {
     private final LocalDateTime to;
     private final LocalDateTime from;
-    private final DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
     /**
      * Constructs a new <code>EventTask</code> with a description, start datetime, and end datetime.
      *
@@ -30,8 +29,8 @@ public class EventTask extends Task {
             throws BobDateTimeException, BobInvalidFormatException {
         super(description, TaskType.EVENT);
         try {
-            this.from = LocalDateTime.parse(from, inputFormat);
-            this.to = LocalDateTime.parse(to, inputFormat);
+            this.from = LocalDateTime.parse(from, Task.inputFormat);
+            this.to = LocalDateTime.parse(to, Task.inputFormat);
             if (this.to.isBefore(this.from)) {
                 throw new BobDateTimeException("To Date needs to be larger than From Date");
             }
@@ -53,9 +52,9 @@ public class EventTask extends Task {
                 + " | "
                 + this.description
                 + " | "
-                + this.from.format(inputFormat)
+                + this.from.format(Task.inputFormat)
                 + " | "
-                + this.to.format(inputFormat);
+                + this.to.format(Task.inputFormat);
     }
 
     /**
@@ -64,7 +63,7 @@ public class EventTask extends Task {
      * @return String in the input format for <code>from</code>.
      */
     public String getFrom() {
-        return this.from.format(inputFormat);
+        return this.from.format(Task.inputFormat);
     }
 
     /**
@@ -73,7 +72,7 @@ public class EventTask extends Task {
      * @return String in the input format for <code>to</code>.
      */
     public String getTo() {
-        return this.to.format(inputFormat);
+        return this.to.format(Task.inputFormat);
     }
 
     /**
@@ -84,12 +83,11 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
         return super.toString()
                 + " (from: "
-                + this.from.format(outputFormat)
+                + this.from.format(Task.outputFormat)
                 + " to: "
-                + this.to.format(outputFormat)
+                + this.to.format(Task.outputFormat)
                 + ")";
     }
 }

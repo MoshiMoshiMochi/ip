@@ -3,6 +3,7 @@ package bob.command;
 import bob.exception.BobDateTimeException;
 import bob.exception.BobException;
 import bob.exception.BobInvalidFormatException;
+import bob.personality.Personality;
 import bob.storage.Storage;
 import bob.task.DeadlineTask;
 import bob.task.EventTask;
@@ -17,9 +18,6 @@ import bob.ui.Ui;
  * (e.g., deadline or event timings).
  */
 public class UpdateCommand extends Command {
-    private static final String INTRO1 = "BOBBIDY BOB BOB! I've up(bob)ed the provided task. \n Old Task: ";
-    private static final String INTRO2 = " Updated Task: ";
-
     private final int index;
     private final String taskType;
     private final String description;
@@ -88,8 +86,9 @@ public class UpdateCommand extends Command {
     private void showUpdateMessage(Ui ui, Task oldTask, Task updatedTask) {
         assert updatedTask != null : "updatedTask should not be null at this point";
         ui.showMessage(
-                INTRO1 + oldTask,
-                INTRO2 + updatedTask
+                Personality.UPDATEINTRO1.getMessage(),
+                Personality.UPDATEINTRO2.getMessage() + oldTask,
+                Personality.UPDATEINTRO3.getMessage() + updatedTask
         );
     }
 
