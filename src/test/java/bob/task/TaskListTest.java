@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import bob.command.AddCommand;
 import bob.exception.BobException;
+import bob.exception.BobInvalidIndexException;
 import bob.personality.Personality;
 import bob.storage.Storage;
 import bob.ui.Ui;
@@ -25,8 +26,8 @@ public class TaskListTest {
         int index = 200;
         try {
             Task t = tasks.getTask(index);
-        } catch (BobException e) {
-            BobException expected = new BobException(
+        } catch (BobInvalidIndexException e) {
+            BobInvalidIndexException expected = new BobInvalidIndexException(
                     Personality.INDEX_OUT_OF_RANGE_MESSAGE1.getMessage()
                             + (index + 1)
                             + Personality.INDEX_OUT_OF_RANGE_MESSAGE2.getMessage());

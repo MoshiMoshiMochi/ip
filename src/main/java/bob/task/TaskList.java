@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bob.exception.BobException;
+import bob.exception.BobInvalidIndexException;
 import bob.personality.Personality;
 
 /**
@@ -36,9 +37,9 @@ public class TaskList {
      * @return The <code>Task</code> at the given index.
      * @throws BobException If the index is out of range.
      */
-    public Task getTask(int index) throws BobException {
+    public Task getTask(int index) throws BobInvalidIndexException {
         if (!isIndexInRange(index)) {
-            throw new BobException(
+            throw new BobInvalidIndexException(
                     Personality.INDEX_OUT_OF_RANGE_MESSAGE1.getMessage()
                             + (index + 1)
                             + Personality.INDEX_OUT_OF_RANGE_MESSAGE2.getMessage()
@@ -64,9 +65,9 @@ public class TaskList {
      * @return The deleted <code>Task</code>.
      * @throws BobException If the index is out of range.
      */
-    public Task deleteTask(int index) throws BobException {
+    public Task deleteTask(int index) throws BobInvalidIndexException {
         if (!isIndexInRange(index)) {
-            throw new BobException(
+            throw new BobInvalidIndexException(
                     Personality.INDEX_OUT_OF_RANGE_MESSAGE1.getMessage()
                             + (index + 1)
                             + Personality.INDEX_OUT_OF_RANGE_MESSAGE2.getMessage()

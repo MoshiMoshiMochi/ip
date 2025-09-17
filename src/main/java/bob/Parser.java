@@ -16,6 +16,7 @@ import bob.command.UnMarkCommand;
 import bob.command.UpdateCommand;
 import bob.exception.BobException;
 import bob.exception.BobInvalidFormatException;
+import bob.exception.BobInvalidIndexException;
 import bob.personality.Personality;
 import bob.task.DeadlineTask;
 import bob.task.EventTask;
@@ -134,7 +135,7 @@ public class Parser {
         try {
             return Integer.parseInt(part.trim()) - 1;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new BobException(Personality.INVALID_INDEX_MESSAGE.getMessage());
+            throw new BobInvalidIndexException(Personality.INVALID_INDEX_MESSAGE.getMessage());
         }
     }
 

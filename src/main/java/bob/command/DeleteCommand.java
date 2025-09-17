@@ -1,6 +1,6 @@
 package bob.command;
 
-import bob.exception.BobException;
+import bob.exception.BobInvalidIndexException;
 import bob.storage.Storage;
 import bob.task.Task;
 import bob.task.TaskList;
@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
                     task,
                     tasks.size()
             );
-        } catch (BobException e) {
+        } catch (BobInvalidIndexException e) {
             ui.showMessage(e.getMessage());
         }
     }

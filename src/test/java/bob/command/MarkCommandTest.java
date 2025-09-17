@@ -7,6 +7,7 @@ import java.io.File;
 import org.junit.jupiter.api.Test;
 
 import bob.exception.BobException;
+import bob.exception.BobInvalidIndexException;
 import bob.storage.Storage;
 import bob.task.TaskList;
 import bob.task.TaskType;
@@ -41,7 +42,7 @@ public class MarkCommandTest {
             assertEquals(
                     "[" + TaskType.TODO.getSymbol() + "]" + "[ ] read book",
                     tasks.getTask(0).toString());
-        } catch (BobException e) {
+        } catch (BobInvalidIndexException e) {
             //It should not reach here!!!!!!!!!!!!!!
         }
 

@@ -4,6 +4,7 @@ import bob.command.Command;
 import bob.exception.BobDateTimeException;
 import bob.exception.BobException;
 import bob.exception.BobInvalidFormatException;
+import bob.exception.BobInvalidIndexException;
 import bob.storage.Storage;
 import bob.task.TaskList;
 import bob.ui.Ui;
@@ -42,7 +43,7 @@ public class Bob {
             Command c = Parser.parse(input);
             updateBob(c);
             return c.executeAndReturn(this.taskList, this.storage);
-        } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {
+        } catch (BobInvalidFormatException | BobDateTimeException | BobInvalidIndexException | BobException e) {
             this.commandType = null; // resets so error label is applied in future uses.
             return e.getMessage();
         }

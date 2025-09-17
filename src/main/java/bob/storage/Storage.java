@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import bob.exception.BobException;
+import bob.exception.BobInvalidIndexException;
 import bob.task.Task;
 import bob.task.TaskList;
 
@@ -45,7 +45,7 @@ public class Storage {
             for (int i = 0; i < tasks.size(); i++) {
                 try {
                     fw.write(tasks.getTask(i).toSaveFormat() + System.lineSeparator());
-                } catch (BobException e) {
+                } catch (BobInvalidIndexException e) {
                     //It should never reach here since i will always be within the range of tasks.size
                 }
             }

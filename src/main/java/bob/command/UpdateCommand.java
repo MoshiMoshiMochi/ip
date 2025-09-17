@@ -1,8 +1,8 @@
 package bob.command;
 
 import bob.exception.BobDateTimeException;
-import bob.exception.BobException;
 import bob.exception.BobInvalidFormatException;
+import bob.exception.BobInvalidIndexException;
 import bob.personality.Personality;
 import bob.storage.Storage;
 import bob.task.DeadlineTask;
@@ -63,7 +63,7 @@ public class UpdateCommand extends Command {
             super.saveStorage(tasks, storage);
             showUpdateMessage(ui, selectedTask, updatedTask);
 
-        } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {
+        } catch (BobInvalidFormatException | BobDateTimeException | BobInvalidIndexException e) {
             // Basically only for not found or if invalid format/datetime format
             ui.showMessage(e.getMessage());
         }

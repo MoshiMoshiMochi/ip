@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import bob.exception.BobException;
 import bob.exception.BobInvalidFormatException;
+import bob.exception.BobInvalidIndexException;
 import bob.storage.Storage;
 import bob.task.DeadlineTask;
 import bob.task.EventTask;
@@ -38,7 +39,7 @@ public class UpdateCommandTest {
 
         try {
             assertEquals(expected.toString(), tasks.getTask(0).toString());
-        } catch (BobException e) {
+        } catch (BobInvalidIndexException e) {
             // shouldn't reach here
         }
 
@@ -63,7 +64,7 @@ public class UpdateCommandTest {
         cmd.execute(tasks, ui, storage);
         try {
             assertEquals(expected.toString(), tasks.getTask(0).toString());
-        } catch (BobException e) {
+        } catch (BobInvalidIndexException e) {
             // shouldn't reach here
         }
 
@@ -88,7 +89,7 @@ public class UpdateCommandTest {
         cmd.execute(tasks, ui, storage);
         try {
             assertEquals(expected.toString(), tasks.getTask(0).toString());
-        } catch (BobException e) {
+        } catch (BobInvalidIndexException e) {
             // shouldn't reach here
         }
 

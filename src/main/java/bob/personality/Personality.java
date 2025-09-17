@@ -10,6 +10,7 @@ public enum Personality {
     BOBINVALIDFORMATEXCEPTION(
             " What the Bob!!![BobInvalidFormatException]\n Invalid Command Format! Expected: "
     ),
+    BOBINVALIDINDEXEXCEPTION(" What the Bob!!![BobInvalidIndexException]\n"),
     INVALID_INDEX_MESSAGE(" Invalid Task number!"),
     INVALID_COMMAND_MESSAGE("  Invalid Command!"),
     INDEX_OUT_OF_RANGE_MESSAGE1(" Task number "),
