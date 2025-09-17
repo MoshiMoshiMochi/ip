@@ -23,7 +23,7 @@ public class DeadlineTask extends Task {
     public DeadlineTask(String description, String by) throws BobInvalidFormatException {
         super(description, TaskType.DEADLINE);
         try {
-            this.by = LocalDateTime.parse(by, Task.inputFormat);
+            this.by = LocalDateTime.parse(by, Task.INPUTFORMAT);
         } catch (DateTimeParseException e) {
             throw new BobInvalidFormatException(CommandFormat.DATETIMEFORMAT);
         }
@@ -42,7 +42,7 @@ public class DeadlineTask extends Task {
                 + " | "
                 + this.description
                 + " | "
-                + this.by.format(Task.inputFormat)
+                + this.by.format(Task.INPUTFORMAT)
                 + " | ";
     }
 
@@ -52,7 +52,7 @@ public class DeadlineTask extends Task {
      * @return String in the input format for <code>by</code>.
      */
     public String getBy() {
-        return this.by.format(Task.inputFormat);
+        return this.by.format(Task.INPUTFORMAT);
     }
 
     /**
@@ -63,6 +63,6 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + " (by:" + this.by.format(Task.outputFormat) + ")";
+        return super.toString() + " (by:" + this.by.format(Task.OUTPUTFORMAT) + ")";
     }
 }

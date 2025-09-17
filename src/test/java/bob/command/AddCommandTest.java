@@ -2,8 +2,6 @@ package bob.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.format.DateTimeFormatter;
-
 import org.junit.jupiter.api.Test;
 
 import bob.exception.BobDateTimeException;

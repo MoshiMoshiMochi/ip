@@ -1,10 +1,15 @@
 package bob.personality;
 
+/**
+ * Enum representing different personality messages used in the application.
+ */
 public enum Personality {
     // Exception messages
     BOBEXCEPTION(" What the BOB!!![BobException]\n"),
     BOBDATETIMEEXCEPTION(" What the Bob!!![BobDateTimeException]\n"),
-    BOBINVALIDFORMATEXCEPTION(" What the Bob!!![BobInvalidFormatException]\n Invalid Command Format! Expected: "),
+    BOBINVALIDFORMATEXCEPTION(
+            " What the Bob!!![BobInvalidFormatException]\n Invalid Command Format! Expected: "
+    ),
     INVALID_INDEX_MESSAGE(" Invalid Task number!"),
     INVALID_COMMAND_MESSAGE("  Invalid Command!"),
     INDEX_OUT_OF_RANGE_MESSAGE1(" Task number "),
@@ -52,10 +57,20 @@ public enum Personality {
 
     private final String message;
 
+    /**
+     * Constructs a Personality enum with the specified message.
+     *
+     * @param message The message associated with the personality.
+     */
     Personality(String message) {
         this.message = message;
     }
 
+    /**
+     * Returns the message associated with the personality.
+     *
+     * @return The personality message.
+     */
     public String getMessage() {
         return message;
     }

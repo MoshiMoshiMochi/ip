@@ -2,8 +2,6 @@ package bob.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.format.DateTimeFormatter;
-
 import org.junit.jupiter.api.Test;
 
 import bob.exception.BobException;
@@ -26,7 +24,14 @@ public class UpdateCommandTest {
         tasks.addTask(new ToDoTask("read book"));
 
         EventTask expected = new EventTask("event", "2025-12-12 1200", "2025-12-12 1300");
-        UpdateCommand cmd = new UpdateCommand(0, "Event", "event", null, "2025-12-12 1200", "2025-12-12 1300");
+        UpdateCommand cmd = new UpdateCommand(
+                0,
+                "Event",
+                "event",
+                null,
+                "2025-12-12 1200",
+                "2025-12-12 1300"
+        );
         cmd.execute(tasks, ui, storage);
 
         try {
@@ -42,7 +47,14 @@ public class UpdateCommandTest {
         tasks.addTask(new EventTask("event", "2025-12-12 1200", "2025-12-12 1300"));
 
         DeadlineTask expected = new DeadlineTask("deadline", "2025-12-12 1200");
-        UpdateCommand cmd = new UpdateCommand(0, "deAdline", "deadline", "2025-12-12 1200", null, null);
+        UpdateCommand cmd = new UpdateCommand(
+                0,
+                "deAdline",
+                "deadline",
+                "2025-12-12 1200",
+                null,
+                null
+        );
         cmd.execute(tasks, ui, storage);
         try {
             assertEquals(expected.toString(), tasks.getTask(0).toString());
@@ -57,7 +69,14 @@ public class UpdateCommandTest {
         tasks.addTask(new DeadlineTask("deadline", "2025-12-12 1200"));
 
         ToDoTask expected = new ToDoTask("todo");
-        UpdateCommand cmd = new UpdateCommand(0, "toDO", "todo", "2025-12-12 1200", null, null);
+        UpdateCommand cmd = new UpdateCommand(
+                0,
+                "toDO",
+                "todo",
+                "2025-12-12 1200",
+                null,
+                null
+        );
         cmd.execute(tasks, ui, storage);
         try {
             assertEquals(expected.toString(), tasks.getTask(0).toString());
@@ -73,7 +92,13 @@ public class UpdateCommandTest {
         tasks.addTask(new ToDoTask("lmao"));
 
         ToDoTask expected = new ToDoTask("todo");
-        UpdateCommand cmd = new UpdateCommand(0, null, "todo", "2025-12-12 1200", null, null);
+        UpdateCommand cmd = new UpdateCommand(0,
+                null,
+                "todo",
+                "2025-12-12 1200",
+                null,
+                null
+        );
         cmd.execute(tasks, ui, storage);
 
         assertEquals(expected.toString(), tasks.getTask(0).toString());
@@ -85,7 +110,13 @@ public class UpdateCommandTest {
         tasks.addTask(new DeadlineTask("lmao", "2025-12-12 1200"));
 
         DeadlineTask expected = new DeadlineTask("deadline", "2025-12-12 1200");
-        UpdateCommand cmd = new UpdateCommand(0, null, "deadline", "2025-12-12 1200", null, null);
+        UpdateCommand cmd = new UpdateCommand(0,
+                null,
+                "deadline",
+                "2025-12-12 1200",
+                null,
+                null
+        );
         cmd.execute(tasks, ui, storage);
 
         assertEquals(expected.toString(), tasks.getTask(0).toString());
@@ -97,7 +128,14 @@ public class UpdateCommandTest {
         tasks.addTask(new EventTask("lmao", "2025-12-12 1100", "2025-12-12 1300"));
 
         EventTask expected = new EventTask("event", "2025-12-12 1100", "2025-12-12 1400");
-        UpdateCommand cmd = new UpdateCommand(0, null, "event", null, "2025-12-12 1100", "2025-12-12 1400");
+        UpdateCommand cmd = new UpdateCommand(
+                0,
+                null,
+                "event",
+                null,
+                "2025-12-12 1100",
+                "2025-12-12 1400"
+        );
         cmd.execute(tasks, ui, storage);
 
         assertEquals(expected.toString(), tasks.getTask(0).toString());
@@ -109,7 +147,14 @@ public class UpdateCommandTest {
         TaskList tasks = new TaskList();
         tasks.addTask(new ToDoTask("lmao"));
 
-        UpdateCommand cmd = new UpdateCommand(0, null, null, "2025-12-12 1200", null, null);
+        UpdateCommand cmd = new UpdateCommand(
+                0,
+                null,
+                null,
+                "2025-12-12 1200",
+                null,
+                null
+        );
 
         try {
             cmd.execute(tasks, ui, storage);
@@ -125,7 +170,14 @@ public class UpdateCommandTest {
         TaskList tasks = new TaskList();
         tasks.addTask(new DeadlineTask("lmao", "2025-12-12 1200"));
 
-        UpdateCommand cmd = new UpdateCommand(0, null, null, null, null, null);
+        UpdateCommand cmd = new UpdateCommand(
+                0,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
 
         try {
             cmd.execute(tasks, ui, storage);
@@ -141,7 +193,14 @@ public class UpdateCommandTest {
         TaskList tasks = new TaskList();
         tasks.addTask(new EventTask("lmao", "2025-12-12 1100", "2025-12-12 1300"));
 
-        UpdateCommand cmd = new UpdateCommand(0, null, null, null, null, null);
+        UpdateCommand cmd = new UpdateCommand(
+                0,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
 
         try {
             cmd.execute(tasks, ui, storage);

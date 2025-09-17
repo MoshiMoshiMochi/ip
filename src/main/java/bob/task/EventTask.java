@@ -29,8 +29,8 @@ public class EventTask extends Task {
             throws BobDateTimeException, BobInvalidFormatException {
         super(description, TaskType.EVENT);
         try {
-            this.from = LocalDateTime.parse(from, Task.inputFormat);
-            this.to = LocalDateTime.parse(to, Task.inputFormat);
+            this.from = LocalDateTime.parse(from, Task.INPUTFORMAT);
+            this.to = LocalDateTime.parse(to, Task.INPUTFORMAT);
             if (this.to.isBefore(this.from)) {
                 throw new BobDateTimeException("To Date needs to be larger than From Date");
             }
@@ -52,9 +52,9 @@ public class EventTask extends Task {
                 + " | "
                 + this.description
                 + " | "
-                + this.from.format(Task.inputFormat)
+                + this.from.format(Task.INPUTFORMAT)
                 + " | "
-                + this.to.format(Task.inputFormat);
+                + this.to.format(Task.INPUTFORMAT);
     }
 
     /**
@@ -63,7 +63,7 @@ public class EventTask extends Task {
      * @return String in the input format for <code>from</code>.
      */
     public String getFrom() {
-        return this.from.format(Task.inputFormat);
+        return this.from.format(Task.INPUTFORMAT);
     }
 
     /**
@@ -72,7 +72,7 @@ public class EventTask extends Task {
      * @return String in the input format for <code>to</code>.
      */
     public String getTo() {
-        return this.to.format(Task.inputFormat);
+        return this.to.format(Task.INPUTFORMAT);
     }
 
     /**
@@ -85,9 +85,9 @@ public class EventTask extends Task {
     public String toString() {
         return super.toString()
                 + " (from: "
-                + this.from.format(Task.outputFormat)
+                + this.from.format(Task.OUTPUTFORMAT)
                 + " to: "
-                + this.to.format(Task.outputFormat)
+                + this.to.format(Task.OUTPUTFORMAT)
                 + ")";
     }
 }
