@@ -26,18 +26,19 @@ public class DeleteCommand extends Command {
      * Executes the delete command: removes the task from the task list
      * and displays a message via the UI.
      *
-     * @param taskList The <code>TaskList</code> from which to delete the task.
+     * @param tasks    The <code>TaskList</code> from which to delete the task.
      * @param ui       The <code>Ui</code> instance for displaying messages.
      * @param storage  The <code>Storage</code> instance for persisting changes.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            Task task = taskList.deleteTask(index);
+            Task task = tasks.deleteTask(index);
+            super.saveStorage(tasks, storage);
             ui.prepareMessage(
                     CommandType.DELETE,
                     task,
-                    taskList.size()
+                    tasks.size()
             );
         } catch (BobException e) {
             ui.showMessage(e.getMessage());

@@ -2,6 +2,8 @@ package bob.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.File;
+
 import org.junit.jupiter.api.Test;
 
 import bob.exception.BobException;
@@ -15,7 +17,7 @@ import bob.ui.Ui;
 
 public class UpdateCommandTest {
     private Ui ui = new Ui();
-    private Storage storage;
+    private Storage storage = new Storage("savedtasks/test.txt");
 
     // For updating with changing type
     @Test
@@ -39,6 +41,9 @@ public class UpdateCommandTest {
         } catch (BobException e) {
             // shouldn't reach here
         }
+
+        File file = new File("savedtasks/test.txt");
+        file.delete();
     }
 
     @Test
@@ -61,6 +66,9 @@ public class UpdateCommandTest {
         } catch (BobException e) {
             // shouldn't reach here
         }
+
+        File file = new File("savedtasks/test.txt");
+        file.delete();
     }
 
     @Test
@@ -83,6 +91,9 @@ public class UpdateCommandTest {
         } catch (BobException e) {
             // shouldn't reach here
         }
+
+        File file = new File("savedtasks/test.txt");
+        file.delete();
     }
 
     // For updating without changing type
@@ -102,6 +113,9 @@ public class UpdateCommandTest {
         cmd.execute(tasks, ui, storage);
 
         assertEquals(expected.toString(), tasks.getTask(0).toString());
+
+        File file = new File("savedtasks/test.txt");
+        file.delete();
     }
 
     @Test
@@ -120,6 +134,9 @@ public class UpdateCommandTest {
         cmd.execute(tasks, ui, storage);
 
         assertEquals(expected.toString(), tasks.getTask(0).toString());
+
+        File file = new File("savedtasks/test.txt");
+        file.delete();
     }
 
     @Test
@@ -139,6 +156,9 @@ public class UpdateCommandTest {
         cmd.execute(tasks, ui, storage);
 
         assertEquals(expected.toString(), tasks.getTask(0).toString());
+
+        File file = new File("savedtasks/test.txt");
+        file.delete();
     }
 
     // For updating without changing type - invalid format

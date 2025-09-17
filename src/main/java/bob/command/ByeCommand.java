@@ -21,7 +21,6 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        storage.save(tasks);
         ui.showMessage(Personality.BYE.getMessage());
     }
 

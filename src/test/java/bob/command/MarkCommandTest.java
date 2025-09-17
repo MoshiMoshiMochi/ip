@@ -2,6 +2,8 @@ package bob.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.File;
+
 import org.junit.jupiter.api.Test;
 
 import bob.exception.BobException;
@@ -13,11 +15,11 @@ import bob.ui.Ui;
 
 public class MarkCommandTest {
     private Ui ui = new Ui();
-    private Storage storage;
+    private Storage storage = new Storage("savedtasks/test.txt");
 
     @Test
     public void task_markUnMark_success() {
-        TaskList tasks = new TaskList();
+        TaskList tasks = storage.load();
         ToDoTask task = new ToDoTask("read book");
 
         AddCommand addCommand = new AddCommand(task);
@@ -42,6 +44,9 @@ public class MarkCommandTest {
         } catch (BobException e) {
             //It should not reach here!!!!!!!!!!!!!!
         }
+
+        File file = new File("savedtasks/test.txt");
+        file.delete();
 
     }
 }

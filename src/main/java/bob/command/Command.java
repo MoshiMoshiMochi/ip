@@ -38,4 +38,14 @@ public abstract class Command {
         this.execute(taskList, tempUi, storage);
         return tempUi.getCollectedMessages();
     }
+
+    /**
+     * Saves the current state of the task list to storage.
+     *
+     * @param tasks   The <code>TaskList</code> to save.
+     * @param storage The <code>Storage</code> instance for persisting tasks.
+     */
+    public void saveStorage(TaskList tasks, Storage storage) {
+        storage.save(tasks);
+    }
 }

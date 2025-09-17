@@ -12,7 +12,7 @@ import bob.ui.Ui;
 
 public class TaskListTest {
     private Ui ui = new Ui();
-    private Storage storage;
+    private Storage storage = new Storage("savedtasks/test.txt");
 
     @Test
     public void taskList_taskNumOutOfRange() {

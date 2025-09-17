@@ -26,15 +26,16 @@ public class MarkCommand extends Command {
     /**
      * Executes the mark command: marks the task as done and displays a confirmation message.
      *
-     * @param taskList The <code>TaskList</code> containing the task.
+     * @param tasks    The <code>TaskList</code> containing the task.
      * @param ui       The <code>Ui</code> instance for displaying messages.
      * @param storage  The <code>Storage</code> instance for persisting changes (unused here).
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            Task task = taskList.getTask(index);
+            Task task = tasks.getTask(index);
             task.markDone();
+            super.saveStorage(tasks, storage);
             ui.showMessage(
                     Personality.MARKINTRO.getMessage(),
                     Personality.TAB.getMessage() + task

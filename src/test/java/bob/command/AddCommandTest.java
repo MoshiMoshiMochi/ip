@@ -2,6 +2,8 @@ package bob.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.File;
+
 import org.junit.jupiter.api.Test;
 
 import bob.exception.BobDateTimeException;
@@ -16,12 +18,12 @@ import bob.ui.Ui;
 
 public class AddCommandTest {
     private Ui ui = new Ui();
-    private Storage storage;
+    private Storage storage = new Storage("savedtasks/test.txt");
 
     @Test
     public void addTodoTask_success() {
 
-        TaskList tasks = new TaskList();
+        TaskList tasks = storage.load();
         ToDoTask task = new ToDoTask("read book");
         AddCommand cmd = new AddCommand(task);
 
@@ -31,12 +33,15 @@ public class AddCommandTest {
         assertEquals(
                 "[" + TaskType.TODO.getSymbol() + "]" + "[ ] read book",
                 task.toString());
+
+        File file = new File("savedtasks/test.txt");
+        file.delete();
     }
 
     @Test
     public void addDeadlineTask_success() {
 
-        TaskList tasks = new TaskList();
+        TaskList tasks = storage.load();
         DeadlineTask task = new DeadlineTask("read book", "2025-12-12 1200");
         AddCommand cmd = new AddCommand(task);
 
@@ -47,12 +52,14 @@ public class AddCommandTest {
                 "[" + TaskType.DEADLINE.getSymbol() + "]"
                         + "[ ] read book (by:Dec 12 2025 1200)",
                 task.toString());
+        File file = new File("savedtasks/test.txt");
+        file.delete();
     }
 
     @Test
     public void addEventTask_success() {
 
-        TaskList tasks = new TaskList();
+        TaskList tasks = storage.load();
         EventTask task = new EventTask("read book", "2025-12-12 1200", "2025-12-12 1300");
         AddCommand cmd = new AddCommand(task);
 
@@ -63,6 +70,8 @@ public class AddCommandTest {
                 "[" + TaskType.EVENT.getSymbol() + "]"
                         + "[ ] read book (from: Dec 12 2025 1200 to: Dec 12 2025 1300)",
                 task.toString());
+        File file = new File("savedtasks/test.txt");
+        file.delete();
     }
 
     @Test

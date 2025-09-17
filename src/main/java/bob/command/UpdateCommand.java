@@ -60,6 +60,7 @@ public class UpdateCommand extends Command {
             Task selectedTask = tasks.getTask(this.index);
             Task updatedTask = getUpdatedTask(selectedTask);
             replaceTaskInList(tasks, updatedTask);
+            super.saveStorage(tasks, storage);
             showUpdateMessage(ui, selectedTask, updatedTask);
 
         } catch (BobInvalidFormatException | BobDateTimeException | BobException e) {

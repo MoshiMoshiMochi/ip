@@ -35,6 +35,7 @@ public class AddCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.addTask(task);
+            super.saveStorage(tasks, storage);
             ui.prepareMessage(
                     CommandType.UNKNOWN,
                     task,
