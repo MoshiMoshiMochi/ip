@@ -1,6 +1,7 @@
-# Duke project template
+# Bob project template
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is a project template for a greenfield Java project. It's named after the Java mascot _Bob_. Given below are instructions on how to use it.
+Kindly refer to the [docs/README.md](docs/README.md) file for more information about the project.
 
 ## Setting up in Intellij
 
