@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import bob.command.AddCommand;
-import bob.exception.BobException;
 import bob.exception.BobInvalidIndexException;
 import bob.personality.Personality;
 import bob.storage.Storage;

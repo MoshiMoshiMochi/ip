@@ -6,7 +6,6 @@ import java.io.File;
 
 import org.junit.jupiter.api.Test;
 
-import bob.exception.BobException;
 import bob.exception.BobInvalidIndexException;
 import bob.storage.Storage;
 import bob.task.TaskList;

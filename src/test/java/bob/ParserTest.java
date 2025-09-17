@@ -74,7 +74,8 @@ public class ParserTest {
 
     @Test
     public void parse_invalidTaskNumber_throwsBobInvalidIndexException() {
-        BobInvalidIndexException expected = new BobInvalidIndexException(Personality.INVALID_INDEX_MESSAGE.getMessage());
+        BobInvalidIndexException expected =
+                new BobInvalidIndexException(Personality.INVALID_INDEX_MESSAGE.getMessage());
         try {
             Parser.parse("Mark hello");
         } catch (BobInvalidFormatException | BobException | BobInvalidIndexException | BobDateTimeException e) {
