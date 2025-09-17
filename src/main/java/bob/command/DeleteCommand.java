@@ -32,17 +32,13 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        try {
-            Task task = tasks.deleteTask(index);
-            super.saveStorage(tasks, storage);
-            ui.prepareMessage(
-                    CommandType.DELETE,
-                    task,
-                    tasks.size()
-            );
-        } catch (BobInvalidIndexException e) {
-            ui.showMessage(e.getMessage());
-        }
+        Task task = tasks.deleteTask(index);
+        super.saveStorage(tasks, storage);
+        ui.prepareMessage(
+                CommandType.DELETE,
+                task,
+                tasks.size()
+        );
     }
 
     /**

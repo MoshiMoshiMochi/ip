@@ -56,17 +56,12 @@ public class UpdateCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
 
-        try {
-            Task selectedTask = tasks.getTask(this.index);
-            Task updatedTask = getUpdatedTask(selectedTask);
-            replaceTaskInList(tasks, updatedTask);
-            super.saveStorage(tasks, storage);
-            showUpdateMessage(ui, selectedTask, updatedTask);
 
-        } catch (BobInvalidFormatException | BobDateTimeException | BobInvalidIndexException e) {
-            // Basically only for not found or if invalid format/datetime format
-            ui.showMessage(e.getMessage());
-        }
+        Task selectedTask = tasks.getTask(this.index);
+        Task updatedTask = getUpdatedTask(selectedTask);
+        replaceTaskInList(tasks, updatedTask);
+        super.saveStorage(tasks, storage);
+        showUpdateMessage(ui, selectedTask, updatedTask);
 
     }
 
@@ -152,7 +147,7 @@ public class UpdateCommand extends Command {
     }
 
     private ToDoTask updateToDoTask(String newDesc) {
-        if (this.description == null) {
+        if (newDesc == null) {
             throw new BobInvalidFormatException(CommandFormat.UPDATEFORMAT);
         }
         return new ToDoTask(newDesc);

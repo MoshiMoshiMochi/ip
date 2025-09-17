@@ -237,8 +237,8 @@ public class Parser {
     }
 
     private static Pair<String, String> extractTaskType(String args) {
-        if (args.contains("/t")) {
-            String[] split = args.split("/t", 2);
+        if (args.contains("/typ ")) {
+            String[] split = args.split("/typ", 2);
             String afterT = split[1].trim();
             String[] parts = afterT.split("\\s+", 2);
             String taskType = parts[0].trim();

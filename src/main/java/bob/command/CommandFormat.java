@@ -15,15 +15,15 @@ public enum CommandFormat {
     FIND("find <desc>"),
     DATETIMEFORMAT("<yyyy-mm-dd HHmm>"),
     UPDATEFORMAT("\n update <task no.> with at least one optional field listed below \n"
-            + "\n /t <task type> for changing task types \n"
+            + "\n /typ <task type> for changing task types \n"
             + "Types to choose from: todo / deadline / event \n"
             + "\n /d <description> for changing description of task \n"
             + "\n /by <date> for changing due datetime for deadline task "
-            + "\n (Required if changing to deadline task i.e. /t deadline) \n"
+            + "\n (Required if changing to deadline task i.e. /typ deadline) \n"
             + "\n /from <date> for changing by datetime for Event task "
-            + "\n (Required if changing to event task i.e. /t event) \n"
+            + "\n (Required if changing to event task i.e. /typ event) \n"
             + "\n /to <date> for changing by datetime for Event task "
-            + "\n (Required if changing to event task i.e. /t event) \n"
+            + "\n (Required if changing to event task i.e. /typ event) \n"
     ),;
 
     private final String format;

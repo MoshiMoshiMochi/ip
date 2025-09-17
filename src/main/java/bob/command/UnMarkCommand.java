@@ -32,17 +32,13 @@ public class UnMarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        try {
-            Task task = tasks.getTask(index);
-            task.markUnDone();
-            super.saveStorage(tasks, storage);
-            ui.showMessage(
-                    Personality.UNMARKINTRO.getMessage(),
-                    Personality.TAB.getMessage() + task
-            );
-        } catch (BobInvalidIndexException e) {
-            ui.showMessage(e.getMessage());
-        }
+        Task task = tasks.getTask(index);
+        task.markUnDone();
+        super.saveStorage(tasks, storage);
+        ui.showMessage(
+                Personality.UNMARKINTRO.getMessage(),
+                Personality.TAB.getMessage() + task
+        );
     }
 
     /**

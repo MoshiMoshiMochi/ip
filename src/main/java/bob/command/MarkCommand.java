@@ -32,17 +32,13 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        try {
-            Task task = tasks.getTask(index);
-            task.markDone();
-            super.saveStorage(tasks, storage);
-            ui.showMessage(
-                    Personality.MARKINTRO.getMessage(),
-                    Personality.TAB.getMessage() + task
-            );
-        } catch (BobInvalidIndexException e) {
-            ui.showMessage(e.getMessage());
-        }
+        Task task = tasks.getTask(index);
+        task.markDone();
+        super.saveStorage(tasks, storage);
+        ui.showMessage(
+                Personality.MARKINTRO.getMessage(),
+                Personality.TAB.getMessage() + task
+        );
     }
 
     /**

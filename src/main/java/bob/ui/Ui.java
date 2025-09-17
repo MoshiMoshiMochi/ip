@@ -71,7 +71,7 @@ public class Ui {
         showMessage(
                 intro,
                 Personality.TAB.getMessage() + task,
-                Personality.ADDDELETEOUTRO_1.getMessage() + count + Personality.ADDDELETEOUTRO_2
+                Personality.ADDDELETEOUTRO_1.getMessage() + count + Personality.ADDDELETEOUTRO_2.getMessage()
         );
     }
 
