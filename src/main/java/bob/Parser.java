@@ -16,6 +16,7 @@ import bob.command.UnMarkCommand;
 import bob.command.UpdateCommand;
 import bob.exception.BobException;
 import bob.exception.BobInvalidFormatException;
+import bob.personality.Personality;
 import bob.task.DeadlineTask;
 import bob.task.EventTask;
 import bob.task.Task;
@@ -27,10 +28,6 @@ import javafx.util.Pair;
  * Handles validation of input format and throws exceptions for invalid commands.
  */
 public class Parser {
-    // Exception messages
-    private static final String INVALID_INDEX_MESSAGE = " Invalid Task number!";
-    private static final String INVALID_COMMAND_MESSAGE = " Invalid Command!";
-
     // Add Command delimiters and expected parts
     private static final String TODO_DELIMITER = null;
     private static final int TODO_EXPECTED = 1;
@@ -101,7 +98,7 @@ public class Parser {
             String updateArg = getArgumentString(parts);
             return validateUpdate(updateArg);
         default:
-            throw new BobException(INVALID_COMMAND_MESSAGE);
+            throw new BobException(Personality.INVALID_COMMAND_MESSAGE.getMessage());
         }
     }
 
@@ -137,7 +134,7 @@ public class Parser {
         try {
             return Integer.parseInt(part.trim()) - 1;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new BobException(INVALID_INDEX_MESSAGE);
+            throw new BobException(Personality.INVALID_INDEX_MESSAGE.getMessage());
         }
     }
 

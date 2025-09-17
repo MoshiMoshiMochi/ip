@@ -28,13 +28,17 @@ public class MarkCommandTest {
 
         //Check if Task is Marked
         try {
-            assertEquals("[" + TaskType.TODO.getSymbol() + "]" + "[X] read book", tasks.getTask(0).toString());
+            assertEquals(
+                    "[" + TaskType.TODO.getSymbol() + "]" + "[X] read book",
+                    tasks.getTask(0).toString());
 
             UnMarkCommand unMarkCommand = new UnMarkCommand(0);
             unMarkCommand.execute(tasks, ui, storage);
 
             //Check if UnMark
-            assertEquals("[" + TaskType.TODO.getSymbol() + "]" + "[ ] read book", tasks.getTask(0).toString());
+            assertEquals(
+                    "[" + TaskType.TODO.getSymbol() + "]" + "[ ] read book",
+                    tasks.getTask(0).toString());
         } catch (BobException e) {
             //It should not reach here!!!!!!!!!!!!!!
         }

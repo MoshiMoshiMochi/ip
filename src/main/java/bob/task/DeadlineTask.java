@@ -1,7 +1,6 @@
 package bob.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import bob.command.CommandFormat;
@@ -14,8 +13,6 @@ import bob.exception.BobInvalidFormatException;
  */
 public class DeadlineTask extends Task {
     private final LocalDateTime by;
-    private final DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-
     /**
      * Constructs a new <code>DeadlineTask</code> with a description and due datetime.
      *
@@ -26,7 +23,7 @@ public class DeadlineTask extends Task {
     public DeadlineTask(String description, String by) throws BobInvalidFormatException {
         super(description, TaskType.DEADLINE);
         try {
-            this.by = LocalDateTime.parse(by, inputFormat);
+            this.by = LocalDateTime.parse(by, Task.INPUTFORMAT);
         } catch (DateTimeParseException e) {
             throw new BobInvalidFormatException(CommandFormat.DATETIMEFORMAT);
         }
@@ -45,7 +42,7 @@ public class DeadlineTask extends Task {
                 + " | "
                 + this.description
                 + " | "
-                + this.by.format(inputFormat)
+                + this.by.format(Task.INPUTFORMAT)
                 + " | ";
     }
 
@@ -55,7 +52,7 @@ public class DeadlineTask extends Task {
      * @return String in the input format for <code>by</code>.
      */
     public String getBy() {
-        return this.by.format(inputFormat);
+        return this.by.format(Task.INPUTFORMAT);
     }
 
     /**
@@ -66,7 +63,6 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
-        return super.toString() + " (by:" + this.by.format(outputFormat) + ")";
+        return super.toString() + " (by:" + this.by.format(Task.OUTPUTFORMAT) + ")";
     }
 }

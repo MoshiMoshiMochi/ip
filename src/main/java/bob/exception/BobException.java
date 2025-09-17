@@ -1,5 +1,7 @@
 package bob.exception;
 
+import bob.personality.Personality;
+
 /**
  * The most general exception used in the Bob application.
  * Serves as the base class for other Bob-specific exceptions.
@@ -13,6 +15,6 @@ public class BobException extends Exception {
      * @param message The detail message explaining the exception.
      */
     public BobException(String message) {
-        super(" What the BOB!!![BobException]\n" + message);
+        super(Personality.BOBEXCEPTION.getMessage() + message);
     }
 }

@@ -1,6 +1,7 @@
 package bob.exception;
 
 import bob.command.CommandFormat;
+import bob.personality.Personality;
 
 /**
  * Exception thrown when a command or input does not follow the expected format.
@@ -13,6 +14,6 @@ public class BobInvalidFormatException extends RuntimeException {
      * @param type The expected <code>CommandFormat</code> that was violated.
      */
     public BobInvalidFormatException(CommandFormat type) {
-        super(" What the Bob!!![BobInvalidFormatException]\n Invalid Command Format! Expected: " + type.getFormat());
+        super(Personality.BOBINVALIDFORMATEXCEPTION.getMessage() + type.getFormat());
     }
 }

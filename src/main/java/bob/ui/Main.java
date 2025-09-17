@@ -13,7 +13,8 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    private Bob bob = new Bob("savedtasks/task.txt");
+    private static final String FILE_PATH = "savedtasks/task.txt";
+    private Bob bob = new Bob(FILE_PATH);
 
     @Override
     public void start(Stage stage) {

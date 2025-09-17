@@ -1,5 +1,6 @@
 package bob.command;
 
+import bob.personality.Personality;
 import bob.storage.Storage;
 import bob.task.TaskList;
 import bob.ui.Ui;
@@ -9,7 +10,7 @@ import bob.ui.Ui;
  * Executes by saving the task list and displaying a farewell message.
  */
 public class ByeCommand extends Command {
-    private static final String MESSAGE = " Bye have a great time!";
+
     /**
      * Executes the bye command: saves the task list to storage
      * and displays a goodbye message via the UI.
@@ -21,7 +22,7 @@ public class ByeCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         storage.save(tasks);
-        ui.showMessage(MESSAGE);
+        ui.showMessage(Personality.BYE.getMessage());
     }
 
     /**

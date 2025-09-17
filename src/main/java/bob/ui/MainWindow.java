@@ -2,7 +2,6 @@ package bob.ui;
 
 import bob.Bob;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -19,15 +18,13 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Bob bob;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream(
-            "/images/typing-on-computer-mark-grayson.gif"));
-    private Image bobImage = new Image(this.getClass().getResourceAsStream(
-            "/images/bob-the-builder-fix-it.gif"));
+    private final String userImagePath = "/images/typing-on-computer-mark-grayson.gif";
+    private final String bobImagePath = "/images/bob-the-builder-fix-it.gif";
+    private Image userImage = new Image(this.getClass().getResourceAsStream(userImagePath));
+    private Image bobImage = new Image(this.getClass().getResourceAsStream(bobImagePath));
 
     @FXML
     public void initialize() {

@@ -1,8 +1,7 @@
 package bob.ui;
 
-import java.util.Scanner;
-
 import bob.command.CommandType;
+import bob.personality.Personality;
 import bob.task.Task;
 
 /**
@@ -11,17 +10,12 @@ import bob.task.Task;
  */
 
 public class Ui {
-    private static final String ADDINTRO = " Aite. I've bobbed it into the list:";
-    private static final String REMOVEINTRO = "  BOB!!! I've removed the task:";
-    private static final String LINE = "____________________________________________________________";
-    private final Scanner scanner;
     private final StringBuilder buffer; // collect messages for GUI
 
     /**
      * Constructs a new <code>Ui</code> instance with a scanner for user input.
      */
     public Ui() {
-        scanner = new Scanner(System.in);
         buffer = new StringBuilder();
     }
 
@@ -30,31 +24,17 @@ public class Ui {
      * BOB BOB BOB!!!!!!!!!
      */
     public void showWelcome() {
-        String logo = "  ____    _____   ____  \n"
-                + " | __ )  |  _  | | __ ) \n"
-                + " |  _ \\  | | | | |  _ \\ \n"
-                + " | |_) | | |_| | | |_) |\n"
-                + " |____/  |_____| |____/ \n";
         showMessage(
-                " Hows it bobbing dude?! I'm Bob",
-                " What can I do for you?"
+                Personality.GREETING1.getMessage(),
+                Personality.GREETING2.getMessage()
         );
-    }
-
-    /**
-     * Reads a line of input from the user.
-     *
-     * @return The next line of user input.
-     */
-    public String readCommand() {
-        return scanner.nextLine();
     }
 
     /**
      * Displays a horizontal line to the console for formatting purposes.
      */
     public void showLine() {
-        System.out.println(LINE);
+        System.out.println(Personality.LINE.getMessage());
     }
 
     /**
@@ -81,17 +61,17 @@ public class Ui {
         String intro;
         switch (type) {
         case DELETE: {
-            intro = REMOVEINTRO;
+            intro = Personality.REMOVEINTRO.getMessage();
             break;
         }
         default: {
-            intro = ADDINTRO;
+            intro = Personality.ADDINTRO.getMessage();
         }
         }
         showMessage(
                 intro,
-                "   " + task,
-                " Bobbing heck! You now have " + count + " tasks in the list."
+                Personality.TAB.getMessage() + task,
+                Personality.ADDDELETEOUTRO_1.getMessage() + count + Personality.ADDDELETEOUTRO_2
         );
     }
 

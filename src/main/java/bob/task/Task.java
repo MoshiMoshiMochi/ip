@@ -1,5 +1,7 @@
 package bob.task;
 
+import java.time.format.DateTimeFormatter;
+
 import bob.exception.BobDateTimeException;
 import bob.exception.BobInvalidFormatException;
 
@@ -8,6 +10,9 @@ import bob.exception.BobInvalidFormatException;
  * A <code>Task</code> has a description, completion status, and type.
  */
 public abstract class Task {
+    protected static final DateTimeFormatter INPUTFORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    protected static final DateTimeFormatter OUTPUTFORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+
     protected String description;
     protected boolean isDone;
     protected TaskType type;
